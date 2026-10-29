@@ -1,14 +1,8 @@
 import { SITE_CONFIG } from "./config"
-import Navbar from "./components/Navbar"
-import Footer from "./components/Footer"
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: SITE_CONFIG.theme.body }}>
-      <div className="bg-white">
-        <Navbar />
-      </div>
-
       <main className="flex-1 max-w-6xl mx-auto px-6 py-12 w-full">
         <h1 className="text-5xl font-black tracking-tight">
           Welcome to {SITE_CONFIG.name}
@@ -42,8 +36,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   )
 }
