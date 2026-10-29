@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import { SITE_CONFIG } from "./config"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
 
 export const metadata: Metadata = {
   title: SITE_CONFIG.name,
@@ -15,9 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      {/* Yahi se pure website ka background color control hoga */}
       <body style={{ backgroundColor: SITE_CONFIG.theme.body }} className="antialiased">
-        {children}
+        <Navbar />
+        <main className="min-h-[80vh]">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   )
