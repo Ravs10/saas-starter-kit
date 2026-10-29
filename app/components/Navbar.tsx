@@ -2,6 +2,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { SITE_CONFIG } from "@/app/config"
+import Logo from "./Logo" // <-- Ye naya add hua hai
 
 const NAV_LINKS = [
   { label: "Features", href: "/#features" },
@@ -15,18 +16,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="flex justify-between items-center px-6 py-4 max-w-6xl mx-auto relative z-50 bg-white">
-        {/* Logo - Agar logo image hai to image dikhao, nahi to naam text me dikhao */}
-        <Link href="/" className="flex items-center z-50">
-          {SITE_CONFIG.logo ? (
-            <img 
-              src={SITE_CONFIG.logo} 
-              alt={SITE_CONFIG.name} 
-              className="h-7 md:h-8 w-auto" 
-            />
-          ) : (
-            <span className="text-xl font-black tracking-tight">{SITE_CONFIG.name}</span>
-          )}
-        </Link>
+        <Logo />
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-7">
@@ -72,9 +62,6 @@ export default function Navbar() {
             ))}
             <Link href="/signup" onClick={() => setIsOpen(false)} className="text-[15px] font-medium py-4 border-b border-gray-100 text-gray-700">
               Sign Up
-            </Link>
-            <Link href="/settings" onClick={() => setIsOpen(false)} className="text-[15px] font-medium py-4 border-b border-gray-100 text-gray-700">
-              Settings
             </Link>
             <Link href="/dashboard" onClick={() => setIsOpen(false)} className="text-[15px] font-bold px-5 py-4 rounded-full text-white text-center mt-6" style={{ backgroundColor: SITE_CONFIG.theme.primary }}>
               Dashboard
