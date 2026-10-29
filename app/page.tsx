@@ -1,51 +1,43 @@
-"use client"
 import { SITE_CONFIG } from "@/app/config"
-import Link from "next/link"
-import { useState } from "react"
+import Navbar from "@/app/components/Navbar"
 
-export default function Navbar() {
-  const [open, setOpen] = useState(false)
-
+export default function Dashboard() {
   return (
-    <header className="w-full bg-white border-b sticky top-0 z-50">
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo + Name - Config se */}
-        <Link href="/" className="flex items-center gap-2 font-black text-xl tracking-tight">
-          {SITE_CONFIG.logo ? (
-            <img src={SITE_CONFIG.logo} alt={SITE_CONFIG.name} className="h-7 w-7 rounded-lg object-cover" />
-          ) : (
-            <div className="h-7 w-7 rounded-lg flex items-center justify-center text-white text-sm" style={{ backgroundColor: SITE_CONFIG.theme.primary }}>
-              {SITE_CONFIG.name.charAt(0)}
-            </div>
-          )}
-          <span>{SITE_CONFIG.name}</span>
-        </Link>
-
-        {/* Desktop Links */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-          <Link href="/" className="hover:text-orange-600 transition">Home</Link>
-          <Link href="/pricing" className="hover:text-orange-600 transition">Pricing</Link>
-          <Link href="/dashboard" className="px-4 py-2 rounded-full text-white" style={{ backgroundColor: SITE_CONFIG.theme.primary }}>
-            Dashboard
-          </Link>
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <button onClick={() => setOpen(!open)} className="md:hidden p-2">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d={open ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
-          </svg>
-        </button>
+    <div className="min-h-screen" style={{ backgroundColor: SITE_CONFIG.theme.body }}>
+      <div className="bg-white">
+        <Navbar />
       </div>
+      
+      <div className="max-w-6xl mx-auto px-6 py-8">
+        <a href="/" className="inline-block px-5 py-2 bg-white border rounded-full text-sm mb-8">
+          ← Back to Home
+        </a>
 
-      {/* Mobile Menu */}
-      {open && (
-        <div className="md:hidden bg-white border-t px-6 py-4 space-y-3">
-          <Link href="/" className="block py-2">Home</Link>
-          <Link href="/pricing" className="block py-2">Pricing</Link>
-          <Link href="/dashboard" className="block py-2 font-bold" style={{ color: SITE_CONFIG.theme.primary }}>Dashboard</Link>
+        <h1 className="text-4xl font-black">Dashboard</h1>
+        <p className="text-gray-600 mt-2">
+          Welcome to {SITE_CONFIG.name} Dashboard 👋
+        </p>
+
+        <div className="grid gap-6 mt-8">
+          <div className="bg-white p-6 rounded-3xl border">
+            <p className="text-sm text-gray-400 tracking-widest">USERS</p>
+            <p className="text-4xl font-black mt-2">1,234</p>
+            <p className="text-sm text-green-600 mt-2">↑ 12% this week</p>
+          </div>
+
+          <div className="bg-black text-white p-6 rounded-3xl">
+            <p className="text-sm text-gray-400 tracking-widest">REVENUE</p>
+            <p className="text-4xl font-black mt-2">$5,678</p>
+            <p className="text-sm text-green-400 mt-2">↑ 23% this month</p>
+          </div>
+
+          <div className="bg-white p-6 rounded-3xl border">
+            <p className="text-sm text-gray-400 tracking-widest">PROJECTS</p>
+            <p className="text-4xl font-black mt-2">12</p>
+            <p className="text-sm text-gray-500 mt-2">4 active now</p>
+          </div>
         </div>
-      )}
-    </header>
+      </div>
+    </div>
   )
 }
