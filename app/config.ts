@@ -63,6 +63,19 @@ export const SITE_CONFIG = {
      * If you change this to "#000000", your entire site background will become black.
      */
     body: "#F8F9B4", // Light Gray - Default site background
+
+    /**
+     * navbar: Background color for Navbar ONLY
+     * Used in: components/Navbar.tsx -> <nav style={{ backgroundColor: ... }}>
+     * If you change this, only Navbar color will change.
+     */
+    navbar: "#FFFFFF", // White - Change this to change Navbar bg
+
+    /**
+     * navbarText: Text color for Navbar links
+     * Used in: Navbar links like Features, Pricing, etc.
+     */
+    navbarText: "#000000", // Black
   },
 
   /**
