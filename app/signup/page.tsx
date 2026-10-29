@@ -1,34 +1,44 @@
 "use client"
-import Link from "next/link"
-import { SITE_CONFIG } from "@/app/config"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 
-export default function Signup() {
+export default function SignupPage() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [name, setName] = useState("")
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
+
+  async function handleSignup(e: any) {
+    e.preventDefault()
+    setLoading(true)
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      body: JSON.stringify({ email, password, name }),
+      headers: { "Content-Type": "application/json" }
+    })
+    const data = await res.json()
+    setLoading(false)
+    if (data.success) {
+      alert("Signup Success! Ab login karo")
+      router.push("/login")
+    } else {
+      alert("Error: " + data.error)
+    }
+  }
+
   return (
-    <div className="px-6 py-8">
-      <Link href="/" className="inline-block mb-6 text-sm border px-4 py-2 rounded-full bg-white hover:bg-black hover:text-white transition-all">
-        ← Back to Home
-      </Link>
-      
-      <div className="flex items-center justify-center mt-4">
-        <div className="bg-white p-8 rounded-[24px] shadow-xl w-full max-w-sm hover:shadow-2xl transition-all duration-500 border">
-          <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-black mb-4" style={{ backgroundColor: SITE_CONFIG.theme.primary }}>
-            {SITE_CONFIG.name.charAt(0)}
-          </div>
-          <h1 className="text-2xl font-black tracking-tight">Create Account</h1>
-          <p className="text-gray-500 text-sm mt-1">Start building your SaaS today with {SITE_CONFIG.name.toUpperCase()}</p>
-          
-          <input className="w-full mt-6 border p-3 rounded-xl focus:ring-2 focus:ring-orange-400 outline-none transition" placeholder="Full Name" />
-          <input className="w-full mt-3 border p-3 rounded-xl focus:ring-2 focus:ring-orange-400 outline-none transition" placeholder="Email" />
-          <input className="w-full mt-3 border p-3 rounded-xl focus:ring-2 focus:ring-orange-400 outline-none transition" placeholder="Password" type="password" />
-          
-          <button className="w-full mt-6 text-white py-3 rounded-xl hover:scale-[1.02] hover:shadow-lg transition-all duration-300 font-bold" style={{ backgroundColor: SITE_CONFIG.theme.primary }}>
-            Sign Up →
-          </button>
-          <p className="text-center text-sm mt-4 text-gray-500">Already have account? <Link href="/login" className="underline font-bold text-black hover:text-orange-500">Login</Link></p>
-          
-          <p className="text-[11px] text-center text-gray-400 mt-6">By signing up you agree to {SITE_CONFIG.name} Terms</p>
-        </div>
-      </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <form onSubmit={handleSignup} className="bg-white p-8 rounded-xl shadow-md w-96">
+        <h1 className="text-2xl font-bold mb-6">Create Account - Velora</h1>
+        <input className="w-full border p-3 rounded mb-3" placeholder="Name" value={name} onChange={e=>setName(e.target.value)} required />
+        <input className="w-full border p-3 rounded mb-3" placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} required />
+        <input className="w-full border p-3 rounded mb-4" placeholder="Password" type="password" value={password} onChange={e=>setPassword(e.target.value)} required />
+        <button disabled={loading} className="w-full bg-black text-white p-3 rounded">
+          {loading ? "Creating..." : "Sign Up"}
+        </button>
+        <p className="mt-4 text-center text-sm">Already have account? <a href="/login" className="underline">Login</a></p>
+      </form>
     </div>
   )
 }
