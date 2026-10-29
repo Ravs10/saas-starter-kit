@@ -8,7 +8,7 @@ export default function Home(){
         <div className="inline-block px-4 py-1 border rounded-full text-xs mb-6 animate-bounce">🚀 New: VELORA Cloud is LIVE</div>
         <h2 className="text-5xl md:text-7xl font-black leading-[0.9]">Build your SaaS<br/>10x faster with<br/>
           <span className="inline-block bg-black px-3 py-2 mt-2 hover:bg-orange-500 transition-colors duration-500">
-            <img src="/velora-logo.png" alt="VELORA" className="h-10 md:h-16 w-auto object-contain bg-white px-2" />
+            <img src="/velora-white-logo.png" alt="VELORA" className="h-10 md:h-16 w-auto object-contain bg-white px-2" />
           </span>
         </h2>
         <p className="mt-6 text-lg text-gray-600">Next.js + Cloudflare D1 + Better Auth Starter</p>
