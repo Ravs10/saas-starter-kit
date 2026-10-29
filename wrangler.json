@@ -6,5 +6,12 @@
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
-  }
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "velora_db",
+      "database_id": "velora_db_local"
+    }
+  ]
 }
