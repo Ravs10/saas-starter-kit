@@ -1,6 +1,7 @@
 {
-  "name": "saas-starter",
-  "compatibility_date": "2024-12-01",
+  "name": "saas-startliker-kit",
+  "compatibility_date": "2024-09-23",
+  "compatibility_flags": ["nodejs_compat"],
   "main": ".open-next/worker.js",
   "assets": {
     "directory": ".open-next/assets",
