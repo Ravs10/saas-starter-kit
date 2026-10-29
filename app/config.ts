@@ -37,12 +37,18 @@ export const SITE_CONFIG = {
     /**
      * Primary color: Used for all CTA buttons, Dashboard button, Logo fallback
      */
-    primary: "#DD6A00",
+    primary: "#111111",
 
     /**
      * Secondary color: Used for badges, highlights, light backgrounds
      */
     secondary: "#EFF6FF",
+
+    /**
+     * Accent color: Used for hover effects, POPULAR tags, small highlights
+     * Example: "Most Popular" badge, icon backgrounds, button hover glow
+     */
+    accent: "#FFD60A",
 
     /**
      * Body background: Global background for all pages (Home, Dashboard, etc.)
