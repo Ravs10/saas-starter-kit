@@ -1,6 +1,6 @@
 export const SITE_CONFIG = {
   // Brand Name - Yahan change karoge to puri website pe change hoga
-  name: "VELORAvish",
+  name: "VELORA",
 
   // Logo Image - Khali "" rakho to text logo (VELORA) dikhega
   // Image chahiye to "/logo.png" likho aur file /public me daalo
@@ -12,8 +12,8 @@ export const SITE_CONFIG = {
 
   // Theme Color - Ek jagah color badlo, puri site pe buttons ka color badlega
   theme: {
-    primary: "#DD6AB6", // Orange
-    secondary: "#F5F5F5",
+    primary: "#DD6A00", // Orange
+    secondary: "#F5F5C4",
   },
 
   footerText: "© 2026 VELORA. All rights reserved.",
