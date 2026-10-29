@@ -5,7 +5,7 @@ export default function Navbar() {
   return (
     <nav className="flex justify-between items-center p-4 md:p-6 border-b bg-white/80 backdrop-blur-xl sticky top-0 z-50">
       <a href="/" className="hover:opacity-80 transition">
-        <img src="/velora-logo.png" alt="VELORA" className="h-7 md:h-8 w-auto object-contain" />
+        <img src="/velora-white-logo.png" alt="VELORA" className="h-7 md:h-8 w-auto object-contain" />
       </a>
       <div className="hidden md:flex gap-6 items-center">
         <a href="/pricing" className="text-sm font-medium hover:text-orange-500 transition">Pricing</a>
