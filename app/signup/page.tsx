@@ -1,6 +1,11 @@
 "use client"
 import { useState } from "react"
-
+import Navbar from "../components/Navbar"
+...
+<div><Navbar/>
+<a href="/" className="inline-block m-6 text-sm border px-4 py-2 rounded-full">← Back to Home</a>
+...baaki aapka purana code
+</div>
 export default function Signup() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
