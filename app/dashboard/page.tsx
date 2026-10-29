@@ -1,17 +1,17 @@
 import Navbar from "../components/Navbar"
-...
-<div><Navbar/>
-<a href="/" className="inline-block m-6 text-sm border px-4 py-2 rounded-full">← Back to Home</a>
-...baaki aapka purana code
-</div>
 export default function Dashboard(){
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b p-6 flex justify-between"><h1 className="font-black">VELORA Dashboard</h1><a href="/" className="text-sm border px-3 py-1 rounded-full">Home</a></div>
-      <div className="max-w-6xl mx-auto p-6 grid md:grid-cols-3 gap-6">
-        <div className="bg-white border p-6 rounded-2xl"><p className="text-sm text-gray-500">MRR</p><p className="text-3xl font-bold">$0</p></div>
-        <div className="bg-white border p-6 rounded-2xl"><p className="text-sm text-gray-500">Users</p><p className="text-3xl font-bold">0</p></div>
-        <div className="bg-white border p-6 rounded-2xl"><p className="text-sm text-gray-500">Status</p><p className="text-3xl font-bold">Ready</p></div>
+      <Navbar/>
+      <a href="/" className="inline-block m-6 text-sm border px-4 py-2 rounded-full bg-white">← Back to Home</a>
+      <div className="max-w-6xl mx-auto p-6">
+        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <p className="text-gray-600 mt-2">Welcome to VELORA Dashboard</p>
+        <div className="grid md:grid-cols-3 gap-6 mt-8">
+          <div className="bg-white p-6 rounded-2xl border">Users: 1,234</div>
+          <div className="bg-white p-6 rounded-2xl border">Revenue: $5,678</div>
+          <div className="bg-white p-6 rounded-2xl border">Projects: 12</div>
+        </div>
       </div>
     </div>
   )
