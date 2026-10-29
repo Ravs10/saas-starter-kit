@@ -15,12 +15,17 @@ export default function Navbar() {
   return (
     <>
       <nav className="flex justify-between items-center px-6 py-4 max-w-6xl mx-auto relative z-50 bg-white">
+        {/* Logo - Agar logo image hai to image dikhao, nahi to naam text me dikhao */}
         <Link href="/" className="flex items-center z-50">
-          <img 
-            src={SITE_CONFIG.logo} 
-            alt={SITE_CONFIG.name} 
-            className="h-7 md:h-8 w-auto" 
-          />
+          {SITE_CONFIG.logo ? (
+            <img 
+              src={SITE_CONFIG.logo} 
+              alt={SITE_CONFIG.name} 
+              className="h-7 md:h-8 w-auto" 
+            />
+          ) : (
+            <span className="text-xl font-black tracking-tight">{SITE_CONFIG.name}</span>
+          )}
         </Link>
 
         {/* Desktop Menu */}
