@@ -1,77 +1,51 @@
-import { SITE_CONFIG } from "./config"
-import Navbar from "./components/Navbar"
-import Footer from "./components/Footer"
+"use client"
+import { SITE_CONFIG } from "@/app/config"
+import Link from "next/link"
+import { useState } from "react"
 
-export default function Home() {
+export default function Navbar() {
+  const [open, setOpen] = useState(false)
+
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: SITE_CONFIG.theme.body }}>
-      <Navbar />
-
-      {/* Hero Section - Yahi tumhara main page tha */}
-      <main className="flex-1">
-        <section className="max-w-6xl mx-auto px-6 py-16 md:py-28">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-block px-3 py-1 bg-orange-100 text-orange-600 rounded-full text-xs font-bold mb-4">
-                ● New - {SITE_CONFIG.name} is Live
-              </div>
-              <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-[0.9]">
-                Build your SaaS <span style={{ color: SITE_CONFIG.theme.primary }}>10x faster</span>
-              </h1>
-              <p className="mt-6 text-lg text-gray-600 leading-relaxed">
-                {SITE_CONFIG.description}. The modern starter kit with auth, payments, and dashboard ready.
-              </p>
-              <div className="mt-8 flex gap-4">
-                <a href="/dashboard" className="px-6 py-3 rounded-full text-white font-bold transition hover:opacity-90" style={{ backgroundColor: SITE_CONFIG.theme.primary }}>
-                  Go to Dashboard →
-                </a>
-                <a href="/pricing" className="px-6 py-3 rounded-full bg-white border font-bold hover:bg-black hover:text-white transition">
-                  View Pricing
-                </a>
-              </div>
+    <header className="w-full bg-white border-b sticky top-0 z-50">
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        {/* Logo + Name - Config se */}
+        <Link href="/" className="flex items-center gap-2 font-black text-xl tracking-tight">
+          {SITE_CONFIG.logo ? (
+            <img src={SITE_CONFIG.logo} alt={SITE_CONFIG.name} className="h-7 w-7 rounded-lg object-cover" />
+          ) : (
+            <div className="h-7 w-7 rounded-lg flex items-center justify-center text-white text-sm" style={{ backgroundColor: SITE_CONFIG.theme.primary }}>
+              {SITE_CONFIG.name.charAt(0)}
             </div>
+          )}
+          <span>{SITE_CONFIG.name}</span>
+        </Link>
 
-            {/* Velora Image wala part - Ye tha tumhara */}
-            <div className="relative">
-              <div className="bg-white rounded-[2rem] border p-4 shadow-2xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1551434678-e076c4d82cc7?w=600&h=400&fit=crop" 
-                  alt={`${SITE_CONFIG.name} Dashboard Preview`}
-                  className="rounded-[1.5rem] w-full object-cover"
-                />
-                <div className="mt-4 p-4 bg-gray-50 rounded-2xl flex justify-between">
-                  <div>
-                    <p className="text-xs text-gray-400">TOTAL USERS</p>
-                    <p className="text-xl font-black">1,234</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-xs text-green-600">↑ 12%</p>
-                    <p className="text-xs text-gray-400">Live</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Desktop Links */}
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+          <Link href="/" className="hover:text-orange-600 transition">Home</Link>
+          <Link href="/pricing" className="hover:text-orange-600 transition">Pricing</Link>
+          <Link href="/dashboard" className="px-4 py-2 rounded-full text-white" style={{ backgroundColor: SITE_CONFIG.theme.primary }}>
+            Dashboard
+          </Link>
+        </nav>
 
-        {/* Features */}
-        <section className="max-w-6xl mx-auto px-6 pb-20 grid md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-3xl border">
-            <h3 className="font-bold">⚡ Super Fast</h3>
-            <p className="text-sm text-gray-500 mt-2">Built with Next.js 14 and Tailwind CSS</p>
-          </div>
-          <div className="bg-white p-6 rounded-3xl border">
-            <h3 className="font-bold">🔒 Secure</h3>
-            <p className="text-sm text-gray-500 mt-2">Auth and payments integrated</p>
-          </div>
-          <div className="bg-white p-6 rounded-3xl border">
-            <h3 className="font-bold">🎨 Customizable</h3>
-            <p className="text-sm text-gray-500 mt-2">Change colors from config.ts</p>
-          </div>
-        </section>
-      </main>
+        {/* Mobile Menu Button */}
+        <button onClick={() => setOpen(!open)} className="md:hidden p-2">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d={open ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+          </svg>
+        </button>
+      </div>
 
-      <Footer />
-    </div>
+      {/* Mobile Menu */}
+      {open && (
+        <div className="md:hidden bg-white border-t px-6 py-4 space-y-3">
+          <Link href="/" className="block py-2">Home</Link>
+          <Link href="/pricing" className="block py-2">Pricing</Link>
+          <Link href="/dashboard" className="block py-2 font-bold" style={{ color: SITE_CONFIG.theme.primary }}>Dashboard</Link>
+        </div>
+      )}
+    </header>
   )
 }
