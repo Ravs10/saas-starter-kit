@@ -1,11 +1,13 @@
+import { getCloudflareContext } from "@opennextjs/cloudflare"
+
 export async function POST(request: Request) {
   try {
     const { email, password } = await request.json() as any
-    const env = (request as any).env || {}
-    const db = env.DB
-    
+    const { env } = await getCloudflareContext()
+    const db = (env as any).DB
+
     if (!db) {
-      return Response.json({ error: "DB not connected" }, { status: 500 })
+      return Response.json({ error: "DB not connected in env" }, { status: 500 })
     }
 
     const user = await db.prepare(
