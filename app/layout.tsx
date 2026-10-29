@@ -1,3 +1,4 @@
+import "./globals.css"
 import { SITE_CONFIG } from "./config"
 
 export const metadata = {
@@ -8,7 +9,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body style={{ "--primary-color": SITE_CONFIG.theme.primary } as any}>
+      <body>
         {children}
       </body>
     </html>
