@@ -62,7 +62,7 @@ export const SITE_CONFIG = {
      * This controls the background of Home, Dashboard, Pricing, etc. all at once.
      * If you change this to "#000000", your entire site background will become black.
      */
-    body: "#F8F9FA", // Light Gray - Default site background
+    body: "#F8F9D2", // Light Gray - Default site background
   },
 
   /**
