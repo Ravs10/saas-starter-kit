@@ -3,10 +3,7 @@ import Logo from "./Logo"
 
 export default function Footer() {
   return (
-    <footer 
-      className="border-t py-10 px-6"
-      style={{ backgroundColor: SITE_CONFIG.theme.secondary }} // <-- Secondary yahan lagega
-    >
+    <footer className="py-10 px-6 border-t" style={{ backgroundColor: SITE_CONFIG.theme.secondary }}>
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         <Logo />
         <p className="text-sm text-gray-500">
