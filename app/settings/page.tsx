@@ -1,13 +1,11 @@
 import Navbar from "../components/Navbar"
-...
-<div><Navbar/>
-<a href="/" className="inline-block m-6 text-sm border px-4 py-2 rounded-full">← Back to Home</a>
-...baaki aapka purana code
-</div>
+
 export default function Settings() {
   return (
-    <div className="min-h-screen bg-white p-8">
-      <div className="max-w-3xl mx-auto">
+    <div className="min-h-screen bg-white">
+      <Navbar/>
+      <div className="max-w-3xl mx-auto p-6">
+        <a href="/" className="inline-block mb-6 text-sm border px-4 py-2 rounded-full">← Back to Home</a>
         <h1 className="text-3xl font-bold">Settings</h1>
         
         <div className="mt-8 border rounded-2xl p-6">
