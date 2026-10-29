@@ -1,6 +1,6 @@
 export const SITE_CONFIG = {
   // Brand Name - Yahan change karoge to puri website pe change hoga
-  name: "Ravish",
+  name: "VELORA",
 
   // Logo Image - Khali "" rakho to text logo dikhega
   // Image chahiye to "/logo.png" likho aur file /public me daalo
@@ -12,9 +12,9 @@ export const SITE_CONFIG = {
 
   // Theme Color - Ek jagah color badlo, puri site pe color badlega
   theme: {
-    primary: "#DD6A00",   // Buttons, Hero box - Main Action Color
-    secondary: "#EFF6FF", // Footer ka background
-    body: "#F8F9FA",       // Puri Website Body ka background - Screenshot wala halka gray
+    primary: "#CC6A00",   // Buttons, Hero box - Main Action Color
+    secondary: "#EFF6BB", // Footer ka background
+    body: "#F8D9FA",       // Puri Website Body ka background - Screenshot wala halka gray
   },
 
   footerText: `© 2026 Ravish. All rights reserved.`,
