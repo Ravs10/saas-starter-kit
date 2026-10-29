@@ -1,17 +1,12 @@
 {
-  "name": "saas-startliker-kit",
+  "name": "saas-starter-kit",
   "compatibility_date": "2024-09-23",
   "compatibility_flags": ["nodejs_compat"],
-  "main": ".open-next/worker.js",
-  "assets": {
-    "directory": ".open-next/assets",
-    "binding": "ASSETS"
-  },
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "velora_db",
-      "database_id": "velora_db_local"
+      "database_id": "bb1a816b-a3e3-4c2e-aca9-8c29210b5887"
     }
   ]
 }
