@@ -3,8 +3,8 @@ export const SITE_CONFIG = {
   // 1. BRAND NAME (Text Logo)
   // ===============================
   // Agar aapke paas logo image nahi hai, to website par ye naam text ke roop me dikhega
-  // Example: "NEXUS", "My Startup", "VEL"
-  name: "VEL",
+  // Example: "NEXUS", "My Startup", "VELORA"
+  name: "VELORA",
 
   // ===============================
   // 2. LOGO IMAGE (Image Logo)
@@ -17,7 +17,8 @@ export const SITE_CONFIG = {
   // IMPORTANT: Agar logo image me pehle se hi VELORA likha hai, to name change karne se wo image nahi badlega.
   // Aapko naya logo image banana padega ya phir logo ko hata ke sirf text use karna padega.
   // Logo hatane ke liye isko aise kar do: logo: "",
-  logo: "/velora-white-logo.png",
+  // Text logo ke liye khali rakho:
+  logo: "",
 
   // ===============================
   // 3. DESCRIPTION (SEO)
