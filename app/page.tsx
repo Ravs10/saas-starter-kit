@@ -3,7 +3,7 @@ import Navbar from "@/app/components/Navbar"
 
 export default function Dashboard() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: SITE_CONFIG.theme.secondary }}>
+    <div className="min-h-screen" style={{ backgroundColor: SITE_CONFIG.theme.body }}>
       <div className="bg-white">
         <Navbar />
       </div>
@@ -14,7 +14,6 @@ export default function Dashboard() {
         </a>
 
         <h1 className="text-4xl font-black">Dashboard</h1>
-        {/* YAHAN FIX KIYA - Ab VELORA ki jagah Ravish ayega */}
         <p className="text-gray-600 mt-2">
           Welcome to {SITE_CONFIG.name} Dashboard 👋
         </p>
