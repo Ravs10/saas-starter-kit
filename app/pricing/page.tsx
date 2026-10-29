@@ -1,33 +1,57 @@
-"use client"
-export default function Footer() {
+import Navbar from "../components/Navbar"
+import Footer from "../components/Footer"
+
+export default function Pricing() {
   return (
-    <footer className="mt-20">
-      <div className="bg-[#FF6A00] py-12 px-4">
-        <div className="max-w-[400px] mx-auto">
-          <div className="bg-black rounded-[32px] p-8 shadow-2xl border border-white/10 relative overflow-hidden group hover:scale-[1.02] transition-all duration-500">
-            <h3 className="text-white text-2xl font-bold leading-tight">What VELORA Can Do For You 👇</h3>
-            <ul className="mt-6 space-y-3 text-white/90 text-[15px]">
-              <li className="flex gap-2"><span className="text-orange-400">✓</span><span><b>Custom Business Tools</b> – Like Lorem Pro</span></li>
-              <li className="flex gap-2"><span className="text-orange-400">✓</span><span><b>Lightning Fast Websites</b> – Next.js, SEO Ready</span></li>
-              <li className="flex gap-2"><span className="text-orange-400">✓</span><span><b>Web & Mobile Apps</b> – Idea to Play Store</span></li>
-            </ul>
-            <div className="mt-6 flex gap-3">
-              <a href="https://wa.me/919999999999" className="flex-1 bg-[#25D366] text-black font-bold py-3 rounded-full text-center hover:scale-105 transition">WhatsApp</a>
-              <a href="mailto:contact@velora.cloud" className="flex-1 bg-white text-black font-bold py-3 rounded-full text-center hover:scale-105 transition">Email</a>
+    <div className="min-h-screen bg-white flex flex-col">
+      <Navbar/>
+      
+      <div className="flex-1">
+        <a href="/" className="inline-block m-6 text-sm border px-4 py-2 rounded-full hover:bg-black hover:text-white transition-all">← Back to Home</a>
+        
+        <div className="max-w-5xl mx-auto p-6 pb-16">
+          <h1 className="text-4xl md:text-5xl font-black text-center">Simple Pricing</h1>
+          <p className="text-center text-gray-500 mt-3">Choose your plan, scale with VELORA</p>
+          
+          <div className="grid md:grid-cols-3 gap-6 mt-12">
+            {/* Free */}
+            <div className="border rounded-2xl p-8 bg-white hover:shadow-2xl hover:-translate-y-2 hover:border-orange-400 transition-all duration-300 group">
+              <h3 className="font-bold text-xl">Free</h3>
+              <p className="text-4xl font-black mt-4 group-hover:text-orange-500 transition">$0</p>
+              <p className="text-sm text-gray-500 mt-2">Perfect to start</p>
+              <ul className="mt-4 text-sm space-y-2">
+                <li>✓ 1 Project</li><li>✓ 100 Users</li><li>✓ Community Support</li>
+              </ul>
+              <a href="/signup" className="block mt-6 bg-black text-white text-center py-3 rounded-xl group-hover:bg-orange-500 transition font-bold">Get Started</a>
             </div>
-            <p className="text-center text-white/50 text-[11px] mt-4 tracking-wider">⚡ REPLY IN 2 HOURS • 100% CONFIDENTIAL</p>
-            
-            <a href="https://ravish.workers.dev" target="_blank" className="mt-6 block bg-[#111] rounded-[20px] p-3 border border-orange-500/50 shadow-[0_0_30px_rgba(255,106,0,0.3)] hover:shadow-[0_0_50px_rgba(255,106,0,0.6)] transition-all">
-              <div className="absolute top-3 right-3 bg-red-600 text-white text-[10px] font-bold px-3 py-1 rounded-full animate-pulse">● LIVE</div>
-              <img src="/velora-logo.png" alt="VELORA" className="w-full rounded-xl" />
-              <p className="text-orange-400 text-center text-[12px] font-bold tracking-[2px] mt-3">CLICK TO VISIT VELORA CLOUD →</p>
-            </a>
+
+            {/* Pro */}
+            <div className="border-2 border-black rounded-2xl p-8 bg-black text-white hover:shadow-2xl hover:-translate-y-2 hover:scale-105 transition-all duration-300 relative">
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-500 text-white text-xs px-3 py-1 rounded-full font-bold">MOST POPULAR</span>
+              <h3 className="font-bold text-xl">Pro</h3>
+              <p className="text-4xl font-black mt-4">$19<span className="text-lg font-normal">/mo</span></p>
+              <p className="text-sm text-white/60 mt-2">For growing teams</p>
+              <ul className="mt-4 text-sm space-y-2 text-white/80">
+                <li>✓ Unlimited Projects</li><li>✓ 10k Users</li><li>✓ Priority Support</li>
+              </ul>
+              <a href="/signup" className="block mt-6 bg-white text-black text-center py-3 rounded-xl hover:bg-orange-500 hover:text-white transition font-bold">Start Pro →</a>
+            </div>
+
+            {/* Enterprise */}
+            <div className="border rounded-2xl p-8 bg-white hover:shadow-2xl hover:-translate-y-2 hover:border-orange-400 transition-all duration-300 group">
+              <h3 className="font-bold text-xl">Enterprise</h3>
+              <p className="text-4xl font-black mt-4 group-hover:text-orange-500 transition">$99</p>
+              <p className="text-sm text-gray-500 mt-2">For large scale</p>
+              <ul className="mt-4 text-sm space-y-2">
+                <li>✓ Everything in Pro</li><li>✓ Unlimited Users</li><li>✓ Dedicated Support</li>
+              </ul>
+              <a href="/signup" className="block mt-6 bg-black text-white text-center py-3 rounded-xl group-hover:bg-orange-500 transition font-bold">Contact Us</a>
+            </div>
           </div>
         </div>
       </div>
-      <div className="bg-black text-white/60 text-center py-4 text-xs">
-        Developed by <a href="https://ravish.workers.dev" className="text-orange-400 font-bold hover:underline">VELORA - Founded by Yadav Ravish</a>
-      </div>
-    </footer>
+
+      <Footer/>
+    </div>
   )
 }
