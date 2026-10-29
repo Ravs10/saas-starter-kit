@@ -1,102 +1,81 @@
 /**
- * SITE_CONFIG - Central Configuration File
- * This is the SINGLE SOURCE OF TRUTH for your entire website.
- * Change anything here and it will reflect everywhere.
+ * SITE_CONFIG - Central Configuration
+ * Single source of truth for the entire website.
  */
 
 export const SITE_CONFIG = {
   /**
-   * name: Your brand / project name
-   * Used in: Navbar (header logo text), Home page "Welcome to...", Dashboard greeting, Page Title, Footer
-   * Example: If you change to "Velora", Navbar will show "Velora"
+   * Brand / Project Name
+   * Displayed in: Navbar, Hero Heading, Dashboard, Page Title, Footer
    */
-  name: "Ravish",
+  name: "Velora",
 
   /**
-   * logo: URL of your logo image
-   * Used in: Navbar - Left side
-   * How it works:
-   * - If you provide a URL (e.g., "/logo.png" or "https://.../logo.jpg"), it will show that image.
-   * - If you leave it empty "" , it will show the first letter of your name inside a colored circle (e.g., "R")
-   * Example: logo: "/velora.png" or logo: "https://cdn.com/logo.svg"
+   * Logo URL
+   * - If provided: Shows image (e.g., "/logo.png")
+   * - If empty "": Shows first letter of name in a circle (e.g., "V")
    */
   logo: "",
 
   /**
-   * description: Short tagline about your product
-   * Used in: Home page hero section below the main heading, SEO meta description (what Google shows), Social share preview
+   * Short tagline / description
+   * Used in: Hero section, SEO meta description, Social share preview
    */
-  description: "Build your SaaS 10x faster",
+  description: "Build your SaaS 10x faster - Founded by Yadav Ravish",
 
   /**
-   * url: Your production/live website domain
-   * Used in: SEO ONLY - Not for UI
-   * - og:url (when someone shares your link on WhatsApp/Twitter)
-   * - canonical URL (tells Google which is the main URL)
-   * - sitemap.xml generation
-   * Important: Changing this does NOT move your website. Your site will still be hosted where you deployed it (e.g., Cloudflare Workers).
-   * Just keep it same as your live domain.
-   * Example: "https://ravish.workers.dev" or "https://velora.com"
+   * Production URL (SEO Only)
+   * Used for: og:url, canonical URL, sitemap.xml
+   * Note: Changing this does not deploy your site, it is only for SEO.
    */
-  url: "https://ravish.workers.dev",
+  url: "https://velora.workers.dev",
 
   /**
-   * theme: Colors for the entire website
+   * Theme Colors - Change here to update entire site
    */
   theme: {
     /**
-     * primary: Main action color
-     * Used in: Dashboard button, Navbar Dashboard button, Any CTA button, First letter circle when logo is empty
+     * Primary color: Used for all CTA buttons, Dashboard button, Logo fallback
      */
-    primary: "#DD6A00", // Orange
+    primary: "#DD6A00",
 
     /**
-     * secondary: Secondary background color
-     * Used in: Footer background (if you enable it), Light badges like "New - Ravish is Live"
+     * Secondary color: Used for badges, highlights, light backgrounds
      */
-    secondary: "#EFF6FF", // Light Blue
+    secondary: "#EFF6FF",
 
     /**
-     * body: Background color for ALL pages
-     * Used in: app/layout.tsx -> <body style={{ backgroundColor: ... }}>
-     * This controls the background of Home, Dashboard, Pricing, etc. all at once.
-     * If you change this to "#000000", your entire site background will become black.
+     * Body background: Global background for all pages (Home, Dashboard, etc.)
      */
-    body: "#F8F9B4", // Light Gray - Default site background
+    body: "#F8F9FA",
 
     /**
-     * navbar: Background color for Navbar ONLY
-     * Used in: components/Navbar.tsx -> <nav style={{ backgroundColor: ... }}>
-     * If you change this, only Navbar color will change.
+     * Navbar background: Only for Navbar component
      */
-    navbar: "#FFF000", // White - Change this to change Navbar bg
+    navbar: "#FFFFFF",
 
     /**
-     * navbarText: Text color for Navbar links
-     * Used in: Navbar links like Features, Pricing, etc.
+     * Navbar text color: Color for nav links (Features, Pricing, etc.)
      */
-    navbarText: "#000000", // Black
+    navbarText: "#000000",
   },
 
   /**
-   * footerText: Copyright text at the bottom
-   * Used in: Footer.tsx - Left side
+   * Footer copyright text
    */
-  footerText: "© 2026 Ravish. All rights reserved.",
+  footerText: "© 2026 Velora. Founded by Yadav Ravish. All rights reserved.",
 
   /**
-   * footerLinks: List of links in the footer
-   * Used in: Footer.tsx - Right side
-   * How to add/edit:
-   * - To add a new link: { name: "Blog", href: "/blog" }
-   * - To remove: Just delete the object from the array
-   * - href can be internal ("/privacy") or external ("https://twitter.com/ravish")
+   * Footer links
+   * To add: { name: "Blog", href: "/blog" }
+   * To remove: Delete the object
+   * Supports internal ("/privacy") and external ("https://...") links
    */
   footerLinks: [
     { name: "Privacy", href: "/privacy" },
     { name: "Terms", href: "/terms" },
     { name: "Pricing", href: "/pricing" },
     { name: "Contact", href: "/contact" },
-    { name: "settings", href: "/settings" },
-  ]
+    { name: "Settings", href: "/settings" },
+  ],
 }
