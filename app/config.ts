@@ -69,7 +69,7 @@ export const SITE_CONFIG = {
      * Used in: components/Navbar.tsx -> <nav style={{ backgroundColor: ... }}>
      * If you change this, only Navbar color will change.
      */
-    navbar: "#FFFFFF", // White - Change this to change Navbar bg
+    navbar: "#FFF000", // White - Change this to change Navbar bg
 
     /**
      * navbarText: Text color for Navbar links
