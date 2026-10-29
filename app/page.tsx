@@ -1,43 +1,49 @@
-import { SITE_CONFIG } from "@/app/config"
-import Navbar from "@/app/components/Navbar"
+import { SITE_CONFIG } from "./config"
+import Navbar from "./components/Navbar"
+import Footer from "./components/Footer"
 
-export default function Dashboard() {
+export default function Home() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: SITE_CONFIG.theme.body }}>
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: SITE_CONFIG.theme.body }}>
       <div className="bg-white">
         <Navbar />
       </div>
-      
-      <div className="max-w-6xl mx-auto px-6 py-8">
-        <a href="/" className="inline-block px-5 py-2 bg-white border rounded-full text-sm mb-8">
-          ← Back to Home
-        </a>
 
-        <h1 className="text-4xl font-black">Dashboard</h1>
-        <p className="text-gray-600 mt-2">
-          Welcome to {SITE_CONFIG.name} Dashboard 👋
+      <main className="flex-1 max-w-6xl mx-auto px-6 py-12 w-full">
+        <h1 className="text-5xl font-black tracking-tight">
+          Welcome to {SITE_CONFIG.name}
+        </h1>
+        <p className="mt-3 text-gray-600 text-lg">
+          {SITE_CONFIG.description} - Build your SaaS 10x faster
         </p>
 
-        <div className="grid gap-6 mt-8">
+        <div className="mt-8 flex gap-4">
+          <a href="/dashboard" className="px-6 py-3 rounded-full text-white font-bold" style={{ backgroundColor: SITE_CONFIG.theme.primary }}>
+            Go to Dashboard →
+          </a>
+          <a href="/" className="px-6 py-3 rounded-full bg-white border font-bold">
+            Learn More
+          </a>
+        </div>
+
+        {/* Preview Cards - Same as Dashboard style */}
+        <div className="grid md:grid-cols-3 gap-6 mt-12">
           <div className="bg-white p-6 rounded-3xl border">
             <p className="text-sm text-gray-400 tracking-widest">USERS</p>
             <p className="text-4xl font-black mt-2">1,234</p>
-            <p className="text-sm text-green-600 mt-2">↑ 12% this week</p>
           </div>
-
           <div className="bg-black text-white p-6 rounded-3xl">
             <p className="text-sm text-gray-400 tracking-widest">REVENUE</p>
             <p className="text-4xl font-black mt-2">$5,678</p>
-            <p className="text-sm text-green-400 mt-2">↑ 23% this month</p>
           </div>
-
           <div className="bg-white p-6 rounded-3xl border">
             <p className="text-sm text-gray-400 tracking-widest">PROJECTS</p>
             <p className="text-4xl font-black mt-2">12</p>
-            <p className="text-sm text-gray-500 mt-2">4 active now</p>
           </div>
         </div>
-      </div>
+      </main>
+
+      <Footer />
     </div>
   )
 }
