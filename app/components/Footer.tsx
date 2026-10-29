@@ -1,3 +1,5 @@
+import { SITE_CONFIG } from "@/app/config"
+
 export default function Footer() {
   return (
     <footer className="bg-white border-t mt-20">
@@ -6,9 +8,13 @@ export default function Footer() {
           
           {/* Logo */}
           <div className="text-center md:text-left">
-            <img src="/velora-white-logo.png" alt="VELORA" className="h-8 w-auto mx-auto md:mx-0" />
+            <img 
+              src={SITE_CONFIG.logo} 
+              alt={SITE_CONFIG.name} 
+              className="h-8 w-auto mx-auto md:mx-0" 
+            />
             <p className="text-sm text-gray-500 mt-3 max-w-xs">
-              Build your SaaS 10x faster. Next.js + Cloudflare starter.
+              {SITE_CONFIG.description}
             </p>
           </div>
 
@@ -34,7 +40,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t mt-10 pt-6 text-center text-xs text-gray-400">
-          © 2026 VELORA. All rights reserved.
+          {SITE_CONFIG.footerText}
         </div>
       </div>
     </footer>
