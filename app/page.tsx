@@ -4,14 +4,15 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: SITE_CONFIG.theme.body }}>
       <main className="flex-1 max-w-6xl mx-auto px-6 py-12 w-full">
-        <h1 className="text-5xl font-black tracking-tight">
+        <h1 className="font-black tracking-tight text-center whitespace-nowrap
+                       text-[28px] sm:text-[36px] md:text-5xl">
           Welcome to {SITE_CONFIG.name}
         </h1>
-        <p className="mt-3 text-gray-600 text-lg">
+        <p className="mt-3 text-gray-600 text-lg text-center">
           {SITE_CONFIG.description} - Build your SaaS 10x faster
         </p>
 
-        <div className="mt-8 flex gap-4">
+        <div className="mt-8 flex gap-4 justify-center">
           <a href="/dashboard" className="px-6 py-3 rounded-full text-white font-bold" style={{ backgroundColor: SITE_CONFIG.theme.primary }}>
             Go to Dashboard →
           </a>
