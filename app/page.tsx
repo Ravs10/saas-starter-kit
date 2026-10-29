@@ -3,9 +3,9 @@ import { SITE_CONFIG } from "./config"
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: SITE_CONFIG.theme.body }}>
-      <main className="flex-1 max-w-6xl mx-auto px-6 py-12 w-full">
-        <h1 className="font-black tracking-tight text-center whitespace-nowrap
-                       text-[28px] sm:text-[36px] md:text-5xl">
+      <main className="flex-1 max-w-6xl mx-auto px-4 sm:px-6 py-12 w-full">
+        <h1 className="font-black tracking-tighter text-center whitespace-nowrap leading-none
+                       text-[40px] sm:text-[46px] md:text-[56px]">
           Welcome to {SITE_CONFIG.name}
         </h1>
         <p className="mt-3 text-gray-600 text-lg text-center">
@@ -21,7 +21,6 @@ export default function Home() {
           </a>
         </div>
 
-        {/* Preview Cards - Same as Dashboard style */}
         <div className="grid md:grid-cols-3 gap-6 mt-12">
           <div className="bg-white p-6 rounded-3xl border">
             <p className="text-sm text-gray-400 tracking-widest">USERS</p>
