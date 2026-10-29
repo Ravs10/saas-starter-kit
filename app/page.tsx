@@ -4,8 +4,9 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: SITE_CONFIG.theme.body }}>
       <main className="flex-1 max-w-6xl mx-auto px-4 sm:px-6 py-12 w-full">
-        <h1 className="font-black tracking-tighter text-center whitespace-nowrap leading-none
-                       text-[40px] sm:text-[46px] md:text-[56px]">
+        <h1 className="font-black text-center whitespace-nowrap leading-none
+                       tracking-[-0.02em]
+                       text-[38px] sm:text-[46px] md:text-[56px]">
           Welcome to {SITE_CONFIG.name}
         </h1>
         <p className="mt-3 text-gray-600 text-lg text-center">
