@@ -84,5 +84,6 @@ export const SITE_CONFIG = {
     { name: "Terms", href: "/terms" },
     { name: "Pricing", href: "/pricing" },
     { name: "Contact", href: "/contact" },
+    { name: "settings", href: "/settings" },
   ]
 }
