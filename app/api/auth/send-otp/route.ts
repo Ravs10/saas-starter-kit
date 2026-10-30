@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getRequestContext } from "@cloudflare/next-on-pages"
+import { getCloudflareContext } from "@opennextjs/cloudflare"
 export const runtime = "edge"
 
 function genOtp() {
@@ -11,9 +11,9 @@ export async function POST(req: NextRequest) {
     const { email } = await req.json()
     if (!email) return NextResponse.json({ error: "Email required" }, { status: 400 })
 
-    const { env } = getRequestContext() as any
+    const { env } = await getCloudflareContext() as any
     const otp = genOtp()
-    const expiresAt = Date.now() + 5 * 60 * 1000
+    const expiresAt = Date.now() + 5 * 60 * 1000 // 5 min only
 
     await env.DB.prepare(
       "INSERT OR REPLACE INTO otps (email, otp, expires_at) VALUES (?, ?, ?)"
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
           from: env.RESEND_FROM || "Velora <onboarding@resend.dev>",
           to: email,
           subject: `Your Velora OTP is ${otp}`,
-          html: `<h1>${otp}</h1><p>Valid for 5 minutes. Don't share.</p>`,
+          html: `<div><h1 style="letter-spacing:6px">${otp}</h1><p style="color:#666">This OTP is valid for 5 minutes. Don't share it.</p></div>`,
         }),
       })
       emailSent = r.ok
