@@ -1,64 +1,54 @@
 "use client"
 import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
 import AuthGuard from "@/app/components/AuthGuard"
 
 export default function DashboardPage() {
-  return (
-    <AuthGuard>
-      <DashboardContent />
-    </AuthGuard>
-  )
+  return <AuthGuard><DashboardContent /></AuthGuard>
 }
 
 function DashboardContent() {
   const [user, setUser] = useState<any>(null)
-  const router = useRouter()
-
   useEffect(() => {
     const u = localStorage.getItem("user")
     if (u) setUser(JSON.parse(u))
   }, [])
 
-  function logout() {
-    localStorage.removeItem("user")
-    localStorage.removeItem("user_email")
-    router.replace("/login")
-  }
-
   if (!user) return null
-
-  // Fix for "Welcome, !"
-  const displayName = user.name || user.email?.split("@")[0] || "User"
-  const userId = user.id || user.email
+  const name = user.name || user.email?.split("@")[0]
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm p-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold">Velora</h1>
-        <div className="flex gap-2">
-          <a href="/settings" className="bg-black text-white px-4 py-2 rounded text-sm">Settings</a>
-          <button onClick={logout} className="bg-red-500 text-white px-4 py-2 rounded text-sm">Logout</button>
+    <div className="min-h-screen bg-[#fafafa]">
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        
+        {/* Top Badge - Isse professional look ayega */}
+        <div className="inline-flex items-center gap-2 bg-black text-white text-xs px-3 py-1 rounded-full mb-4">
+          <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+          VELORA DASHBOARD • SECURED BY CLOUDFLARE D1
         </div>
-      </header>
 
-      <div className="p-6">
-        <h1 className="text-3xl font-bold mb-1">Welcome, {displayName}!</h1>
-        <p className="text-gray-600 mb-6">Email: {user.email}</p>
+        <h1 className="text-4xl font-black tracking-tight">Welcome back, {name}!</h1>
+        <p className="text-gray-500 mt-2">Here's what's happening with your account today.</p>
 
-        <div className="bg-white p-6 rounded-2xl border shadow-sm">
-          <p className="font-medium">✅ Your data is secure in Cloudflare D1</p>
-          <p className="text-sm text-gray-500 mt-2">User ID: {userId}</p>
-          
-          <div className="mt-6 grid grid-cols-2 gap-3">
-            <a href="/settings" className="border p-4 rounded-xl text-center hover:bg-gray-50">
-              <div className="text-2xl">⚙️</div>
-              <div className="text-sm font-medium mt-1">Change Password</div>
-            </a>
-            <a href="/" className="border p-4 rounded-xl text-center hover:bg-gray-50">
-              <div className="text-2xl">🛍️</div>
-              <div className="text-sm font-medium mt-1">Go to Store</div>
-            </a>
+        <div className="grid md:grid-cols-3 gap-4 mt-8">
+          {/* Card 1 */}
+          <div className="bg-white p-5 rounded-2xl border shadow-sm">
+            <p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Email Account</p>
+            <p className="font-medium mt-2 break-all">{user.email}</p>
+            <p className="text-xs text-green-600 mt-3">● Verified & Secure</p>
+          </div>
+          {/* Card 2 */}
+          <div className="bg-white p-5 rounded-2xl border shadow-sm">
+            <p className="text-xs text-gray-400 uppercase font-bold tracking-widest">User Status</p>
+            <p className="font-medium mt-2">Active Member</p>
+            <p className="text-xs text-gray-500 mt-3">ID: {user.email.slice(0,12)}...</p>
+          </div>
+          {/* Card 3 */}
+          <div className="bg-black text-white p-5 rounded-2xl shadow-sm">
+            <p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Quick Action</p>
+            <div className="mt-3 space-y-2">
+              <a href="/settings" className="block bg-white text-black text-sm text-center py-2 rounded-full font-medium">Change Password</a>
+              <a href="/" className="block bg-zinc-800 text-sm text-center py-2 rounded-full">Go to Store →</a>
+            </div>
           </div>
         </div>
       </div>
