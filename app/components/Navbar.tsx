@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
+import Link from "next/link"
 
 export default function Navbar() {
   const [user, setUser] = useState<any>(null)
@@ -13,17 +14,14 @@ export default function Navbar() {
       setUser(u ? JSON.parse(u) : null)
     }
     checkUser()
-    window.addEventListener("storage", checkUser)
-    // Route change pe bhi check karo
+    // har second check karo taaki login ke turant baad update ho jaye
     const interval = setInterval(checkUser, 1000)
-    return () => {
-      window.removeEventListener("storage", checkUser)
-      clearInterval(interval)
-    }
+    return () => clearInterval(interval)
   }, [pathname])
 
   const logout = () => {
     localStorage.removeItem("user")
+    localStorage.removeItem("user_email")
     setUser(null)
     router.push("/login")
   }
@@ -31,39 +29,26 @@ export default function Navbar() {
   const isInside = pathname.startsWith("/dashboard") || pathname.startsWith("/settings")
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b">
+    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b">
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-        {/* Logo - Login hai to Dashboard pe, nahi to Home pe */}
-        <a href={user ? "/dashboard" : "/"} className="text-2xl font-black tracking-tight">
+        <Link href={user ? "/dashboard" : "/"} className="text-2xl font-black tracking-tight">
           Velora
-        </a>
+        </Link>
 
         <nav className="flex items-center gap-2">
           {!user ? (
             <>
-              <a href="/login" className="text-sm font-medium px-4 py-2">Login</a>
-              <a href="/signup" className="text-sm bg-black text-white px-4 py-2 rounded-full">Sign Up</a>
+              <Link href="/login" className="text-sm font-medium px-4 py-2">Login</Link>
+              <Link href="/signup" className="text-sm bg-black text-white px-4 py-2 rounded-full">Sign Up</Link>
             </>
           ) : (
             <>
-              {/* Har page pe Dashboard ka button dikhega */}
-              {!isInside && (
-                <a href="/dashboard" className="text-sm bg-black text-white px-4 py-2 rounded-full font-medium">
-                  Dashboard
-                </a>
-              )}
-              {isInside ? (
-                <>
-                  <a href="/" className="text-sm px-3 py-2 hover:bg-gray-100 rounded-full">Store</a>
-                  <a href="/settings" className="text-sm bg-black text-white px-4 py-2 rounded-full">Settings</a>
-                  <button onClick={logout} className="text-sm bg-red-500 text-white px-4 py-2 rounded-full">Logout</button>
-                </>
-              ) : (
-                <>
-                  <a href="/settings" className="text-sm border px-4 py-2 rounded-full">Settings</a>
-                  <button onClick={logout} className="text-sm bg-red-50 text-red-600 px-4 py-2 rounded-full">Logout</button>
-                </>
-              )}
+              {/* Logged in hai to har jagah Dashboard ka button dikhega */}
+              <Link href="/dashboard" className={`text-sm px-4 py-2 rounded-full font-medium ${isInside ? 'bg-gray-100' : 'bg-black text-white'}`}>
+                Dashboard
+              </Link>
+              <Link href="/settings" className="text-sm border px-4 py-2 rounded-full">Settings</Link>
+              <button onClick={logout} className="text-sm bg-red-500 text-white px-4 py-2 rounded-full">Logout</button>
             </>
           )}
         </nav>
