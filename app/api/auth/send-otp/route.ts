@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getCloudflareContext } from "@opennextjs/cloudflare"
-export const runtime = "edge"
+
 
 function genOtp() {
   return Math.floor(100000 + Math.random() * 900000).toString()
