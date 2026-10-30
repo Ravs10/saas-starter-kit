@@ -1,51 +1,71 @@
-import { getCloudflareContext } from "@opennextjs/cloudflare"
+"use client"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 
-function isStrongPassword(p: string) {
-  return p.length >= 8 && /[A-Z]/.test(p) && /[a-z]/.test(p) && /[0-9]/.test(p) && /[^A-Za-z0-9]/.test(p)
-}
+export default function SignupPage() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [name, setName] = useState("")
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
-function isValidEmail(email: string) {
-  // Pro level regex - .com/.in/.co sab mandatory
-  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-  return regex.test(email)
-}
-
-async function hashPassword(password: string) {
-  const data = new TextEncoder().encode(password + "_velora_salt_123")
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
-  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('')
-}
-
-export async function POST(request: Request) {
-  try {
-    const { email, password, name } = await request.json() as any
-    const { env } = await getCloudflareContext()
-    const db = (env as any).DB
-
-    if (!email || !password) return Response.json({ error: "Email & Password required" }, { status: 400 })
-
-    // 1. EMAIL VALIDATION - Ye ats@atscom ko rok dega
-    if (!isValidEmail(email)) {
-      return Response.json({ error: "Invalid email! Must be like name@domain.com" }, { status: 400 })
-    }
-
-    // 2. PASSWORD VALIDATION
-    if (!isStrongPassword(password)) {
-      return Response.json({ error: "Password must be 8+ chars with Upper, Lower, Number & Symbol" }, { status: 400 })
-    }
-
-    const hashedPassword = await hashPassword(password)
-    const id = crypto.randomUUID()
-    
-    await db.prepare(
-      "INSERT INTO users (id, email, password, name) VALUES (?, ?, ?, ?)"
-    ).bind(id, email.toLowerCase(), hashedPassword, name || 'User').run()
-
-    return Response.json({ success: true, id })
-  } catch (e: any) {
-    if (e.message?.includes("UNIQUE")) {
-      return Response.json({ error: "Email already registered" }, { status: 400 })
-    }
-    return Response.json({ error: e.message }, { status: 400 })
+  // Strong password logic
+  const getStrength = (pwd: string) => {
+    if (pwd.length === 0) return null
+    if (pwd.length < 8) return { text: "Too short - minimum 8 characters", color: "text-red-500", ok: false }
+    if (!/[A-Z]/.test(pwd)) return { text: "Add 1 Uppercase letter (A-Z)", color: "text-orange-500", ok: false }
+    if (!/[a-z]/.test(pwd)) return { text: "Add 1 Lowercase letter (a-z)", color: "text-orange-500", ok: false }
+    if (!/[0-9]/.test(pwd)) return { text: "Add 1 Number (0-9)", color: "text-yellow-600", ok: false }
+    if (!/[^A-Za-z0-9]/.test(pwd)) return { text: "Add 1 Symbol (@ # $ %)", color: "text-yellow-600", ok: false }
+    return { text: "Strong Password ✓", color: "text-green-600", ok: true }
   }
+
+  const strength = getStrength(password)
+
+  async function handleSignup(e: any) {
+    e.preventDefault()
+    if (!strength?.ok) {
+      alert(strength?.text)
+      return
+    }
+    setLoading(true)
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      body: JSON.stringify({ email, password, name }),
+      headers: { "Content-Type": "application/json" }
+    })
+    const data = await res.json()
+    setLoading(false)
+    if (data.success) {
+      alert("Signup Success! Ab login karo")
+      router.push("/login")
+    } else {
+      alert("Error: " + data.error)
+    }
+  }
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <form onSubmit={handleSignup} className="bg-white p-8 rounded-xl shadow-md w-96">
+        <h1 className="text-2xl font-bold mb-6">Create Account - Velora</h1>
+        <input className="w-full border p-3 rounded mb-3" placeholder="Name" value={name} onChange={e=>setName(e.target.value)} required />
+        <input className="w-full border p-3 rounded mb-3" placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} required />
+        
+        <div className="mb-4">
+          <input className="w-full border p-3 rounded" placeholder="Password" type="password" value={password} onChange={e=>setPassword(e.target.value)} required />
+          {strength && (
+            <p className={`text-[13px] mt-2 font-medium ${strength.color}`}>
+              {strength.text}
+            </p>
+          )}
+          <p className="text-[11px] text-gray-400 mt-2">Example: Ravish@1234</p>
+        </div>
+
+        <button disabled={loading || !strength?.ok} className="w-full bg-black text-white p-3 rounded disabled:bg-gray-400 disabled:cursor-not-allowed">
+          {loading ? "Creating..." : "Sign Up"}
+        </button>
+        <p className="mt-4 text-center text-sm">Already have account? <a href="/login" className="underline">Login</a></p>
+      </form>
+    </div>
+  )
 }
