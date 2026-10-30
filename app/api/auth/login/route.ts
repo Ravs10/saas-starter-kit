@@ -36,7 +36,14 @@ export async function POST(req: NextRequest) {
     }
 
     await env.DB.prepare("DELETE FROM login_attempts WHERE email = ?").bind(email).run()
-    return NextResponse.json({ success: true, user: { email: user.email } })
+    return NextResponse.json({ 
+      success: true, 
+      user: { 
+        id: user.id, 
+        name: user.name || user.email.split("@")[0], 
+        email: user.email 
+      } 
+    })
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500 })
   }
