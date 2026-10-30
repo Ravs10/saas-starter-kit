@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import PasswordInput from "@/components/PasswordInput"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
@@ -32,7 +33,17 @@ export default function LoginPage() {
       <form onSubmit={handleLogin} className="bg-white p-8 rounded-xl shadow-md w-96">
         <h1 className="text-2xl font-bold mb-6">Welcome Back - Velora</h1>
         <input className="w-full border p-3 rounded mb-3" placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} required />
-        <input className="w-full border p-3 rounded mb-4" placeholder="Password" type="password" value={password} onChange={e=>setPassword(e.target.value)} required />
+        
+        <PasswordInput 
+          value={password} 
+          onChange={(e:any) => setPassword(e.target.value)} 
+          placeholder="Password" 
+        />
+
+        <div className="flex justify-between mt-3 mb-4 text-sm">
+          <a href="/forgot-password" className="text-blue-600 hover:underline font-medium">Forgot Password? Change Password</a>
+        </div>
+
         <button disabled={loading} className="w-full bg-black text-white p-3 rounded">
           {loading ? "Checking..." : "Login"}
         </button>
