@@ -2,6 +2,13 @@
 import { useState } from "react"
 import PasswordInput from "@/app/components/PasswordInput"
 
+function maskEmail(email: string) {
+  const [name, domain] = email.split("@")
+  if (!name || !domain) return email
+  if (name.length <= 2) return name[0] + "***@" + domain
+  return name[0] + "***" + name.slice(-1) + "@" + domain
+}
+
 export default function ForgotPasswordPage() {
   const [step, setStep] = useState(1)
   const [email, setEmail] = useState("")
@@ -21,9 +28,9 @@ export default function ForgotPasswordPage() {
     setLoading(false)
     if (data.success) {
       if (data.emailSent) {
-        alert(`OTP sent! ✅ Check your email (${email}). Valid for 5 minutes. Check Spam if not in inbox.`)
+        alert(`OTP sent to ${maskEmail(email)}! ✅\nValid for 5 minutes. Check Spam if not in inbox.`)
       } else {
-        alert(`OTP sent! (Email failed: ${data.resend_error}) Debug OTP: ${data.debug_otp}`)
+        alert(`OTP sent to ${maskEmail(email)}! (Email failed: ${data.resend_error}) Debug: ${data.debug_otp}\nValid for 5 minutes.`)
       }
       setStep(2)
     } else {
@@ -52,9 +59,12 @@ export default function ForgotPasswordPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="bg-white p-8 rounded-xl shadow-md w-96">
-        <h1 className="text-2xl font-bold mb-6">
+        <h1 className="text-2xl font-bold mb-2">
           {step === 1 ? "Forgot Password" : "Reset Password"}
         </h1>
+        <p className="text-xs text-gray-500 mb-4">
+          {step === 1 ? "Enter your email to receive OTP (Valid for 5 minutes)" : `OTP sent to ${maskEmail(email)} - Valid for 5 minutes`}
+        </p>
 
         {step === 1 ? (
           <form onSubmit={sendOtp}>
@@ -65,12 +75,14 @@ export default function ForgotPasswordPage() {
           </form>
         ) : (
           <form onSubmit={changePass}>
-            <input className="w-full border p-3 rounded mb-3" placeholder="Email" value={email} disabled />
-            <input className="w-full border p-3 rounded mb-3" placeholder="6-digit OTP" value={otp} onChange={e=>setOtp(e.target.value)} required />
+            <input className="w-full border p-3 rounded mb-2 bg-gray-100" value={maskEmail(email)} disabled />
+            <p className="text-[11px] text-gray-400 mb-3">Full email: {email}</p>
+            <input className="w-full border p-3 rounded mb-3" placeholder="6-digit OTP (Valid for 5 min)" value={otp} onChange={e=>setOtp(e.target.value)} required />
             <PasswordInput value={newPass} onChange={(e:any)=>setNewPass(e.target.value)} placeholder="New Password" />
-            <button disabled={loading} className="w-full bg-black text-white p-3 rounded mt-2">
+            <button disabled={loading} className="w-full bg-black text-white p-3 rounded mt-3">
               {loading ? "Updating..." : "Change Password"}
             </button>
+            <p className="text-[11px] text-center text-gray-400 mt-2">OTP expires in 5 minutes. Don't share.</p>
           </form>
         )}
 
