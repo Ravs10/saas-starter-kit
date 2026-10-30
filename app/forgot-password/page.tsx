@@ -20,10 +20,14 @@ export default function ForgotPasswordPage() {
     const data = await res.json()
     setLoading(false)
     if (data.success) {
-      alert(`OTP sent! Debug OTP: ${data.debug_otp} (D1 me bhi save hai)`)
+      if (data.emailSent) {
+        alert(`OTP sent! ✅ Check your email (${email}). Valid for 5 minutes. Check Spam if not in inbox.`)
+      } else {
+        alert(`OTP sent! (Email failed: ${data.resend_error}) Debug OTP: ${data.debug_otp}`)
+      }
       setStep(2)
     } else {
-      alert("Error: " + data.error)
+      alert("Error: " + (data.error || data.resend_error))
     }
   }
 
