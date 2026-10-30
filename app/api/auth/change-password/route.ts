@@ -1,16 +1,27 @@
-import { getCloudflareContext } from "@opennextjs/cloudflare"
+import { NextRequest, NextResponse } from "next/server"
+import { getRequestContext } from "@cloudflare/next-on-pages"
+export const runtime = "edge"
 
-export async function POST(req: Request) {
-  const { email, otp, newPassword } = await req.json()
-  const { env } = getCloudflareContext() as any
+export async function POST(req: NextRequest) {
+  try {
+    const { email, otp, newPassword } = await req.json()
+    const { env } = getRequestContext()
 
-  const row = await env.DB.prepare("SELECT * FROM otps WHERE email = ?").bind(email).first()
-  if (!row || row.otp !== otp || Date.now() > row.expires_at) {
-    return Response.json({ error: "Invalid or expired OTP" }, { status: 400 })
+    const row: any = await env.DB.prepare("SELECT * FROM otps WHERE email = ?").bind(email).first()
+    
+    if (!row) return NextResponse.json({ error: "No OTP found. Request again." }, { status: 400 })
+    if (row.otp !== otp) return NextResponse.json({ error: "Invalid OTP" }, { status: 400 })
+    if (Date.now() > row.expires_at) {
+      await env.DB.prepare("DELETE FROM otps WHERE email = ?").bind(email).run()
+      return NextResponse.json({ error: "OTP expired! Valid for only 5 minutes. Request new OTP." }, { status: 400 })
+    }
+
+    // Password update (hash karo ideally)
+    await env.DB.prepare("UPDATE users SET password = ? WHERE email = ?").bind(newPassword, email).run()
+    await env.DB.prepare("DELETE FROM otps WHERE email = ?").bind(email).run()
+
+    return NextResponse.json({ success: true })
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message }, { status: 500 })
   }
-
-  await env.DB.prepare("UPDATE users SET password = ? WHERE email = ?").bind(newPassword, email).run()
-  await env.DB.prepare("DELETE FROM otps WHERE email = ?").bind(email).run()
-
-  return Response.json({ success: true, message: "Password changed!" })
 }
