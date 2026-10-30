@@ -14,7 +14,10 @@ function DashboardContent() {
   }, [])
 
   if (!user) return null
-  const name = user.name || user.email?.split("@")[0]
+  
+  // Welcome back ke liye best logic
+  const rawName = user.name || user.email?.split("@")[0]
+  const displayName = rawName.charAt(0).toUpperCase() + rawName.slice(1)
 
   return (
     <div className="min-h-screen bg-[#fafafa]">
@@ -26,7 +29,7 @@ function DashboardContent() {
           VELORA DASHBOARD • SECURED BY CLOUDFLARE D1
         </div>
 
-        <h1 className="text-4xl font-black tracking-tight">Welcome back, {name}!</h1>
+        <h1 className="text-4xl font-black tracking-tight">Welcome back, {displayName}!</h1>
         <p className="text-gray-500 mt-2">Here's what's happening with your account today.</p>
 
         <div className="grid md:grid-cols-3 gap-4 mt-8">
