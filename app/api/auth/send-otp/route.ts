@@ -14,21 +14,32 @@ export async function POST(req: NextRequest) {
 
     const { env } = getRequestContext()
     const otp = genOtp()
-    const expiresAt = Date.now() + 10 * 60 * 1000 // 10 min
+    const expiresAt = Date.now() + 5 * 60 * 1000 // 5 min only
 
     // 1. D1 me save
     await env.DB.prepare(
       "INSERT OR REPLACE INTO otps (email, otp, expires_at) VALUES (?, ?, ?)"
     ).bind(email, otp, expiresAt).run()
 
-    // 2. Resend se Real Email
+    // 2. User ki apni key hai to usi se bhejo, nahi to tumhari default key se
+    let apiKey = env.RESEND_API_KEY
+    try {
+      const userRow: any = await env.DB.prepare("SELECT resend_api_key FROM users WHERE email = ?").bind(email).first()
+      if (userRow?.resend_api_key) {
+        apiKey = userRow.resend_api_key
+      }
+    } catch (e) {
+      console.log("User key fetch error, using default", e)
+    }
+
+    // 3. Resend se Real Email
     let emailSent = false
-    if (env.RESEND_API_KEY) {
+    if (apiKey) {
       try {
         const res = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${env.RESEND_API_KEY}`,
+            Authorization: `Bearer ${apiKey}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
@@ -40,7 +51,7 @@ export async function POST(req: NextRequest) {
                 <h2 style="color: #111;">Velora - Password Reset</h2>
                 <p>Your OTP for password reset is:</p>
                 <h1 style="letter-spacing: 6px; background: #f5f5f5; padding: 12px; text-align: center; border-radius: 8px;">${otp}</h1>
-                <p style="color: #666; font-size: 14px;">This OTP is valid for 10 minutes. Don't share it.</p>
+                <p style="color: #666; font-size: 14px;">This OTP is valid for 5 minutes. Don't share it.</p>
                 <hr/>
                 <p style="font-size: 12px; color: #999;">If you didn't request this, ignore this email.</p>
               </div>
@@ -56,7 +67,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ 
       success: true, 
       emailSent,
-      debug_otp: emailSent ? undefined : otp // agar email fail ho to debug me OTP dega testing ke liye
+      debug_otp: emailSent ? undefined : otp
     })
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 })
