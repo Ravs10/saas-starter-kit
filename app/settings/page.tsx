@@ -2,8 +2,17 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import PasswordInput from "@/app/components/PasswordInput"
+import AuthGuard from "@/app/components/AuthGuard"
 
 export default function SettingsPage() {
+  return (
+    <AuthGuard>
+      <SettingsContent />
+    </AuthGuard>
+  )
+}
+
+function SettingsContent() {
   const [userEmail, setUserEmail] = useState("")
   const [oldPass, setOldPass] = useState("")
   const [newPass, setNewPass] = useState("")
