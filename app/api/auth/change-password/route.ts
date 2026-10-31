@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getCloudflareContext } from "@opennextjs/cloudflare"
-import bcrypt from "bcryptjs"
+
+async function hashPassword(password: string) {
+  const data = new TextEncoder().encode(password + "_velora_salt_123")
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('')
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -22,8 +27,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "OTP expired! Valid for only 5 minutes." }, { status: 400 })
     }
 
-    // ✅ FIX: Hash karke save karo
-    const hashedPassword = await bcrypt.hash(newPassword, 10)
+    const hashedPassword = await hashPassword(newPassword)
     await env.DB.prepare("UPDATE users SET password = ? WHERE email = ?").bind(hashedPassword, email).run()
     await env.DB.prepare("DELETE FROM otps WHERE email = ?").bind(email).run()
     await env.DB.prepare("DELETE FROM login_attempts WHERE email = ?").bind(email).run()
