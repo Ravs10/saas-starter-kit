@@ -1,51 +1,64 @@
-import Link from "next/link"
-import { SITE_CONFIG } from "@/app/config"
-
-export default function Pricing() {
+// app/pricing/page.tsx - FINAL FIXED
+export default function PricingPage() {
   return (
-    <div className="max-w-6xl mx-auto px-6 py-16">
-      <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-black mb-8 border px-4 py-2 rounded-full bg-white">
-        ← Back to Home
-      </Link>
+    <div className="min-h-[calc(100vh-200px)] bg-black text-white">
+      <div className="max-w-5xl mx-auto px-4 py-10 md:py-16">
+        
+        {/* Back Button */}
+        <a href="/" className="inline-block bg-white text-black px-5 py-2.5 rounded-full text-sm font-medium mb-10">
+          ← Back to Home
+        </a>
 
-      <div className="text-center max-w-2xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-black tracking-tight">Simple Pricing</h1>
-        <p className="text-gray-600 mt-4">One time payment, lifetime access to {SITE_CONFIG.name}.</p>
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-6 mt-12 max-w-3xl mx-auto">
-        <div className="bg-white p-8 rounded-[24px] border">
-          <h3 className="text-xl font-bold">Free</h3>
-          <p className="text-3xl font-black mt-4">$0</p>
-          <ul className="mt-6 space-y-3 text-sm text-gray-600">
-            <li>✓ 1 Project</li>
-            <li>✓ Basic support</li>
-            <li>✓ Community access</li>
-          </ul>
-          <Link href="/signup" className="mt-8 block text-center w-full py-3 rounded-full border font-semibold hover:bg-black hover:text-white transition">
-            Get Started
-          </Link>
+        {/* HEADING - YEHI MISSING THA */}
+        <div className="text-center max-w-2xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-black tracking-tight text-white">
+            Simple, Fair Pricing
+          </h1>
+          <p className="text-zinc-400 mt-4 text-[15px]">
+            One time payment, lifetime access to Velora.
+          </p>
         </div>
 
-        <div className="bg-black text-white p-8 rounded-[24px] border relative">
-          <div className="absolute -top-3 right-6 bg-white text-black text-xs px-3 py-1 rounded-full font-bold">POPULAR</div>
-          <h3 className="text-xl font-bold">Pro</h3>
-          <p className="text-3xl font-black mt-4">$29</p>
-          <ul className="mt-6 space-y-3 text-sm text-white/70">
-            <li>✓ Unlimited Projects</li>
-            <li>✓ Priority support</li>
-            <li>✓ Lifetime updates</li>
-          </ul>
-          <Link href="/signup" className="mt-8 block text-center w-full py-3 rounded-full font-semibold text-white" style={{ backgroundColor: SITE_CONFIG.theme.primary }}>
-            Sign up Now
-          </Link>
-        </div>
-      </div>
+        {/* PRICING CARDS */}
+        <div className="grid md:grid-cols-3 gap-6 mt-12 max-w-4xl mx-auto">
+          {/* Free */}
+          <div className="bg-white text-black p-7 rounded-[24px]">
+            <h3 className="font-bold">Free</h3>
+            <p className="text-4xl font-black mt-3">$0</p>
+            <ul className="mt-6 space-y-3 text-sm text-gray-600">
+              <li>✓ 1 Project</li>
+              <li>✓ Basic support</li>
+              <li>✓ Community access</li>
+            </ul>
+            <a href="/signup" className="block mt-8 border border-gray-200 text-center py-3 rounded-full font-medium">Get Started</a>
+          </div>
 
-      <div className="mt-16 pt-8 border-t border-gray-200 text-center">
-        <Link href="/" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-black bg-white px-6 py-2.5 rounded-full border">
-          ✕ Close and go to Home
-        </Link>
+          {/* Pro - Popular */}
+          <div className="bg-white text-black p-7 rounded-[24px] border-2 border-black relative">
+            <span className="absolute -top-3 right-6 bg-black text-white text-[10px] px-3 py-1 rounded-full tracking-widest">POPULAR</span>
+            <h3 className="font-bold">Pro</h3>
+            <p className="text-4xl font-black mt-3">$29</p>
+            <ul className="mt-6 space-y-3 text-sm text-gray-600">
+              <li>✓ Unlimited Projects</li>
+              <li>✓ Priority support</li>
+              <li>✓ All features</li>
+            </ul>
+            <a href="/signup" className="block mt-8 bg-black text-white text-center py-3 rounded-full font-medium">Get Pro</a>
+          </div>
+
+          {/* Enterprise */}
+          <div className="bg-zinc-900 text-white p-7 rounded-[24px] border border-zinc-800">
+            <h3 className="font-bold">Enterprise</h3>
+            <p className="text-4xl font-black mt-3">$99</p>
+            <ul className="mt-6 space-y-3 text-sm text-zinc-400">
+              <li>✓ Everything in Pro</li>
+              <li>✓ Custom domain</li>
+              <li>✓ Dedicated support</li>
+            </ul>
+            <a href="/contact" className="block mt-8 bg-white text-black text-center py-3 rounded-full font-medium">Contact Sales</a>
+          </div>
+        </div>
+
       </div>
     </div>
   )
