@@ -11,13 +11,11 @@ function getEmailTemplate(otp: string, name: string = "User") {
       <div style="padding: 30px;">
         <h2 style="margin: 0 0 10px; font-size: 20px;">Hi ${name},</h2>
         <p style="color: #555; font-size: 14px; line-height: 22px;">Aapka verification code neeche hai. Ye 5 minute ke liye valid hai:</p>
-        
         <div style="text-align: center; margin: 30px 0;">
           <div style="display: inline-block; background: #f3f3f3; border: 1px dashed black; border-radius: 12px; padding: 15px 30px; font-size: 32px; font-weight: bold; letter-spacing: 8px;">
             ${otp}
           </div>
         </div>
-
         <p style="color: #999; font-size: 12px;">Agar aapne ye request nahi ki hai, toh is email ko ignore kar de.</p>
         <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
         <p style="color: #999; font-size: 11px; text-align: center;">© 2026 Velora. All rights reserved.</p>
@@ -33,18 +31,14 @@ export async function POST(req: NextRequest) {
     const { env } = await getCloudflareContext() as any
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString()
-    const expires_at = Date.now() + 5 * 60 * 1000 // 5 min
+    const expires_at = Date.now() + 5 * 60 * 1000
 
-    // Rate Limit - 1 min me 1 hi OTP
-    const last: any = await env.DB.prepare("SELECT * FROM otps WHERE email = ?").bind(email).first()
-    if (last && Date.now() - last.created_at < 60 * 1000) {
-      return NextResponse.json({ error: "Please wait 1 minute before resending" }, { status: 429 })
-    }
-
+    // Purani entry delete - created_at ki zarurat nahi
     await env.DB.prepare("DELETE FROM otps WHERE email = ?").bind(email).run()
-    await env.DB.prepare("INSERT INTO otps (email, otp, expires_at, created_at) VALUES (?, ?, ?, ?)").bind(email, otp, expires_at, Date.now()).run()
+    
+    // Sirf 3 column jo aapki table me already hai
+    await env.DB.prepare("INSERT INTO otps (email, otp, expires_at) VALUES (?, ?, ?)").bind(email, otp, expires_at).run()
 
-    // Email bhejna - Aap Resend use kar rahe ho toh
     await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -52,7 +46,7 @@ export async function POST(req: NextRequest) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: "Velora <noreply@velora.com>",
+        from: "Velora <noreply@run4ravish.com>",
         to: email,
         subject: `Your Velora OTP is ${otp}`,
         html: getEmailTemplate(otp, name || "User")
