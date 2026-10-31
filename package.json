@@ -1,10 +1,22 @@
 {
-  "name": "saas-starter-kit",
-  "private": true,
-  "version": "0.1.0",
+  "name": "velora-saas-starter-kit",
+  "private": false,
+  "version": "1.0.0",
+  "description": "Velora - Premium SaaS Starter Kit. Production-ready Next.js 15 boilerplate with secure auth (bcrypt + OTP + 10min lock), Cloudflare D1, Resend email, Tailwind CSS. Ship your SaaS in 1 hour.",
+  "keywords": ["saas", "starter-kit", "nextjs", "boilerplate", "velora", "cloudflare", "d1", "auth", "saas-boilerplate"],
+  "author": "Velora Labs <noreply@velora.com>",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/run4ravish/velora-saas-starter-kit"
+  },
+  "homepage": "https://velora.run4ravish.com",
   "scripts": {
     "dev": "next dev",
-    "build": "next build"
+    "build": "next build",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf-type": "wrangler types cloudflare-env.d.ts"
   },
   "dependencies": {
     "next": "15.1.6",
@@ -21,6 +33,7 @@
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@opennextjs/cloudflare": "1.12.0",
-    "wrangler": "3.114.13"
+    "wrangler": "3.114.13",
+    "@types/bcryptjs": "^2.4.6"
   }
 }
