@@ -1,16 +1,10 @@
 {
   "name": "velora-saas-starter-kit",
-  "private": false,
+  "private": true,
   "version": "1.0.0",
-  "description": "Velora - Premium SaaS Starter Kit. Production-ready Next.js 15 boilerplate with secure auth (bcrypt + OTP + 10min lock), Cloudflare D1, Resend email, Tailwind CSS. Ship your SaaS in 1 hour.",
-  "keywords": ["saas", "starter-kit", "nextjs", "boilerplate", "velora", "cloudflare", "d1", "auth", "saas-boilerplate"],
-"author": "Velora - Founded by Yadav Ravish"
-  "license": "SEE LICENSE IN LICENSE.md",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/run4ravish/velora-saas-starter-kit"
-  },
-  "homepage": "https://velora.run4ravish.com",
+  "description": "Velora - Founded by Yadav Ravish - Premium SaaS Starter Kit with Next.js 15, Auth, D1, Resend",
+  "author": "Velora - Founded by Yadav Ravish",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -21,8 +15,8 @@
   "dependencies": {
     "next": "15.1.6",
     "react": "^19.0.0",
-    "bcryptjs": "^2.4.3",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "bcryptjs": "^2.4.3"
   },
   "devDependencies": {
     "typescript": "^5",
