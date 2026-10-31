@@ -5,15 +5,18 @@ import { SITE_CONFIG } from "@/app/config"
 
 export default function Footer() {
   const pathname = usePathname()
-  const isDashboard = pathname.startsWith("/dashboard") || pathname.startsWith("/settings") || pathname.startsWith("/login") || pathname.startsWith("/signup")
+  const isDashboard = pathname.startsWith("/dashboard") || pathname.startsWith("/settings") || pathname.startsWith("/login") || pathname.startsWith("/signup") || pathname.startsWith("/privacy") || pathname.startsWith("/terms")
 
   return (
-    <footer className={`w-full border-t mt-20 ${isDashboard ? 'bg-white border-gray-200' : 'bg-black border-zinc-900'}`}>
-      <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className={`text-sm ${isDashboard ? 'text-gray-500' : 'text-zinc-500'}`}>{SITE_CONFIG.footerText}</p>
-        <div className="flex items-center gap-5 flex-wrap justify-center">
-          {SITE_CONFIG.footerLinks?.map((link: any) => (
-            <Link key={link.name} href={link.href} className={`text-sm transition capitalize ${isDashboard ? 'text-gray-500 hover:text-black' : 'text-zinc-500 hover:text-white'}`}>{link.name}</Link>
+    <footer className={`w-full border-t ${isDashboard ? 'bg-white border-gray-200 text-black' : 'bg-black border-zinc-900 text-white'}`}>
+      <div className="max-w-6xl mx-auto px-4 py-10 flex flex-col md:flex-row justify-between gap-6">
+        <div>
+          <p className="font-black tracking-tight text-sm">VELORA</p>
+          <p className="text-xs mt-2 opacity-60">{SITE_CONFIG.footerText}</p>
+        </div>
+        <div className="flex gap-6 text-xs opacity-60">
+          {SITE_CONFIG.footerLinks.map(link => (
+            <Link key={link.href} href={link.href} className="hover:opacity-100 transition">{link.name}</Link>
           ))}
         </div>
       </div>
