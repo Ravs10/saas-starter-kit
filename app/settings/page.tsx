@@ -62,27 +62,30 @@ function SettingsContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 flex justify-center">
-      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md mt-10">
-        <h1 className="text-2xl font-bold mb-2">Settings - Velora</h1>
-        <p className="text-sm text-gray-500 mb-6">Logged in as: {maskEmail(userEmail)}</p>
+    <div className="min-h-[calc(100vh-200px)] bg-[#F8F9FA] flex justify-center p-4 py-12">
+      <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 w-full max-w-md h-fit">
+        <div className="mb-6">
+          <div className="inline-flex items-center gap-2 bg-black text-white text-[10px] tracking-widest px-3 py-1 rounded-full mb-4">SECURE SETTINGS</div>
+          <h1 className="text-2xl font-black tracking-tight">Settings - Velora</h1>
+          <p className="text-sm text-gray-500 mt-2">Logged in as: <span className="font-medium text-black">{maskEmail(userEmail)}</span></p>
+        </div>
 
-        <h2 className="font-semibold mb-3">Change Password (Inside)</h2>
-        <form onSubmit={changeInside} className="space-y-3">
+        <h2 className="font-semibold mb-4 text-[15px]">Change Password (Inside)</h2>
+        <form onSubmit={changeInside} className="space-y-4">
           <PasswordInput value={oldPass} onChange={(e:any)=>setOldPass(e.target.value)} placeholder="Old Password" />
           <PasswordInput value={newPass} onChange={(e:any)=>setNewPass(e.target.value)} placeholder="New Password" />
           <PasswordInput value={confirmPass} onChange={(e:any)=>setConfirmPass(e.target.value)} placeholder="Confirm New Password" />
 
-          <button disabled={loading} className="w-full bg-black text-white p-3 rounded mt-2">
+          <button disabled={loading} className="w-full bg-black text-white p-3 rounded-full mt-2 font-medium hover:bg-zinc-800 transition disabled:opacity-50">
             {loading ? "Updating..." : "Update Password Inside"}
           </button>
         </form>
 
-        {msg && <div className="mt-4 p-3 rounded text-sm bg-gray-100 border">{msg}</div>}
+        {msg && <div className="mt-5 p-3 rounded-xl text-sm bg-gray-50 border border-gray-100">{msg}</div>}
 
-        <div className="mt-6 text-sm flex justify-between">
-          <a href="/dashboard" className="underline">← Back to Dashboard</a>
-          <a href="/forgot-password" className="text-blue-600 hover:underline">Forgot? Reset via OTP</a>
+        <div className="mt-8 text-sm flex justify-between items-center border-t border-gray-100 pt-5">
+          <a href="/dashboard" className="text-gray-500 hover:text-black transition">← Back to Dashboard</a>
+          <a href="/forgot-password" className="text-black font-medium hover:underline">Forgot? Reset via OTP</a>
         </div>
       </div>
     </div>
