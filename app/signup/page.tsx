@@ -1,7 +1,6 @@
 "use client"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { Eye, EyeOff } from "lucide-react"
 
 export default function SignupPage() {
   const router = useRouter()
@@ -14,7 +13,6 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false)
   const [msg, setMsg] = useState("")
 
-  // Aapka wala Strong Password Logic - same to same
   const getStrength = (pwd: string) => {
     if (pwd.length === 0) return null
     if (pwd.length < 8) return { text: "Too short - minimum 8 characters", color: "text-red-500", ok: false }
@@ -24,92 +22,59 @@ export default function SignupPage() {
     if (!/[^A-Za-z0-9]/.test(pwd)) return { text: "Add 1 Symbol (@ # $ %)", color: "text-yellow-600", ok: false }
     return { text: "Strong Password ✓", color: "text-green-600", ok: true }
   }
-
   const strength = getStrength(password)
 
   const sendOtp = async () => {
     if (!email) return setMsg("Email daalo pehle")
-    setLoading(true)
-    setMsg("")
+    setLoading(true); setMsg("")
     try {
-      // Aapke project me send-otp hai, send-signup-otp nahi - toh yahi use karo
       const res = await fetch("/api/auth/send-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, type: "signup" })
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
-      setOtpSent(true)
-      setMsg("OTP bhej diya! Email check karo (5 min valid)")
-    } catch (e: any) {
-      setMsg(e.message)
-    } finally { setLoading(false) }
+      setOtpSent(true); setMsg("OTP bhej diya! Email check karo")
+    } catch (e: any) { setMsg(e.message) } 
+    finally { setLoading(false) }
   }
 
   async function handleSignup(e: any) {
     e.preventDefault()
-    if (!strength?.ok) {
-      setMsg(strength?.text || "Weak password")
-      return
-    }
-    if (!otpSent || !otp) {
-      setMsg("Pehle OTP bhejo aur OTP daalo")
-      return
-    }
-    setLoading(true)
-    setMsg("")
+    if (!strength?.ok) return setMsg(strength?.text || "Weak password")
+    setLoading(true); setMsg("")
     try {
       const res = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password, otp })
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
       setMsg("Account ban gaya! Login pe ja rahe ho...")
       setTimeout(() => router.push("/login"), 1500)
-    } catch (e: any) {
-      setMsg(e.message)
-    } finally { setLoading(false) }
+    } catch (e: any) { setMsg(e.message) } 
+    finally { setLoading(false) }
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <form onSubmit={handleSignup} className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg space-y-4">
         <h1 className="text-2xl font-bold text-center">Create Account - Velora</h1>
-
-        <input value={name} onChange={e => setName(e.target.value)} placeholder="Full Name (RCY)" className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-black outline-none" required />
-
+        <input value={name} onChange={e => setName(e.target.value)} placeholder="Full Name (RCY)" className="w-full px-4 py-3 border rounded-xl outline-none" required />
         <div className="flex gap-2">
-          <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email - name@example.com" className="flex-1 px-4 py-3 border rounded-xl focus:ring-2 focus:ring-black outline-none" required />
-          <button type="button" onClick={sendOtp} disabled={loading} className="px-4 py-2 bg-black text-white rounded-xl text-sm whitespace-nowrap disabled:opacity-50">
-            {otpSent ? "Resend" : "Send OTP"}
-          </button>
+          <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="flex-1 px-4 py-3 border rounded-xl outline-none" required />
+          <button type="button" onClick={sendOtp} disabled={loading} className="px-4 py-2 bg-black text-white rounded-xl text-sm disabled:opacity-50">{otpSent ? "Resend" : "Send OTP"}</button>
         </div>
-
-        {otpSent && (
-          <input value={otp} onChange={e => setOtp(e.target.value)} placeholder="6-digit OTP" className="w-full px-4 py-3 border rounded-xl tracking-widest focus:ring-2 focus:ring-black outline-none" required />
-        )}
-
+        {otpSent && <input value={otp} onChange={e => setOtp(e.target.value)} placeholder="6-digit OTP" className="w-full px-4 py-3 border rounded-xl outline-none" required />}
         <div>
           <div className="relative">
-            <input type={showPassword ? "text" : "password"} value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" className="w-full px-4 py-3 pr-12 border rounded-xl focus:ring-2 focus:ring-black outline-none" required />
-            <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500">
-              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-            </button>
+            <input type={showPassword ? "text" : "password"} value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" className="w-full px-4 py-3 pr-12 border rounded-xl outline-none" required />
+            <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">{showPassword ? "Hide" : "Show"}</button>
           </div>
           {strength && <p className={`text-[13px] mt-2 font-medium ${strength.color}`}>{strength.text}</p>}
-          <p className="text-[11px] text-gray-400 mt-1">Example: Ravish@1234</p>
         </div>
-
         {msg && <p className="text-sm text-center text-red-500 bg-red-50 p-2 rounded-lg">{msg}</p>}
-
-        <button disabled={loading || !strength?.ok} className="w-full py-3 bg-black text-white rounded-xl font-semibold disabled:bg-gray-400 disabled:cursor-not-allowed">
-          {loading ? "Please wait..." : "Create Account"}
-        </button>
-        
-        <p className="text-center text-sm">Already have account? <a href="/login" className="underline">Login</a></p>
+        <button disabled={loading || !strength?.ok} className="w-full py-3 bg-black text-white rounded-xl font-semibold disabled:bg-gray-400">{loading ? "Please wait..." : "Create Account"}</button>
       </form>
     </div>
   )
