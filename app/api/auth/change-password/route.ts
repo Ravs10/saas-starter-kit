@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getCloudflareContext } from "@opennextjs/cloudflare"
+import bcrypt from "bcryptjs"
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,9 +22,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "OTP expired! Valid for only 5 minutes." }, { status: 400 })
     }
 
-    await env.DB.prepare("UPDATE users SET password = ? WHERE email = ?").bind(newPassword, email).run()
+    // ✅ FIX: Hash karke save karo
+    const hashedPassword = await bcrypt.hash(newPassword, 10)
+    await env.DB.prepare("UPDATE users SET password = ? WHERE email = ?").bind(hashedPassword, email).run()
     await env.DB.prepare("DELETE FROM otps WHERE email = ?").bind(email).run()
-    await env.DB.prepare("DELETE FROM login_attempts WHERE email = ?").bind(email).run() // Lock clear on success
+    await env.DB.prepare("DELETE FROM login_attempts WHERE email = ?").bind(email).run()
 
     return NextResponse.json({ success: true })
   } catch (e: any) { return NextResponse.json({ error: e.message }, { status: 500 }) }
