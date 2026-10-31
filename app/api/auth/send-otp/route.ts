@@ -1,36 +1,66 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getCloudflareContext } from "@opennextjs/cloudflare"
 
-function genOtp() { return Math.floor(100000 + Math.random() * 900000).toString() }
+function getEmailTemplate(otp: string, name: string = "User") {
+  return `
+  <div style="font-family: Arial, sans-serif; background-color: #f6f9fc; padding: 20px;">
+    <div style="max-width: 480px; margin: 0 auto; background: white; border-radius: 16px; overflow: hidden; border: 1px solid #eee;">
+      <div style="background: black; padding: 20px; text-align: center;">
+        <h1 style="color: white; margin: 0; font-size: 24px; letter-spacing: 2px;">VELORA</h1>
+      </div>
+      <div style="padding: 30px;">
+        <h2 style="margin: 0 0 10px; font-size: 20px;">Hi ${name},</h2>
+        <p style="color: #555; font-size: 14px; line-height: 22px;">Aapka verification code neeche hai. Ye 5 minute ke liye valid hai:</p>
+        
+        <div style="text-align: center; margin: 30px 0;">
+          <div style="display: inline-block; background: #f3f3f3; border: 1px dashed black; border-radius: 12px; padding: 15px 30px; font-size: 32px; font-weight: bold; letter-spacing: 8px;">
+            ${otp}
+          </div>
+        </div>
+
+        <p style="color: #999; font-size: 12px;">Agar aapne ye request nahi ki hai, toh is email ko ignore kar de.</p>
+        <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+        <p style="color: #999; font-size: 11px; text-align: center;">© 2026 Velora. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+  `
+}
 
 export async function POST(req: NextRequest) {
   try {
-    const { email } = await req.json()
+    const { email, type, name } = await req.json()
     const { env } = await getCloudflareContext() as any
-    const now = Date.now()
 
-    const attemptRow: any = await env.DB.prepare("SELECT * FROM login_attempts WHERE email = ?").bind(email).first()
-    if (attemptRow && attemptRow.locked_until > now) {
-      const minsLeft = Math.ceil((attemptRow.locked_until - now) / 60000)
-      return NextResponse.json({ error: `Account locked! Try after ${minsLeft} min. OTP also blocked.`, locked: true }, { status: 429 })
+    const otp = Math.floor(100000 + Math.random() * 900000).toString()
+    const expires_at = Date.now() + 5 * 60 * 1000 // 5 min
+
+    // Rate Limit - 1 min me 1 hi OTP
+    const last: any = await env.DB.prepare("SELECT * FROM otps WHERE email = ?").bind(email).first()
+    if (last && Date.now() - last.created_at < 60 * 1000) {
+      return NextResponse.json({ error: "Please wait 1 minute before resending" }, { status: 429 })
     }
 
-    const otp = genOtp()
-    const expiresAt = now + 5 * 60 * 1000
-    await env.DB.prepare("INSERT OR REPLACE INTO otps (email, otp, expires_at) VALUES (?, ?, ?)").bind(email, otp, expiresAt).run()
+    await env.DB.prepare("DELETE FROM otps WHERE email = ?").bind(email).run()
+    await env.DB.prepare("INSERT INTO otps (email, otp, expires_at, created_at) VALUES (?, ?, ?, ?)").bind(email, otp, expires_at, Date.now()).run()
 
-    let apiKey = env.RESEND_API_KEY
-    try { const u: any = await env.DB.prepare("SELECT resend_api_key FROM users WHERE email = ?").bind(email).first(); if (u?.resend_api_key) apiKey = u.resend_api_key } catch {}
-
-    let emailSent = false, errMsg = ""
-    if (apiKey) {
-      const r = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ from: env.RESEND_FROM || "Velora <onboarding@resend.dev>", to: email, subject: `Your Velora OTP is ${otp}`, html: `<h1>${otp}</h1><p>Valid for 5 minutes. Don't share.</p>` }),
+    // Email bhejna - Aap Resend use kar rahe ho toh
+    await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${env.RESEND_API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        from: "Velora <noreply@velora.com>",
+        to: email,
+        subject: `Your Velora OTP is ${otp}`,
+        html: getEmailTemplate(otp, name || "User")
       })
-      emailSent = r.ok; if (!r.ok) errMsg = await r.text()
-    }
-    return NextResponse.json({ success: true, emailSent, resend_error: errMsg, debug_otp: emailSent ? undefined : otp })
-  } catch (e: any) { return NextResponse.json({ error: e.message }, { status: 500 }) }
+    })
+
+    return NextResponse.json({ success: true })
+  } catch (e: any) {
+    return NextResponse.json({ error: e.message }, { status: 500 })
+  }
 }
