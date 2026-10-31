@@ -4,79 +4,22 @@
  */
 
 export const SITE_CONFIG = {
-  /**
-   * Brand / Project Name
-   * Displayed in: Navbar, Hero Heading, Dashboard, Page Title, Footer
-   */
   name: "Velora",
-
-  /**
-   * Logo URL
-   * - If provided: Shows image (e.g., "/logo.png")
-   * - If empty "": Shows first letter of name in a circle (e.g., "V")
-   */
   logo: "",
-
-  /**
-   * Short tagline / description
-   * Used in: Hero section, SEO meta description, Social share preview
-   */
   description: "Build your SaaS 10x faster - Founded by Yadav Ravish",
-
-  /**
-   * Production URL (SEO Only)
-   * Used for: og:url, canonical URL, sitemap.xml
-   * Note: Changing this does not deploy your site, it is only for SEO.
-   */
   url: "https://velora.workers.dev",
 
-  /**
-   * Theme Colors - Change here to update entire site
-   */
   theme: {
-    /**
-     * Primary color: Used for all CTA buttons, Dashboard button, Logo fallback
-     */
-    primary: "#111111",
-
-    /**
-     * Secondary color: Used for badges, highlights, light backgrounds
-     */
-    secondary: "#EFF6FF",
-
-    /**
-     * Accent color: Used for hover effects, POPULAR tags, small highlights
-     * Example: "Most Popular" badge, icon backgrounds, button hover glow
-     */
+    primary: "#FFFFFF", // CTA buttons - white on black theme
+    secondary: "#18181B", // zinc-900 for cards
     accent: "#FFD60A",
-
-    /**
-     * Body background: Global background for all pages (Home, Dashboard, etc.)
-     */
-    body: "#F8F9FA",
-
-    /**
-     * Navbar background: Only for Navbar component
-     */
-    navbar: "#FFFFFF",
-
-    /**
-     * Navbar text color: Color for nav links (Features, Pricing, etc.)
-     */
-    navbarText: "#000000",
+    body: "#000000", // FIXED: pure black for premium look
+    navbar: "#000000", // FIXED: black navbar
+    navbarText: "#FFFFFF", // FIXED: white text
   },
 
-  /**
-   * Footer copyright text
-   */
-  footerText: "© 2026 Velora. Founded by Yadav Ravish. All rights reserved.",
+  footerText: "© 2026 Velora - Founded by Yadav Ravish. All rights reserved.",
 
-  /**
-   * Footer links
-   * To add: { name: "Blog", href: "/blog" }
-   * To remove: Delete the object
-   * Supports internal ("/privacy") and external ("https://...") links
-   */
   footerLinks: [
     { name: "Privacy", href: "/privacy" },
     { name: "Terms", href: "/terms" },
