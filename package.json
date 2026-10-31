@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Velora - Premium SaaS Starter Kit. Production-ready Next.js 15 boilerplate with secure auth (bcrypt + OTP + 10min lock), Cloudflare D1, Resend email, Tailwind CSS. Ship your SaaS in 1 hour.",
   "keywords": ["saas", "starter-kit", "nextjs", "boilerplate", "velora", "cloudflare", "d1", "auth", "saas-boilerplate"],
-  "author": "Velora Labs <noreply@velora.com>",
+"author": "Velora - Founded by Yadav Ravish"
   "license": "SEE LICENSE IN LICENSE.md",
   "repository": {
     "type": "git",
