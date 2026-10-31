@@ -10,15 +10,13 @@ function getEmailTemplate(otp: string, name: string = "User") {
       </div>
       <div style="padding: 30px;">
         <h2 style="margin: 0 0 10px; font-size: 20px;">Hi ${name},</h2>
-        <p style="color: #555; font-size: 14px; line-height: 22px;">Aapka verification code neeche hai. Ye 5 minute ke liye valid hai:</p>
+        <p style="color: #555; font-size: 14px;">Aapka verification code 5 minute ke liye valid hai:</p>
         <div style="text-align: center; margin: 30px 0;">
           <div style="display: inline-block; background: #f3f3f3; border: 1px dashed black; border-radius: 12px; padding: 15px 30px; font-size: 32px; font-weight: bold; letter-spacing: 8px;">
             ${otp}
           </div>
         </div>
-        <p style="color: #999; font-size: 12px;">Agar aapne ye request nahi ki hai, toh is email ko ignore kar de.</p>
-        <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
-        <p style="color: #999; font-size: 11px; text-align: center;">© 2026 Velora. All rights reserved.</p>
+        <p style="color: #999; font-size: 12px;">Ignore if you didn't request this.</p>
       </div>
     </div>
   </div>
@@ -27,33 +25,41 @@ function getEmailTemplate(otp: string, name: string = "User") {
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, type, name } = await req.json()
+    const { email, name } = await req.json()
     const { env } = await getCloudflareContext() as any
+
+    if (!env.RESEND_API_KEY) {
+      return NextResponse.json({ error: "RESEND_API_KEY missing in Cloudflare env" }, { status: 500 })
+    }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString()
     const expires_at = Date.now() + 5 * 60 * 1000
 
-    // Purani entry delete - created_at ki zarurat nahi
     await env.DB.prepare("DELETE FROM otps WHERE email = ?").bind(email).run()
-    
-    // Sirf 3 column jo aapki table me already hai
     await env.DB.prepare("INSERT INTO otps (email, otp, expires_at) VALUES (?, ?, ?)").bind(email, otp, expires_at).run()
 
-    await fetch("https://api.resend.com/emails", {
+    const resendRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${env.RESEND_API_KEY}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: "Velora <noreply@run4ravish.com>",
+        from: "Velora <onboarding@resend.dev>",
         to: email,
         subject: `Your Velora OTP is ${otp}`,
         html: getEmailTemplate(otp, name || "User")
       })
     })
 
-    return NextResponse.json({ success: true })
+    const resendData = await resendRes.json()
+    
+    if (!resendRes.ok) {
+      console.log("RESEND ERROR:", resendData)
+      return NextResponse.json({ error: `Resend Fail: ${resendData.message || JSON.stringify(resendData)}` }, { status: 500 })
+    }
+
+    return NextResponse.json({ success: true, id: resendData.id })
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500 })
   }
