@@ -18,14 +18,14 @@ export default function Home() {
       {/* Hero */}
       <section className="px-6 md:px-20 py-20 md:py-32 text-center">
         <div className="inline-block px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs mb-6">
-          Developed by Velora Labs • Next.js 15 + D1 + Resend
+          Velora - Founded by Yadav Ravish • Next.js 15 + D1 + Resend
         </div>
         <h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tighter">
           Velora <br/> <span className="text-zinc-500">SaaS Starter Kit</span>
         </h1>
         <p className="text-zinc-500 text-xs tracking-widest mt-3">SHIP YOUR SAAS IN 1 HOUR</p>
         <p className="text-zinc-400 max-w-xl mx-auto mt-6 text-lg">
-          Premium production-ready boilerplate developed by Velora. Secure auth, OTP, 10min lock, edge DB. No boilerplate, just ship.
+          Premium production-ready boilerplate by Velora - Founded by Yadav Ravish. Secure auth, OTP, 10min lock, edge DB.
         </p>
         <div className="flex justify-center gap-4 mt-10">
           <Link href="/signup" className="px-8 py-3 bg-white text-black rounded-full font-semibold">Buy for $29</Link>
@@ -37,7 +37,7 @@ export default function Home() {
             <div>✓ Creating Velora SaaS Starter Kit</div>
             <div>✓ Installing D1 database</div>
             <div>✓ Auth with bcrypt + OTP + 10min lock</div>
-            <div className="text-white">✓ Ready to ship in 47s - by Velora Labs</div>
+            <div className="text-white">✓ Ready to ship in 47s</div>
           </div>
         </div>
       </section>
@@ -45,9 +45,9 @@ export default function Home() {
       {/* Features */}
       <section className="px-6 md:px-20 py-20 grid md:grid-cols-3 gap-6 border-t border-zinc-900">
         {[
-          { t: "Secure Auth by Velora", d: "bcrypt hashing, OTP login, 5 attempt = 10min lock, email normalization." },
+          { t: "Secure Auth", d: "bcrypt hashing, OTP login, 5 attempt = 10min lock, email normalization. By Yadav Ravish." },
           { t: "Edge Ready", d: "Cloudflare D1, OpenNext, 100% edge, zero cold start. Built for scale." },
-          { t: "Email System", d: "Resend + Premium HTML template by Velora, 5 min expiry auto-clean." },
+          { t: "Email System", d: "Resend + Premium HTML template, 5 min expiry auto-clean." },
         ].map(f => (
           <div key={f.t} className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800">
             <h3 className="font-semibold mb-2">{f.t}</h3>
@@ -59,25 +59,25 @@ export default function Home() {
       {/* Pricing */}
       <section className="px-6 md:px-20 py-20 text-center border-t border-zinc-900">
         <h2 className="text-3xl font-bold mb-2">Velora SaaS Starter Kit Pricing</h2>
-        <p className="text-zinc-500 text-sm mb-10">Developed & Maintained by Velora Labs</p>
+        <p className="text-zinc-500 text-sm mb-10">Founded by Yadav Ravish</p>
         <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           <div className="p-8 rounded-2xl border border-zinc-800 text-left">
-            <h3>Starter</h3><div className="text-3xl font-bold mt-2">$29</div><p className="text-sm text-zinc-500 mt-4">For solo founders. Single project license.</p>
+            <h3>Starter</h3><div className="text-3xl font-bold mt-2">$29</div><p className="text-sm text-zinc-500 mt-4">Single project license.</p>
             <Link href="/signup" className="mt-6 block text-center py-2 bg-zinc-900 rounded-full">Get Starter</Link>
           </div>
           <div className="p-8 rounded-2xl bg-white text-black text-left">
-            <h3>Pro - Popular</h3><div className="text-3xl font-bold mt-2">$49</div><p className="text-sm text-zinc-600 mt-4">Unlimited projects + Payment kit by Velora.</p>
+            <h3>Pro - Popular</h3><div className="text-3xl font-bold mt-2">$49</div><p className="text-sm text-zinc-600 mt-4">Unlimited projects + Payment kit.</p>
             <Link href="/signup" className="mt-6 block text-center py-2 bg-black text-white rounded-full">Get Pro</Link>
           </div>
           <div className="p-8 rounded-2xl border border-zinc-800 text-left">
-            <h3>Agency</h3><div className="text-3xl font-bold mt-2">$99</div><p className="text-sm text-zinc-500 mt-4">Resell to clients. Full source by Velora Labs.</p>
+            <h3>Agency</h3><div className="text-3xl font-bold mt-2">$99</div><p className="text-sm text-zinc-500 mt-4">Resell to clients. Full source.</p>
             <Link href="/signup" className="mt-6 block text-center py-2 bg-zinc-900 rounded-full">Get Agency</Link>
           </div>
         </div>
       </section>
 
       <footer className="py-10 text-center text-xs text-zinc-600 border-t border-zinc-900">
-        © 2026 Velora Labs. Velora SaaS Starter Kit - Crafted by Velora. Built on Cloudflare.
+        © 2026 Velora - Founded by Yadav Ravish. Built on Cloudflare.
       </footer>
     </div>
   )
