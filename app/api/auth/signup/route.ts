@@ -1,8 +1,5 @@
+import { NextRequest, NextResponse } from "next/server"
 import { getCloudflareContext } from "@opennextjs/cloudflare"
-
-function isStrongPassword(p: string) {
-  return p.length >= 8 && /[A-Z]/.test(p) && /[a-z]/.test(p) && /[0-9]/.test(p) && /[^A-Za-z0-9]/.test(p)
-}
 
 async function hashPassword(password: string) {
   const data = new TextEncoder().encode(password + "_velora_salt_123")
@@ -10,24 +7,32 @@ async function hashPassword(password: string) {
   return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('')
 }
 
-export async function POST(request: Request) {
+export async function POST(req: NextRequest) {
   try {
-    const { email, password, name } = await request.json() as any
-    const { env } = await getCloudflareContext()
-    const db = (env as any).DB
+    const { email, otp, newPassword } = await req.json()
+    const { env } = await getCloudflareContext() as any
+    const now = Date.now()
 
-    if (!email || !password) return Response.json({ error: "Email & Password required" }, { status: 400 })
-    if (!isStrongPassword(password)) return Response.json({ error: "Weak password" }, { status: 400 })
+    const attemptRow: any = await env.DB.prepare("SELECT * FROM login_attempts WHERE email = ?").bind(email).first()
+    if (attemptRow && attemptRow.locked_until > now) {
+      const minsLeft = Math.ceil((attemptRow.locked_until - now) / 60000)
+      return NextResponse.json({ error: `Account locked! Try after ${minsLeft} min.`, locked: true }, { status: 429 })
+    }
 
-    const hashedPassword = await hashPassword(password)
-    const id = crypto.randomUUID()
-    
-    await db.prepare(
-      "INSERT INTO users (id, email, password, name) VALUES (?, ?, ?, ?)"
-    ).bind(id, email.toLowerCase(), hashedPassword, name || 'User').run()
+    const row: any = await env.DB.prepare("SELECT * FROM otps WHERE email = ?").bind(email).first()
+    if (!row) return NextResponse.json({ error: "No OTP found" }, { status: 400 })
+    if (row.otp !== otp) return NextResponse.json({ error: "Invalid OTP" }, { status: 400 })
+    if (now > row.expires_at) {
+      await env.DB.prepare("DELETE FROM otps WHERE email = ?").bind(email).run()
+      return NextResponse.json({ error: "OTP expired! Valid for only 5 minutes." }, { status: 400 })
+    }
 
-    return Response.json({ success: true, id })
-  } catch (e: any) {
-    return Response.json({ error: e.message }, { status: 400 })
-  }
+    // ✅ FIX: Same hash function use karo
+    const hashedPassword = await hashPassword(newPassword)
+    await env.DB.prepare("UPDATE users SET password = ? WHERE email = ?").bind(hashedPassword, email).run()
+    await env.DB.prepare("DELETE FROM otps WHERE email = ?").bind(email).run()
+    await env.DB.prepare("DELETE FROM login_attempts WHERE email = ?").bind(email).run()
+
+    return NextResponse.json({ success: true })
+  } catch (e: any) { return NextResponse.json({ error: e.message }, { status: 500 }) }
 }
