@@ -23,7 +23,24 @@ export async function POST(req: NextRequest) {
     // 2. OTP Verify
     const row: any = await env.DB.prepare("SELECT * FROM otps WHERE email = ?").bind(cleanEmail).first()
     if (!row) return NextResponse.json({ error: "No OTP found. Send OTP first." }, { status: 400 })
-    if (row.otp !== otp) return NextResponse.json({ error: "Invalid OTP" }, { status: 400 })
+    
+    if (row.otp !== otp) {
+      // Invalid OTP - attempts badhao
+      let attempts = attemptRow ? attemptRow.attempts + 1 : 1
+      let lockUntil = 0
+      if (attempts >= 5) {
+        lockUntil = now + 10 * 60 * 1000 // 10 min lock
+        attempts = 0
+      }
+      await env.DB.prepare("INSERT OR REPLACE INTO login_attempts (email, attempts, locked_until) VALUES (?, ?, ?)")
+        .bind(cleanEmail, attempts, lockUntil).run()
+
+      if (lockUntil > 0) {
+        return NextResponse.json({ error: "Too many wrong OTP. Locked for 10 min", locked: true }, { status: 429 })
+      }
+      return NextResponse.json({ error: `Invalid OTP. ${5 - attempts} attempts left` }, { status: 400 })
+    }
+
     if (now > row.expires_at) {
       await env.DB.prepare("DELETE FROM otps WHERE email = ?").bind(cleanEmail).run()
       return NextResponse.json({ error: "OTP expired! Valid for 5 min only." }, { status: 400 })
