@@ -23,27 +23,26 @@ export default function Navbar() {
   const isInside = pathname.startsWith("/dashboard") || pathname.startsWith("/settings")
   const isDashboard = isInside || pathname.startsWith("/login") || pathname.startsWith("/signup") || pathname.startsWith("/privacy") || pathname.startsWith("/terms")
 
-  // Dashboard, Settings, Login, Signup, Privacy, Terms = white navbar
-  // Landing, Pricing, Contact = black navbar
   return (
     <header className={`sticky top-0 z-50 border-b backdrop-blur-md ${isDashboard ? 'bg-white/80 border-gray-200' : 'bg-black border-zinc-800'}`}>
-      <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-        <Link href={user ? "/dashboard" : "/"} className="flex items-baseline gap-3">
-          <span className={`text-2xl font-black tracking-tight ${isDashboard ? 'text-black' : 'text-white'}`}>VELORA</span>
-          <span className={`text-[10px] tracking-[0.2em] px-2 py-1 rounded-full border hidden md:inline-block ${isDashboard ? 'text-gray-500 border-gray-200' : 'text-zinc-500 border-zinc-800'}`}>SAAS STARTER KIT</span>
+      <div className="max-w-6xl mx-auto px-3 md:px-4 py-3 flex justify-between items-center gap-3">
+        {/* LEFT - LOGO - shrink nahi hoga */}
+        <Link href={user ? "/dashboard" : "/"} className="flex-shrink-0">
+          <span className={`text-xl md:text-2xl font-black tracking-tight ${isDashboard ? 'text-black' : 'text-white'}`}>VELORA</span>
         </Link>
 
-        <nav className="flex items-center gap-2">
+        {/* RIGHT - BUTTONS - mobile pe chote */}
+        <nav className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
           {!user ? (
             <>
-              <Link href="/login" className={`text-sm px-4 py-2 ${isDashboard ? 'text-black' : 'text-zinc-400 hover:text-white'}`}>Login</Link>
-              <Link href="/signup" className={`text-sm px-4 py-2 rounded-full font-medium ${isDashboard ? 'bg-black text-white' : 'bg-white text-black'}`}>Sign Up</Link>
+              <Link href="/login" className={`text-xs md:text-sm px-3 md:px-4 py-2 ${isDashboard ? 'text-black' : 'text-zinc-400'}`}>Login</Link>
+              <Link href="/signup" className={`text-xs md:text-sm px-3.5 md:px-4 py-2 rounded-full font-medium ${isDashboard ? 'bg-black text-white' : 'bg-white text-black'}`}>Sign Up</Link>
             </>
           ) : (
             <>
-              <Link href="/dashboard" className={`text-sm px-4 py-2 rounded-full font-medium ${isInside ? 'bg-gray-100 text-black' : 'bg-white text-black'}`}>Dashboard</Link>
-              <Link href="/settings" className={`text-sm border px-4 py-2 rounded-full ${isDashboard ? 'border-gray-200 text-black' : 'border-zinc-800 text-zinc-300'}`}>Settings</Link>
-              <button onClick={logout} className="text-sm bg-red-500 text-white px-4 py-2 rounded-full">Logout</button>
+              <Link href="/dashboard" className={`text-xs md:text-sm px-3 md:px-4 py-2 rounded-full font-medium ${isInside ? 'bg-gray-100 text-black' : 'bg-white text-black'}`}>Dashboard</Link>
+              <Link href="/settings" className={`text-xs md:text-sm border px-3 md:px-4 py-2 rounded-full ${isDashboard ? 'border-gray-200 text-black' : 'border-zinc-800 text-zinc-300'}`}>Settings</Link>
+              <button onClick={logout} className="text-xs md:text-sm bg-red-500 text-white px-3.5 md:px-4 py-2 rounded-full">Logout</button>
             </>
           )}
         </nav>
