@@ -255,12 +255,14 @@ You can build unlimited SaaS products for yourself and clients. You cannot resel
 
 Velora needs 3 core files inside `lib/` folder (in ROOT, not inside `app/`):
 
+```
 velora/
 ├── app/
 └── lib/
     ├── db.ts      # D1 Database client - REQUIRED
     ├── auth.ts    # Auth & OTP verify logic - REQUIRED
     └── email.ts   # Resend + Console Fallback - REQUIRED
+```
 
 App will not work without these 3 files.
 
