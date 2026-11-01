@@ -22,7 +22,7 @@ npx create-velora-app my-saas
 
 2. Tech Stack
 
-- Framework: http://Next.js 15 App Router (TypeScript)
+- Framework: Next.js 15 App Router (TypeScript)
 - Database: Cloudflare D1 (Edge SQLite, Zero Cold Start)
 - Auth: bcrypt + JWT + OTP + 5 Attempts = 10 Min Lock
 - Email: Resend with Premium HTML Template
@@ -61,9 +61,10 @@ Premium UI
 
 velora/
 ├── app/
-│   ├── http://config.ts         # MAIN CONFIG - Single Source of Truth
-│   ├── http://page.tsx          # Landing Page / Hero
-│   ├── http://layout.tsx        # Root Layout
+│   ├── config.ts        
+# MAIN CONFIG - Single Source of Truth
+│   ├── page.tsx       # Landing Page / Hero
+│   ├── layout.tsx      # Root Layout
 │   ├── pricing/page.tsx      # Pricing with Direct WhatsApp Sell
 │   ├── contact/page.tsx      # Contact with WhatsApp +91 8299746179
 │   ├── privacy/page.tsx      # GDPR Ready Privacy Policy
@@ -72,13 +73,13 @@ velora/
 │       ├── auth/         # Login, Signup, Verify
 │       └── otp/          # Send & Verify OTP
 ├── components/
-│   ├── http://Navbar.tsx        # Uses SITE_CONFIG.navLinks
-│   └── http://Footer.tsx        # Uses SITE_CONFIG.footerText
+│   ├── Navbar.tsx        # Uses SITE_CONFIG.navLinks
+│   └── Footer.tsx        # Uses SITE_CONFIG.footerText
 ├── lib/
-│   ├── http://db.ts             # Cloudflare D1 Client
-│   ├── http://auth.ts           # Auth Logic
-│   └── http://email.ts          # Resend Wrapper
-├── http://wrangler.toml         # Cloudflare Workers Config
+│   ├── db.ts             # Cloudflare D1 Client
+│   ├── auth.ts           # Auth Logic
+│   └── email.ts          # Resend Wrapper
+├── wrangler.toml         # Cloudflare Workers Config
 ├── .env.example          # Env Template for Buyers
 ├── .env.local            # Your Local Env (Not in Git)
 └── http://README.md             # This File
