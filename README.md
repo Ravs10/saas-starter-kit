@@ -240,7 +240,7 @@ To Buy: Send "BUY VELORA PRO" on WhatsApp https://wa.me/918299746179
 11. Deployment Checklist
 
 - [ ] Update SITE_CONFIG url to your domain
-- [ ] Set D1_DATABASE_ID in .env.local and http://wrangler.toml
+- [ ] Set D1_DATABASE_ID in .env.local and wrangler.toml
 - [ ] Set RESEND_API_KEY and JWT_SECRET
 - [ ] Test /pricing, /contact, /terms, /privacy pages
 - [ ] Test WhatsApp links with +91 8299746179
@@ -258,9 +258,9 @@ Velora needs 3 core files inside `lib/` folder (in ROOT, not inside `app/`):
 velora/
 ├── app/
 └── lib/
-    ├── http://db.ts      # D1 Database client - REQUIRED
-    ├── http://auth.ts    # Auth & OTP verify logic - REQUIRED
-    └── http://email.ts   # Resend + Console Fallback - REQUIRED
+    ├── db.ts      # D1 Database client - REQUIRED
+    ├── auth.ts    # Auth & OTP verify logic - REQUIRED
+    └── email.ts   # Resend + Console Fallback - REQUIRED
 
 App will not work without these 3 files.
 
