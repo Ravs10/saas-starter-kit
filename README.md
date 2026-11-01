@@ -82,7 +82,7 @@ velora/
 ├── wrangler.toml         # Cloudflare Workers Config
 ├── .env.example          # Env Template for Buyers
 ├── .env.local            # Your Local Env (Not in Git)
-└── http://README.md             # This File
+└── README.md             # This File
 
 5. SITE_CONFIG - How to Use
 
@@ -141,7 +141,7 @@ import { SITE_CONFIG } from "@/app/config"
 <a href={SITE_CONFIG.founder.whatsappLink}>WhatsApp: {SITE_CONFIG.founder.whatsapp}</a>
 <p>Price: {SITE_CONFIG.pricing.currency}{SITE_CONFIG.pricing.pro}</p>
 
-Change once in http://config.ts, updates everywhere.
+Change once in config.ts, updates everywhere.
 
 6. Environment Variables - .env Setup
 
