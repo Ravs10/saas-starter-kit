@@ -2,7 +2,7 @@ Velora - SaaS Starter Kit
 
 *Ship Your SaaS in 47 Seconds. Not in Hours.*
 
-Premium production-ready boilerplate for http://Next.js 15 + Cloudflare D1 + Secure Auth + Email. Built for indie hackers who want to ship fast.
+Premium production-ready boilerplate for Next.js 15 + Cloudflare D1 + Secure Auth + Email. Built for indie hackers who want to ship fast.
 
 *Live Demo:* https://velora.workers.dev
 *Founder:* Yadav Ravish, Uska, Uttar Pradesh, India
@@ -162,7 +162,7 @@ RESEND_API_KEY=
 RESEND_FROM_EMAIL=noreply@velora.workers.dev
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
-http://wrangler.toml - For Cloudflare Workers
+wrangler.toml - For Cloudflare Workers
 
 name = "velora"
 compatibility_date = "2024-12-01"
@@ -249,6 +249,38 @@ To Buy: Send "BUY VELORA PRO" on WhatsApp https://wa.me/918299746179
 12. License
 
 You can build unlimited SaaS products for yourself and clients. You cannot resell Velora itself as a boilerplate/template. Single purchase, lifetime updates.
+
+### IMPORTANT: lib/ Folder - Required Files
+
+Velora needs 3 core files inside `lib/` folder (in ROOT, not inside `app/`):
+
+velora/
+├── app/
+└── lib/
+    ├── http://db.ts      # D1 Database client - REQUIRED
+    ├── http://auth.ts    # Auth & OTP verify logic - REQUIRED
+    └── http://email.ts   # Resend + Console Fallback - REQUIRED
+
+App will not work without these 3 files.
+
+### How OTP Works - No Resend API Needed
+
+Buyers don't need API key immediately:
+
+1. If `RESEND_API_KEY` is empty -> OTP will show in terminal / console
+2. If `RESEND_API_KEY` is set -> OTP will be sent via email
+
+**For Local Testing:**
+
+npm run dev
+Signup with any email
+Check terminal:
+OTP for test@gmail.com: 123456
+
+**To Enable Email in Production:**
+1. Get free API key from resend.com
+2. Add to .env: `RESEND_API_KEY=re_xxxxxx`
+3. Redeploy
 
 © 2026 Velora - Founded by Yadav Ravish. All rights reserved.
 
