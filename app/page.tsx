@@ -5,52 +5,56 @@ export default function Home() {
     <div className="bg-black text-white">
       {/* Hero */}
       <section className="px-6 md:px-20 py-20 md:py-32 text-center">
-        <div className="inline-block px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs mb-6">
-          Velora - Founded by Yadav Ravish • Next.js 15 + D1 + Resend
+        <div className="inline-block px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-[11px] tracking-widest mb-6">
+          FOUNDED BY YADAV RAVISH • NEXT.JS 15 + CLOUDFLARE D1 • 100% EDGE
         </div>
-        <h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tighter">
-          Velora <br/> <span className="text-zinc-500">SaaS Starter Kit</span>
+        <h1 className="text-5xl md:text-7xl font-black leading-[0.9] tracking-tighter">
+          Ship Your SaaS<br/> <span className="text-zinc-500">in 47 Seconds.</span>
         </h1>
-        <p className="text-zinc-500 text-xs tracking-widest mt-3">SHIP YOUR SAAS IN 1 HOUR</p>
-        <p className="text-zinc-400 max-w-xl mx-auto mt-6 text-lg">
-          Premium production-ready boilerplate by Velora - Founded by Yadav Ravish. Secure auth, OTP, 10min lock, edge DB.
+        <p className="text-zinc-500 text-[11px] tracking-[0.3em] mt-4 font-bold uppercase">Not in 1 Hour. In 47 Seconds.</p>
+        <p className="text-zinc-400 max-w-xl mx-auto mt-6 text-[15px] leading-7">
+          Velora is a premium, production-ready boilerplate. Auth with bcrypt + OTP + 10min lock, Resend emails, Cloudflare D1. No setup hell.
         </p>
-        <div className="flex justify-center gap-4 mt-10">
-          <Link href="/signup" className="px-8 py-3 bg-white text-black rounded-full font-semibold">Buy for $29</Link>
-          <Link href="/login" className="px-8 py-3 border border-zinc-800 rounded-full">Live Demo</Link>
+        <div className="flex justify-center gap-3 mt-10 flex-wrap">
+          <a href="https://wa.me/918299746179?text=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Pro" target="_blank" className="px-8 py-3.5 bg-white text-black rounded-full font-bold hover:bg-zinc-200 transition">Buy for ₹3,999 →</a>
+          <Link href="/pricing" className="px-8 py-3.5 border border-zinc-800 rounded-full font-medium hover:bg-zinc-900 transition">See Pricing</Link>
         </div>
-        <div className="mt-16 p-2 bg-zinc-900 rounded-2xl border border-zinc-800 max-w-4xl mx-auto">
-          <div className="bg-zinc-950 rounded-xl p-4 text-left font-mono text-sm text-zinc-400">
-            <div className="text-zinc-600">$ npx velora-saas-starter-kit my-saas</div>
-            <div>✓ Creating Velora SaaS Starter Kit</div>
-            <div>✓ Installing D1 database</div>
-            <div>✓ Auth with bcrypt + OTP + 10min lock</div>
-            <div className="text-white">✓ Ready to ship in 47s</div>
+        <p className="text-zinc-600 text-xs mt-4">7-day refund • Lifetime access • Reply in 2 hours</p>
+
+        <div className="mt-16 p-2 bg-zinc-900 rounded-[24px] border border-zinc-800 max-w-4xl mx-auto shadow-2xl">
+          <div className="bg-[#0A0A0A] rounded-[18px] p-5 text-left font-mono text-[13px] text-zinc-400 leading-6">
+            <div className="flex gap-2 mb-4"><span className="w-3 h-3 rounded-full bg-red-500"></span><span className="w-3 h-3 rounded-full bg-yellow-500"></span><span className="w-3 h-3 rounded-full bg-green-500"></span></div>
+            <div className="text-zinc-600">$ npx create-velora-app my-saas</div>
+            <div className="mt-2">✓ Creating Velora SaaS Starter Kit...</div>
+            <div>✓ Installing Cloudflare D1 database</div>
+            <div>✓ Auth: bcrypt + OTP + 10min brute-force lock</div>
+            <div>✓ Email: Resend + Premium HTML template</div>
+            <div className="text-white font-bold mt-2">✓ Ready to ship in 47s. Happy coding, Ravish!</div>
           </div>
         </div>
       </section>
 
-      {/* Features & Pricing same as you sent */}
+      {/* Features */}
       <section className="px-6 md:px-20 py-20 grid md:grid-cols-3 gap-6 border-t border-zinc-900">
         {[
-          { t: "Secure Auth", d: "bcrypt hashing, OTP login, 5 attempt = 10min lock, email normalization. By Yadav Ravish." },
-          { t: "Edge Ready", d: "Cloudflare D1, OpenNext, 100% edge, zero cold start. Built for scale." },
-          { t: "Email System", d: "Resend + Premium HTML template, 5 min expiry auto-clean." },
+          { t: "Secure Auth", d: "Bcrypt hashing, OTP login, 5 attempts = 10min lock, email normalization. Production-grade security." },
+          { t: "Edge Ready", d: "Cloudflare D1 + OpenNext. 100% edge, zero cold start. Deployed on velora.workers.dev" },
+          { t: "Email System", d: "Resend + Premium HTML template, 5 min expiry, auto-cleanup. No Spam." },
         ].map(f => (
-          <div key={f.t} className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800">
-            <h3 className="font-semibold mb-2">{f.t}</h3>
-            <p className="text-sm text-zinc-400">{f.d}</p>
+          <div key={f.t} className="p-7 rounded-[24px] bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition">
+            <h3 className="font-bold mb-2">{f.t}</h3>
+            <p className="text-sm text-zinc-400 leading-6">{f.d}</p>
           </div>
         ))}
       </section>
 
-      <section className="px-6 md:px-20 py-20 text-center border-t border-zinc-900">
-        <h2 className="text-3xl font-bold mb-2">Velora SaaS Starter Kit Pricing</h2>
-        <p className="text-zinc-500 text-sm mb-10">Founded by Yadav Ravish</p>
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          <div className="p-8 rounded-2xl border border-zinc-800 text-left"><h3>Starter</h3><div className="text-3xl font-bold mt-2">$29</div><p className="text-sm text-zinc-500 mt-4">Single project license.</p><Link href="/signup" className="mt-6 block text-center py-2 bg-zinc-900 rounded-full">Get Starter</Link></div>
-          <div className="p-8 rounded-2xl bg-white text-black text-left"><h3>Pro - Popular</h3><div className="text-3xl font-bold mt-2">$49</div><p className="text-sm text-zinc-600 mt-4">Unlimited projects + Payment kit.</p><Link href="/signup" className="mt-6 block text-center py-2 bg-black text-white rounded-full">Get Pro</Link></div>
-          <div className="p-8 rounded-2xl border border-zinc-800 text-left"><h3>Agency</h3><div className="text-3xl font-bold mt-2">$99</div><p className="text-sm text-zinc-500 mt-4">Resell to clients. Full source.</p><Link href="/signup" className="mt-6 block text-center py-2 bg-zinc-900 rounded-full">Get Agency</Link></div>
+      {/* Final CTA */}
+      <section className="px-6 md:px-20 py-20 text-center border-t border-zinc-900 bg-zinc-950">
+        <h2 className="text-3xl md:text-4xl font-black tracking-tight">Ready to ship?</h2>
+        <p className="text-zinc-500 text-sm mt-3">Join 100+ builders using Velora. Founded by Yadav Ravish.</p>
+        <div className="flex justify-center gap-3 mt-8">
+          <a href="https://wa.me/918299746179?text=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Pro" className="px-8 py-3 bg-white text-black rounded-full font-bold">Get Velora for ₹3,999</a>
+          <Link href="/contact" className="px-8 py-3 border border-zinc-800 rounded-full">Contact Founder</Link>
         </div>
       </section>
     </div>
