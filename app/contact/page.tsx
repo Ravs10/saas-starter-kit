@@ -38,7 +38,7 @@ export default function ContactPage() {
             </div>
             <div>
               <p className="text-xs font-bold tracking-widest uppercase text-zinc-500">Location</p>
-              <p className="font-medium mt-2">Uska, UP</p>
+              <p className="font-medium mt-2">Uttar Pradesh</p>
               <p className="text-sm text-zinc-400">India • IST</p>
             </div>
           </div>
