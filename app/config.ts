@@ -29,7 +29,7 @@ export const SITE_CONFIG = {
   // All contact methods - Used in contact page, pricing page, and footer
   founder: {
     name: "Yadav Ravish", // Your full name - shown everywhere as founder
-    location: "Uska, Uttar Pradesh, India", // Your city/state - for trust building
+    location: "Uttar Pradesh, India", // Your city/state - for trust building
     email: "yadavravish@velora.workers.dev", // Primary email - for sales & direct contact
     emailSupport: "support@velora.workers.dev", // Support email - for help & refunds
     twitter: "https://x.com/yadavravish", // Your X/Twitter profile - for social proof
