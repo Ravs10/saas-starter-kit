@@ -13,7 +13,7 @@ export default function Home() {
         </h1>
         <p className="text-zinc-500 text-[11px] tracking-[0.3em] mt-4 font-bold uppercase">Not in 1 Hour. In 47 Seconds.</p>
         <p className="text-zinc-400 max-w-xl mx-auto mt-6 text-[15px] leading-7">
-          Velora is a premium, production-ready boilerplate. Auth with bcrypt + OTP + 10min lock, Resend emails, Cloudflare D1. No setup hell.
+          Velora SaaS Starter Kit is a premium, production-ready boilerplate. Auth with bcrypt + OTP + 10min lock, Resend emails, Cloudflare D1. No setup hell.
         </p>
         <div className="flex justify-center gap-3 mt-10 flex-wrap">
           <a href="https://wa.me/918299746179?text=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Pro" target="_blank" className="px-8 py-3.5 bg-white text-black rounded-full font-bold hover:bg-zinc-200 transition">Buy for ₹3,999 →</a>
@@ -51,7 +51,7 @@ export default function Home() {
       {/* Final CTA */}
       <section className="px-6 md:px-20 py-20 text-center border-t border-zinc-900 bg-zinc-950">
         <h2 className="text-3xl md:text-4xl font-black tracking-tight">Ready to ship?</h2>
-        <p className="text-zinc-500 text-sm mt-3">Join 100+ builders using Velora. Founded by Yadav Ravish.</p>
+        <p className="text-zinc-500 text-sm mt-3">Join 100+ builders using Velora - Founded by Yadav Ravish.</p>
         <div className="flex justify-center gap-3 mt-8">
           <a href="https://wa.me/918299746179?text=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Pro" className="px-8 py-3 bg-white text-black rounded-full font-bold">Get Velora for ₹3,999</a>
           <Link href="/contact" className="px-8 py-3 border border-zinc-800 rounded-full">Contact Founder</Link>
