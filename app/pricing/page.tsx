@@ -1,4 +1,4 @@
-// app/pricing/page.tsx - DIRECT SELL - PROFESSIONAL
+// app/pricing/page.tsx - DIRECT SELL - FINAL WITH WHATSAPP
 export default function PricingPage() {
   return (
     <div className="min-h-[calc(100vh-200px)] bg-black text-white">
@@ -46,8 +46,13 @@ export default function PricingPage() {
               <li>✓ Private GitHub Access</li>
             </ul>
             <div className="mt-8 space-y-3">
-              <a href="/contact" className="block bg-black text-white text-center py-3.5 rounded-full font-bold hover:bg-zinc-900 transition">Buy Now - Direct</a>
-              <p className="text-[11px] text-center text-gray-400">UPI / Bank Transfer / WhatsApp<br/>Instant delivery within 2 hours</p>
+              <a href="https://wa.me/918299746179?text=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Saas%20%Starter%20Kit-%20Rs%203999" target="_blank" className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-black text-center py-3.5 rounded-full font-bold transition">
+                <span>💬</span> Buy on WhatsApp - ₹3,999
+              </a>
+              <a href="mailto:yadavravish@velora.workers.dev?subject=Buy%20Velora%20Pro%20-%20Rs%203999&body=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Pro" className="flex items-center justify-center gap-2 bg-black hover:bg-zinc-900 text-white text-center py-3.5 rounded-full font-bold transition">
+                ✉️ Email to Buy
+              </a>
+              <p className="text-[11px] text-center text-gray-400">Instant delivery within 2 hours • UPI / Bank Transfer<br/>+91 82997 46179</p>
             </div>
           </div>
 
@@ -62,14 +67,17 @@ export default function PricingPage() {
               <li>✓ 1-Hour Setup Call</li>
               <li>✓ Custom Domain Setup</li>
             </ul>
-            <a href="/contact" className="block mt-8 bg-white text-black text-center py-3.5 rounded-full font-bold">Contact Sales</a>
+            <div className="mt-8 space-y-3">
+              <a href="https://wa.me/918299746179?text=Hi%20Ravish,%20Need%20Enterprise%20Plan%20for%20Velora" target="_blank" className="block bg-zinc-800 hover:bg-zinc-700 text-center py-3.5 rounded-full font-bold text-white transition">WhatsApp for Enterprise</a>
+              <a href="/contact" className="block bg-white text-black text-center py-3.5 rounded-full font-bold">Contact Sales</a>
+            </div>
           </div>
         </div>
 
         {/* Trust Section */}
         <div className="text-center mt-16 max-w-xl mx-auto">
-          <p className="text-zinc-500 text-sm">Questions? Contact directly: <a href="mailto:yadavravish@velora.workers.dev" className="text-white underline">yadavravish@velora.workers.dev</a></p>
-          <p className="text-zinc-600 text-xs mt-2">Secure payment via UPI • Instant access • 7-day refund</p>
+          <p className="text-zinc-500 text-sm">Questions? <a href="https://wa.me/918299746179" className="text-[#25D366] underline font-medium">WhatsApp: +91 82997 46179</a> • <a href="mailto:yadavravish@velora.workers.dev" className="text-white underline">yadavravish@velora.workers.dev</a></p>
+          <p className="text-zinc-600 text-xs mt-2">Secure payment via UPI • Instant access • 7-day refund • Founded by Yadav Ravish, Uska UP</p>
         </div>
 
       </div>
