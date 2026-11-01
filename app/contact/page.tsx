@@ -32,7 +32,7 @@ export default function ContactPage() {
           {/* Location & Founder */}
           <div className="bg-zinc-900 p-6 rounded-[20px] border border-zinc-800 grid grid-cols-2 gap-6">
             <div>
-              <p className="text-xs font-bold tracking-widest uppercase text-zinc-500">Founder</p>
+              <p className="text-xs font-bold tracking-widest uppercase text-zinc-500">Founder @VELORA</p>
               <p className="font-medium mt-2">Yadav Ravish</p>
               <a href="https://x.com/yadavravish" target="_blank" className="text-sm text-zinc-400 hover:text-white">@yadavravish</a>
             </div>
@@ -46,7 +46,7 @@ export default function ContactPage() {
           {/* Direct Buy Box */}
           <div className="bg-white text-black p-6 rounded-[20px] mt-2">
             <h3 className="font-black text-lg">Want to buy Velora directly?</h3>
-            <p className="text-sm text-gray-600 mt-2">Send a WhatsApp with <span className="font-bold text-black">"BUY VELORA PRO"</span> and get instant payment link + GitHub access within 2 hours.</p>
+            <p className="text-sm text-gray-600 mt-2">Send a WhatsApp with <span className="font-bold text-black">"BUY VELORA Saas Starter Kit"</span> and get instant payment link + GitHub access within 2 hours.</p>
             <div className="mt-4 flex gap-3">
               <a href="https://wa.me/918299746179?text=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Pro%20-%20Rs%203999" target="_blank" className="bg-black text-white px-5 py-2.5 rounded-full text-sm font-bold">Buy on WhatsApp</a>
               <a href="mailto:yadavravish@velora.workers.dev?subject=Buy%20Velora%20Pro%20-%20Rs%203999" className="border border-gray-200 px-5 py-2.5 rounded-full text-sm font-medium">Email to Buy</a>
