@@ -46,7 +46,7 @@ export default function PricingPage() {
               <li>✓ Private GitHub Access</li>
             </ul>
             <div className="mt-8 space-y-3">
-              <a href="https://wa.me/918299746179?text=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Saas%20%Starter%20Kit-%20Rs%203999" target="_blank" className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-black text-center py-3.5 rounded-full font-bold transition">
+              <a href="https://wa.me/918299746179?text=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Saas%20Starter%20Kit-%20Rs%203999" target="_blank" className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-black text-center py-3.5 rounded-full font-bold transition">
                 <span>💬</span> Buy on WhatsApp - ₹3,999
               </a>
               <a href="mailto:yadavravish@velora.workers.dev?subject=Buy%20Velora%20Pro%20-%20Rs%203999&body=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Pro" className="flex items-center justify-center gap-2 bg-black hover:bg-zinc-900 text-white text-center py-3.5 rounded-full font-bold transition">
