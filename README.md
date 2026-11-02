@@ -4,9 +4,9 @@ Velora - SaaS Starter Kit
 
 Premium production-ready boilerplate for Next.js 15 + Cloudflare D1 + Secure Auth + Email. Built for indie hackers who want to ship fast.
 
-*Live Demo:* https://velora.workers.dev
+*Live Demo:* https://saas-starter-kit.run4ravish.workers.dev
 *Founder:* Yadav Ravish, Uska, Uttar Pradesh, India
-*Contact:* +91 8299746179 (WhatsApp) | yadavravish@velora.workers.dev
+*Contact:* +91 8299746179 (WhatsApp) | yadavravish@saas-starter-kit.run4ravish.workers.dev
 
 ---
 
@@ -94,7 +94,7 @@ export const SITE_CONFIG = {
   name: "Velora",
   logo: "V",
   description: "Build your SaaS 10x faster - Founded by Yadav Ravish",
-  url: "https://velora.workers.dev",
+  url: "https://saas-starter-kit.run4ravish.workers.dev",
   theme: {
     primary: "#FFFFFF",
     secondary: "#18181B",
@@ -178,7 +178,7 @@ database_name = "velora-db"
 database_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 
 [vars]
-NEXT_PUBLIC_SITE_URL = "https://velora.workers.dev"
+NEXT_PUBLIC_SITE_URL = "https://saas-starter-kit.run4ravish.workers.dev"
 
 Add to .gitignore:
 .env.local
@@ -233,7 +233,7 @@ Location: Uska, Siddharthnagar, Uttar Pradesh, India
 WhatsApp (Fastest): +91 8299746179 - Reply in 2 hours (9 AM - 9 PM IST)
 Email: yadavravish@velora.workers.dev / support@velora.workers.dev
 Twitter: https://x.com/yadavravish
-Website: https://velora.workers.dev
+Website: https://saas-starter-kit.run4ravish.workers.dev
 
 To Buy: Send "BUY VELORA PRO" on WhatsApp https://wa.me/918299746179
 
