@@ -1,24 +1,22 @@
 Velora - SaaS Starter Kit
+Ship Your SaaS in 47 Seconds. Not in Hours.
+Premium production-ready boilerplate for Next.js 15 + Cloudflare D1 + Secure Auth + Email + License System
 
-*Ship Your SaaS in 47 Seconds. Not in Hours.*
-
-Premium production-ready boilerplate for Next.js 15 + Cloudflare D1 + Secure Auth + Email. Built for indie hackers who want to ship fast.
-
-*Live Demo:* https://saas-starter-kit.run4ravish.workers.dev
-*Founder:* Yadav Ravish, Uska, Uttar Pradesh, India
-*Contact:* +91 8299746179 (WhatsApp) | yadavravish@saas-starter-kit.run4ravish.workers.dev
-
----
+Live Demo: https://saas-starter-kit.run4ravish.workers.dev
+Founder: Yadav Ravish, Uska, Uttar Pradesh, India
+Contact: +91 8299746179 (WhatsApp) | yadavravish@velora.workers.dev
 
 1. What is Velora?
 
 Velora is not another landing page template. It's a complete SaaS foundation.
 
-You get: Secure Authentication, Edge Database, Email System, Premium Black Theme, Pricing, Contact, Terms, Privacy - Everything ready.
+You get: Secure Authentication, Edge Database, Email System, License System, Premium Black Theme, Pricing, Contact, Terms, Privacy - Everything ready.
 
-One command and you are ready to code your features, not boilerplate.
-
-npx create-velora-app my-saas
+Quick Start:
+git clone https://github.com/yadavravish/velora.git
+cd velora
+npm install
+npm run dev
 
 2. Tech Stack
 
@@ -28,7 +26,8 @@ npx create-velora-app my-saas
 - Email: Resend with Premium HTML Template
 - Styling: Tailwind CSS, Pure Black Theme #000000
 - Deployment: Cloudflare Workers via OpenNext
-- Security: Email Normalization, httpOnly Cookies, Encrypted D1
+- Security: Email Normalization, httpOnly Cookies, Encrypted D1, License Verification
+- License: Gumroad License Key System
 
 3. Features
 
@@ -39,62 +38,67 @@ Secure Auth System
 - Email normalization (lowercase + trim)
 - JWT in httpOnly secure cookie
 
+License System (NEW)
+- Gumroad license verification via /api/verify-license
+- Cookie based auth - velora_license
+- Middleware protection for /dashboard and /settings
+- Activate page at /activate-license
+- Uses req.nextUrl.origin so works on localhost + production auto
+
 Edge Ready
 - Cloudflare D1 database
-- 100% edge runtime
-- Zero cold start, global scale
+- 100% edge runtime, Zero cold start
 - Auto backup by Cloudflare
 
 Premium Email
-- Resend integration
-- OTP delivery in <2 seconds
-- Premium HTML email template (Black & White)
+- Resend integration, OTP <2 seconds
+- Premium HTML template (Black & White)
 - From: noreply@velora.workers.dev
 
 Premium UI
 - Pure black theme #000000
-- Mobile responsive
-- SEO optimized
+- Mobile responsive, SEO optimized
 - Founder badge: Founded by Yadav Ravish
 
 4. Project Structure
 
 velora/
 ├── app/
-│   ├── config.ts        
-# MAIN CONFIG - Single Source of Truth
-│   ├── page.tsx       # Landing Page / Hero
-│   ├── layout.tsx      # Root Layout
-│   ├── pricing/page.tsx      # Pricing with Direct WhatsApp Sell
-│   ├── contact/page.tsx      # Contact with WhatsApp +91 8299746179
-│   ├── privacy/page.tsx      # GDPR Ready Privacy Policy
-│   ├── terms/page.tsx        # Terms with 7-Day Refund
+│   ├── config.ts               # MAIN CONFIG - Single Source of Truth
+│   ├── page.tsx                # Landing Page / Hero
+│   ├── layout.tsx              # Root Layout
+│   ├── pricing/page.tsx        # Pricing
+│   ├── contact/page.tsx        # Contact with WhatsApp +91 8299746179
+│   ├── privacy/page.tsx        # GDPR Ready
+│   ├── terms/page.tsx          # Terms with 7-Day Refund
+│   ├── refund/page.tsx         # Refund Policy
+│   ├── activate-license/page.tsx # License Activation
+│   ├── dashboard/page.tsx      # Protected Dashboard
 │   └── api/
-│       ├── auth/         # Login, Signup, Verify
-│       └── otp/          # Send & Verify OTP
+│       ├── auth/               # Login, Signup, Verify
+│       ├── otp/                # Send & Verify OTP
+│       └── verify-license/     # Gumroad License Check
 ├── components/
-│   ├── Navbar.tsx        # Uses SITE_CONFIG.navLinks
-│   └── Footer.tsx        # Uses SITE_CONFIG.footerText
+│   ├── Navbar.tsx
+│   └── Footer.tsx
 ├── lib/
-│   ├── db.ts             # Cloudflare D1 Client
-│   ├── auth.ts           # Auth Logic
-│   └── email.ts          # Resend Wrapper
-├── wrangler.toml         # Cloudflare Workers Config
-├── .env.example          # Env Template for Buyers
-├── .env.local            # Your Local Env (Not in Git)
-└── README.md             # This File
+│   ├── db.ts                   # D1 Client - REQUIRED
+│   ├── auth.ts                 # Auth Logic - REQUIRED
+│   └── email.ts                # Resend Wrapper - REQUIRED
+├── middleware.ts               # License Protection
+├── wrangler.toml               # Cloudflare Workers Config
+├── .env.example
+└── README.md
 
-5. SITE_CONFIG - How to Use
+5. SITE_CONFIG - How to Use (CORRECTED URL)
 
-All website data is controlled from one file: app/config.ts
-
-Example config:
+File: app/config.ts
 
 export const SITE_CONFIG = {
   name: "Velora",
   logo: "V",
   description: "Build your SaaS 10x faster - Founded by Yadav Ravish",
-  url: "https://saas-starter-kit.run4ravish.workers.dev",
+  url: "https://saas-starter-kit.run4ravish.workers.dev", // <-- CORRECTED WITH run4ravish
   theme: {
     primary: "#FFFFFF",
     secondary: "#18181B",
@@ -125,6 +129,7 @@ export const SITE_CONFIG = {
     { name: "Contact", href: "/contact" },
     { name: "Privacy", href: "/privacy" },
     { name: "Terms", href: "/terms" },
+    { name: "Refund", href: "/refund" },
   ],
   navLinks: [
     { name: "Pricing", href: "/pricing" },
@@ -132,68 +137,28 @@ export const SITE_CONFIG = {
   ]
 }
 
-Use in any page:
+6. Environment Variables
 
-import { SITE_CONFIG } from "@/app/config"
-
-<h1>{SITE_CONFIG.name}</h1>
-<p>Founder: {SITE_CONFIG.founder.name}</p>
-<a href={SITE_CONFIG.founder.whatsappLink}>WhatsApp: {SITE_CONFIG.founder.whatsapp}</a>
-<p>Price: {SITE_CONFIG.pricing.currency}{SITE_CONFIG.pricing.pro}</p>
-
-Change once in config.ts, updates everywhere.
-
-6. Environment Variables - .env Setup
-
-.env.local - For Local (DO NOT push to GitHub)
-
-D1_DATABASE_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+.env.local (DO NOT push)
+D1_DATABASE_ID=xxxxxxxx
 JWT_SECRET=your_super_secret_jwt_32_chars_minimum
-RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxxx
+RESEND_API_KEY=re_xxxx
 RESEND_FROM_EMAIL=noreply@velora.workers.dev
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-NEXT_PUBLIC_FOUNDER_EMAIL=yadavravish@velora.workers.dev
-NEXT_PUBLIC_WHATSAPP=+918299746179
+NEXT_PUBLIC_SITE_URL=https://saas-starter-kit.run4ravish.workers.dev
+GUMROAD_PRODUCT_ID=your_gumroad_product_id
 
-.env.example - For GitHub
-
+.env.example (For Buyers)
 D1_DATABASE_ID=
 JWT_SECRET=
 RESEND_API_KEY=
 RESEND_FROM_EMAIL=noreply@velora.workers.dev
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
-wrangler.toml - For Cloudflare Workers
-
-name = "velora"
-compatibility_date = "2024-12-01"
-
-[assets]
-directory = ".open-next/assets"
-binding = "ASSETS"
-
-[[d1_databases]]
-binding = "DB"
-database_name = "velora-db"
-database_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-
-[vars]
-NEXT_PUBLIC_SITE_URL = "https://saas-starter-kit.run4ravish.workers.dev"
-
-Add to .gitignore:
-.env.local
-.env
-.dev.vars
-.open-next
-
 7. Quick Start Guide (For Buyers)
 
-Step 1 - Buy Velora Pro
-WhatsApp: https://wa.me/918299746179?text=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Pro
-Email: yadavravish@velora.workers.dev
-Price: Rs 3999 Lifetime, Rs 9999 Enterprise
-Payment: UPI / Bank Transfer
-Delivery: Private GitHub access within 2 hours
+Step 1 - Buy
+Global: Gumroad - $29 Lifetime
+India: WhatsApp https://wa.me/918299746179 - Rs 3999 Lifetime
 
 Step 2 - Clone & Install
 git clone https://github.com/yadavravish/velora.git
@@ -201,91 +166,58 @@ cd velora
 npm install
 
 Step 3 - Setup Env
-Copy .env.example to .env.local and fill values.
+Copy .env.example to .env.local and fill values
 
 Step 4 - Run Local
 npm run dev
+Open http://localhost:3000/activate-license
 
-Step 5 - Deploy
+Step 5 - Deploy to Cloudflare
 npx wrangler d1 create velora-db
 npm run deploy
 
-8. Pricing & Refund Policy
+8. License System Explained
 
-Starter - Rs 0 - 1 Project, Community Support
-Lifetime Pro (Most Popular) - Rs 3999 (Original Rs 9999) - Unlimited Projects, Premium Support, Private GitHub, Free Updates
-Enterprise - Rs 9999 - Everything in Pro + Resell License + 1 Hour Setup Call
+middleware.ts:
+import { NextResponse } from 'next/server'
+export async function middleware(req) {
+  const license = req.cookies.get('velora_license')?.value
+  if (!license) return NextResponse.redirect(new URL('/activate-license', req.url))
+  const res = await fetch(`${req.nextUrl.origin}/api/verify-license?key=${license}`)
+  const data = await res.json()
+  if (!data.valid) return NextResponse.redirect(new URL('/activate-license', req.url))
+  return NextResponse.next()
+}
+export const config = { matcher: ['/dashboard/:path*', '/settings/:path*'] }
 
-Refund: 7-Day Money Back Guarantee. Email yadavravish@velora.workers.dev within 7 days if not satisfied. Valid if not deployed to >100 users.
+- Uses req.nextUrl.origin = auto works on localhost + Cloudflare
+- No hardcoded URL needed
 
-9. Legal Pages
+activate-license/page.tsx:
+- Fetches /api/verify-license?key=KEY (relative URL)
+- Sets cookie velora_license on success
 
-- Terms: /terms - Single license, no resale of kit, 7-day refund
-- Privacy: /privacy - GDPR ready, D1 encrypted, no third-party sharing
-- Contact: /contact - Direct founder contact
+9. Pricing & Refund
 
-All pages use SITE_CONFIG for founder info.
+Starter - Rs 0 - 1 Project
+Pro (Most Popular) - Rs 3999 / $29 - Unlimited Projects, License System, Private GitHub
+Enterprise - Rs 9999 / $79 - Resell License + Setup Call
+Refund: 7-Day Money Back, Email support@velora.workers.dev
 
-10. Contact & Support
+10. Contact
 
 Founder: Yadav Ravish
-Location: Uska, Siddharthnagar, Uttar Pradesh, India
-WhatsApp (Fastest): +91 8299746179 - Reply in 2 hours (9 AM - 9 PM IST)
+Location: Uska, Siddharthnagar, UP, India
+WhatsApp: +91 8299746179 (9 AM - 9 PM IST) - Reply in 2 hours
 Email: yadavravish@velora.workers.dev / support@velora.workers.dev
-Twitter: https://x.com/yadavravish
 Website: https://saas-starter-kit.run4ravish.workers.dev
 
-To Buy: Send "BUY VELORA PRO" on WhatsApp https://wa.me/918299746179
+Deployment Checklist:
+- [x] SITE_CONFIG url = https://saas-starter-kit.run4ravish.workers.dev
+- [x] Email single = yadavravish@velora.workers.dev
+- [x] middleware uses req.nextUrl.origin
+- [x] activate-license uses relative /api/verify-license
+- [ ] Set GUMROAD_PRODUCT_ID in Cloudflare
+- [ ] npm run deploy
 
-11. Deployment Checklist
-
-- [ ] Update SITE_CONFIG url to your domain
-- [ ] Set D1_DATABASE_ID in .env.local and wrangler.toml
-- [ ] Set RESEND_API_KEY and JWT_SECRET
-- [ ] Test /pricing, /contact, /terms, /privacy pages
-- [ ] Test WhatsApp links with +91 8299746179
-- [ ] Run npm run build - Should have 0 errors
-- [ ] Run npm run deploy to Cloudflare
-
-12. License
-
-You can build unlimited SaaS products for yourself and clients. You cannot resell Velora itself as a boilerplate/template. Single purchase, lifetime updates.
-
-### IMPORTANT: lib/ Folder - Required Files
-
-Velora needs 3 core files inside `lib/` folder (in ROOT, not inside `app/`):
-
-```
-velora/
-├── app/
-└── lib/
-    ├── db.ts      # D1 Database client - REQUIRED
-    ├── auth.ts    # Auth & OTP verify logic - REQUIRED
-    └── email.ts   # Resend + Console Fallback - REQUIRED
-```
-
-App will not work without these 3 files.
-
-### How OTP Works - No Resend API Needed
-
-Buyers don't need API key immediately:
-
-1. If `RESEND_API_KEY` is empty -> OTP will show in terminal / console
-2. If `RESEND_API_KEY` is set -> OTP will be sent via email
-
-**For Local Testing:**
-
-npm run dev
-Signup with any email
-Check terminal:
-OTP for test@gmail.com: 123456
-
-**To Enable Email in Production:**
-1. Get free API key from resend.com
-2. Add to .env: `RESEND_API_KEY=re_xxxxxx`
-3. Redeploy
-
-© 2026 Velora - Founded by Yadav Ravish. All rights reserved.
-
-If Velora helps you ship faster, please star the repo!
-Built with love, UP, India.
+© 2026 Velora - Founded by Yadav Ravish
