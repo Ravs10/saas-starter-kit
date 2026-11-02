@@ -12,7 +12,7 @@ export const SITE_CONFIG = {
   name: "Velora",
   logo: "V", // Fallback letter logo - shown when no image logo is set
   description: "Build your SaaS 10x faster - Founded by Yadav Ravish",
-  url: "https://saas-starter-kit.workers.dev", // IMPORTANT: Change this when you deploy to custom domain
+  url: "https://saas-starter-kit.run4ravish.workers.dev", // IMPORTANT: Change this when you deploy to custom domain
 
   // ========== THEME COLORS ==========
   // Pure black premium theme - Don't change unless you want different look
