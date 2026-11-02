@@ -1,11 +1,23 @@
-export default function Page(){
+'use client'
+import { useState } from 'react'
+export default function Activate() {
+  const [key, setKey] = useState('')
+  const activate = async () => {
+    const res = await fetch(`/api/verify-license?key=${key}`)
+    const data = await res.json()
+    if (data.valid) {
+      document.cookie = `velora_license=${key}; path=/; max-age=31536000`
+      alert('Activated! Ab dashboard kholo')
+      window.location.href = '/dashboard'
+    } else {
+      alert('Galat key hai')
+    }
+  }
   return (
-    <div style={{padding:40, textAlign:'center', fontFamily:'sans-serif'}}>
-      <h1 style={{fontSize:24, fontWeight:'bold'}}>VELORA - License Required</h1>
-      <p style={{marginTop:16}}>Your LICENSE_KEY is missing or invalid.</p>
-      <p style={{marginTop:8}}>1. Go to gumroad.com/library</p>
-      <p>2. Copy your license key</p>
-      <p>3. Add in .env file: LICENSE_KEY=your_key_here</p>
+    <div className="p-10 max-w-md mx-auto">
+      <h1 className="text-2xl font-bold">Velora License Activate Karo</h1>
+      <input className="border w-full p-2 mt-4" placeholder="VELORA-XXXX" value={key} onChange={e=>setKey(e.target.value)} />
+      <button onClick={activate} className="bg-black text-white w-full p-2 mt-2">Activate</button>
     </div>
   )
 }
