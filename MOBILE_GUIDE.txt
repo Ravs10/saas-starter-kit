@@ -1,0 +1,17 @@
+VELORA - HOW TO USE ON MOBILE
+
+1. Extract the zip using ZArchiver app
+2. Go to GitHub App > Create New Repository > Upload all files
+3. Open Cloudflare.com in Chrome (Turn ON Desktop Mode)
+4. Go to Workers & Pages > Create Application > Connect to Git
+5. Select your GitHub repository
+6. Go to Settings > Variables and Secrets and add:
+   - D1_DATABASE_ID
+   - JWT_SECRET
+   - RESEND_API_KEY
+7. Click Deploy -> Your SaaS will be Live!
+
+NOTE: Laptop is recommended, but you can deploy from mobile using this method.
+
+Support: yadavravish@velora.workers.dev
+Founder: Yadav Ravish @ VELORA
