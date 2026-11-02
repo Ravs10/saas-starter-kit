@@ -6,7 +6,7 @@ Live Demo: https://saas-starter-kit.run4ravish.workers.dev
 Founder: Yadav Ravish, Uska, Uttar Pradesh, India
 Contact: +91 8299746179 (WhatsApp) | yadavravish@velora.workers.dev
 
-1. What is Velora?
+1. What is Velora Saas starter kit?
 
 Velora is not another landing page template. It's a complete SaaS foundation.
 
