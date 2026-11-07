@@ -7,6 +7,7 @@ export default function Activate() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [devicesUsed, setDevicesUsed] = useState<number | null>(null)
+  const [maxDevices, setMaxDevices] = useState(4)
   
   const activate = async () => {
     if(!key) { setError('Please enter your license key first'); return }
@@ -24,6 +25,7 @@ export default function Activate() {
     setLoading(false)
 
     if (data.devices_used !== undefined) setDevicesUsed(data.devices_used)
+    if (data.max_devices !== undefined) setMaxDevices(data.max_devices)
 
     if (data.valid) {
       try {
@@ -33,9 +35,9 @@ export default function Activate() {
       document.cookie = `velora_license=${key.trim()}; path=/; max-age=31536000`
       window.location.href = '/dashboard'
     } else {
-      // No more silent redirect - show proper error on same page
       setError(data.error || 'Invalid key. Please copy it from gumroad.com/library')
       if (data.devices_used !== undefined) setDevicesUsed(data.devices_used)
+      if (data.max_devices !== undefined) setMaxDevices(data.max_devices)
     }
   }
 
@@ -48,11 +50,11 @@ export default function Activate() {
         {/* Device Counter */}
         {devicesUsed !== null && (
           <div className="mt-4 bg-zinc-800 p-3 rounded-lg text-sm">
-            <p className="text-zinc-300">Devices Used: <span className="font-bold text-white">{devicesUsed} / 4</span></p>
+            <p className="text-zinc-300">Devices Used: <span className="font-bold text-white">{devicesUsed} / {maxDevices}</span></p>
             <div className="w-full bg-zinc-700 h-2 rounded-full mt-2 overflow-hidden">
-              <div className="bg-white h-2 rounded-full" style={{width: `${(devicesUsed/4)*100}%`}}></div>
+              <div className="bg-white h-2 rounded-full" style={{width: `${Math.min((devicesUsed/maxDevices)*100, 100)}%`}}></div>
             </div>
-            <p className="text-zinc-500 text-xs mt-2">This license is valid for 4 devices only.</p>
+            <p className="text-zinc-500 text-xs mt-2">This license is valid for {maxDevices} devices only.</p>
           </div>
         )}
 
