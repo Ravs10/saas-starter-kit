@@ -7,10 +7,10 @@ export default function Activate() {
   const [loading, setLoading] = useState(false)
   
   const activate = async () => {
-    if(!key) return alert('Key daalo pehle')
+    if(!key) return alert('Please enter your license key first')
     setLoading(true)
 
-    // ===== DEVICE ID - 1 baar banega, hamesha wahi rahega =====
+    // ===== DEVICE ID - Generated once, persists forever =====
     let deviceId = localStorage.getItem('velora_device_id')
     if (!deviceId) {
       deviceId = 'dev-' + Math.random().toString(36).slice(2) + Date.now().toString(36)
@@ -28,8 +28,8 @@ export default function Activate() {
       document.cookie = `velora_license=${key.trim()}; path=/; max-age=31536000`
       window.location.href = '/dashboard'
     } else {
-      // Ab asli error dikhega, jaise "dusre device pe use ho rahi hai"
-      alert(data.error || 'Galat key hai, gumroad.com/library se copy karo')
+      // Show real error, e.g. "Device limit reached"
+      alert(data.error || 'Invalid key. Please copy it from gumroad.com/library')
     }
   }
 
@@ -43,7 +43,7 @@ export default function Activate() {
           {loading ? 'Checking...' : 'Activate License'}
         </button>
         <div className="mt-6 bg-black p-4 rounded-lg text-sm border border-zinc-800">
-          <p className="text-zinc-500">How to get key?</p>
+          <p className="text-zinc-500">How to get your key?</p>
           <p className="mt-1">1. Go to gumroad.com/library</p>
           <p>2. Find {SITE_CONFIG.name} product</p>
           <p>3. Copy license key & paste above</p>
