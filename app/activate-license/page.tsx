@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import { SITE_CONFIG } from '@/lib/config'
 
+const SUPPORT_EMAIL = 'support@velora.com' // <-- Yaha apna asli email daal dena, bas ye ek jagah badalni hai
+
 export default function Activate() {
   const [key, setKey] = useState('')
   const [loading, setLoading] = useState(false)
@@ -58,13 +60,17 @@ export default function Activate() {
           </div>
         )}
 
-        {/* Error Box - Red, clearly visible */}
+        {/* Error Box - Red, clearly visible + Support Email Big */}
         {error && (
           <div className="mt-4 bg-red-500/10 border border-red-500/50 p-4 rounded-lg text-sm">
             <p className="text-red-400 font-bold">⚠️ Activation Failed</p>
             <p className="text-red-300 mt-1">{error}</p>
-            <p className="text-zinc-400 mt-2 text-xs">If you need to use this key on a new device, please contact support to deactivate an old device.</p>
-            <a href="mailto:support@velora.com" className="text-white underline text-xs mt-1 inline-block">Contact Support →</a>
+            <div className="mt-3 bg-black/50 border border-zinc-700 p-3 rounded-lg">
+              <p className="text-zinc-300 text-xs">Need to use on a new device?</p>
+              <p className="text-white text-sm font-medium mt-1">Contact Support to deactivate an old device:</p>
+              <a href={`mailto:${SUPPORT_EMAIL}?subject=Deactivate Device - License Key`} className="text-white font-bold underline text-base break-all inline-block mt-1">{SUPPORT_EMAIL}</a>
+              <p className="text-zinc-500 text-[11px] mt-1">Tap to send email directly</p>
+            </div>
           </div>
         )}
 
