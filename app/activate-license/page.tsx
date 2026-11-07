@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { SITE_CONFIG } from '@/lib/config' // agar path alag hai to check kar lena
+import { SITE_CONFIG } from '@/lib/config'
 
 export default function Activate() {
   const [key, setKey] = useState('')
@@ -9,14 +9,23 @@ export default function Activate() {
   const activate = async () => {
     if(!key) return alert('Key daalo pehle')
     setLoading(true)
-    const res = await fetch(`/api/verify-license?key=${key}`)
+
+    // ===== DEVICE ID - 1 baar banega, hamesha wahi rahega =====
+    let deviceId = localStorage.getItem('velora_device_id')
+    if (!deviceId) {
+      deviceId = 'dev-' + Math.random().toString(36).slice(2) + Date.now().toString(36)
+      localStorage.setItem('velora_device_id', deviceId)
+    }
+
+    const res = await fetch(`/api/verify-license?key=${encodeURIComponent(key.trim())}&device_id=${encodeURIComponent(deviceId)}`)
     const data = await res.json()
     setLoading(false)
     if (data.valid) {
-      document.cookie = `velora_license=${key}; path=/; max-age=31536000`
+      document.cookie = `velora_license=${key.trim()}; path=/; max-age=31536000`
       window.location.href = '/dashboard'
     } else {
-      alert('Galat key hai, gumroad.com/library se copy karo')
+      // Ab asli error dikhega, jaise "dusre device pe use ho rahi hai"
+      alert(data.error || 'Galat key hai, gumroad.com/library se copy karo')
     }
   }
 
