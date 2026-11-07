@@ -21,7 +21,10 @@ export default function Activate() {
     const data = await res.json()
     setLoading(false)
     if (data.valid) {
-      try { localStorage.setItem('velora_license', key.trim()) } catch(e) {}
+      try {
+        localStorage.setItem('velora_license', key.trim())
+        localStorage.setItem('user', JSON.stringify({ name: 'Velora Member', email: 'member@velora.com' }))
+      } catch(e) {}
       document.cookie = `velora_license=${key.trim()}; path=/; max-age=31536000`
       window.location.href = '/dashboard'
     } else {
