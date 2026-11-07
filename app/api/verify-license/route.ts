@@ -8,7 +8,7 @@ export async function GET(req: Request) {
   const key = searchParams.get('key')?.trim()
   const deviceId = searchParams.get('device_id')?.trim() || req.headers.get('x-device-id')?.trim() || ''
 
-  if (!key) return NextResponse.json({ valid: false, error: 'Please enter your license key.' })
+  if (!key) return NextResponse.json({ valid: false, error: 'Please enter your license key.', devices_used: 0, max_devices: MAX_DEVICES })
 
   const { env } = await getCloudflareContext() as any
 
@@ -19,11 +19,11 @@ export async function GET(req: Request) {
   if (key.startsWith('VELORA-')) {
     const myKeys = (env.VELORA_KEYS || '').split(',').map((k: string) => k.trim()).filter(Boolean)
     if (myKeys.includes(key)) { isValid = true; source = 'velora' }
-    else return NextResponse.json({ valid: false, error: 'Invalid Velora license key.' })
+    else return NextResponse.json({ valid: false, error: 'Invalid Velora license key.', devices_used: 0, max_devices: MAX_DEVICES })
   } else {
     // Gumroad
     if (!env.GUMROAD_PRODUCT_ID) {
-      return NextResponse.json({ valid: false, error: 'Gumroad is not configured yet.' })
+      return NextResponse.json({ valid: false, error: 'Gumroad is not configured yet.', devices_used: 0, max_devices: MAX_DEVICES })
     }
     try {
       const gumRes = await fetch('https://api.gumroad.com/v2/licenses/verify', {
@@ -33,18 +33,18 @@ export async function GET(req: Request) {
       })
       const gumData: any = await gumRes.json()
       if (gumData.success) { isValid = true; source = 'gumroad' }
-      else return NextResponse.json({ valid: false, error: 'Invalid Gumroad license key.' })
+      else return NextResponse.json({ valid: false, error: 'Invalid Gumroad license key.', devices_used: 0, max_devices: MAX_DEVICES })
     } catch {
-      return NextResponse.json({ valid: false, error: 'Invalid Gumroad license key.' })
+      return NextResponse.json({ valid: false, error: 'Invalid Gumroad license key.', devices_used: 0, max_devices: MAX_DEVICES })
     }
   }
 
-  if (!isValid) return NextResponse.json({ valid: false, error: 'Invalid license key.' })
+  if (!isValid) return NextResponse.json({ valid: false, error: 'Invalid license key.', devices_used: 0, max_devices: MAX_DEVICES })
 
   // ===== 2. DEVICE LIMIT - 1 LICENSE = UP TO 4 DEVICES =====
   // If no device_id or no DB, allow without locking (backward compatibility)
   if (!deviceId || !env.DB) {
-    return NextResponse.json({ valid: true, source })
+    return NextResponse.json({ valid: true, source, devices_used: 0, max_devices: MAX_DEVICES })
   }
 
   const now = Date.now()
@@ -58,7 +58,7 @@ export async function GET(req: Request) {
     await env.DB.prepare(
       'INSERT INTO licenses (license_key, device_id, device_ids, first_activated_at, last_seen_at) VALUES (?, ?, ?, ?, ?)'
     ).bind(key, deviceId, devices, now, now).run()
-    return NextResponse.json({ valid: true, source, device: 'locked' })
+    return NextResponse.json({ valid: true, source, device: 'locked', devices_used: 1, max_devices: MAX_DEVICES })
   }
 
   // Parse already registered devices - supports old single device_id + new device_ids list
@@ -76,12 +76,17 @@ export async function GET(req: Request) {
     await env.DB.prepare(
       'UPDATE licenses SET last_seen_at = ? WHERE license_key = ?'
     ).bind(now, key).run()
-    return NextResponse.json({ valid: true, source, device: 'same' })
+    return NextResponse.json({ valid: true, source, device: 'same', devices_used: devices.length, max_devices: MAX_DEVICES })
   }
 
-  // Limit reached - block in English
+  // Limit reached - block with counter info
   if (devices.length >= MAX_DEVICES) {
-    return NextResponse.json({ valid: false, error: `This license is already active on ${MAX_DEVICES} devices. Please deactivate it on one device to continue.` })
+    return NextResponse.json({
+      valid: false,
+      error: `This license is already active on ${MAX_DEVICES} devices. This key is valid for ${MAX_DEVICES} devices only. Please contact support to deactivate a device.`,
+      devices_used: devices.length,
+      max_devices: MAX_DEVICES
+    })
   }
 
   // New device under limit - add and allow
@@ -89,5 +94,5 @@ export async function GET(req: Request) {
   await env.DB.prepare(
     'UPDATE licenses SET device_id = ?, device_ids = ?, last_seen_at = ? WHERE license_key = ?'
   ).bind(deviceId, JSON.stringify(devices), now, key).run()
-  return NextResponse.json({ valid: true, source, device: 'added' })
+  return NextResponse.json({ valid: true, source, device: 'added', devices_used: devices.length, max_devices: MAX_DEVICES })
 }
