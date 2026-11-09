@@ -24,8 +24,7 @@ export default function ContactPage() {
           {/* Email */}
           <div className="bg-zinc-900 p-6 rounded-[20px] border border-zinc-800">
             <p className="text-xs font-bold tracking-widest uppercase text-zinc-500">Email Support</p>
-            <a href="mailto:yadavravish@velora.workers.dev" className="font-medium mt-2 block text-white hover:underline">yadavravish@velora.workers.dev</a>
-            <a href="mailto:support@velora.workers.dev" className="font-medium mt-1 block text-zinc-400 text-sm hover:underline">support@velora.workers.dev</a>
+            <a href="mailto:run4ravish@gmail.com" className="font-medium mt-2 block text-white hover:underline">run4ravish@gmail.com</a>
             <p className="text-xs text-zinc-500 mt-3">For refund, support, and enterprise queries</p>
           </div>
 
@@ -49,7 +48,7 @@ export default function ContactPage() {
             <p className="text-sm text-gray-600 mt-2">Send a WhatsApp with <span className="font-bold text-black">"BUY VELORA - SaaS Starter Kit"</span> and get instant payment link + GitHub access within 2 hours.</p>
             <div className="mt-4 flex gap-3">
               <a href="https://wa.me/918299746179?text=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Pro%20-%20Rs%203999" target="_blank" className="bg-black text-white px-5 py-2.5 rounded-full text-sm font-bold">Buy on WhatsApp</a>
-              <a href="mailto:yadavravish@velora.workers.dev?subject=Buy%20Velora%20Pro%20-%20Rs%203999" className="border border-gray-200 px-5 py-2.5 rounded-full text-sm font-medium">Email to Buy</a>
+              <a href="mailto:run4ravish@gmail.com?subject=Buy%20Velora%20Pro%20-%20Rs%203999" className="border border-gray-200 px-5 py-2.5 rounded-full text-sm font-medium">Email to Buy</a>
             </div>
           </div>
         </div>
