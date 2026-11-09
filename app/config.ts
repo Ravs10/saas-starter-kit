@@ -30,8 +30,8 @@ export const SITE_CONFIG = {
   founder: {
     name: "Yadav Ravish", // Your full name - shown everywhere as founder
     location: "Uttar Pradesh, India", // Your city/state - for trust building
-    email: "yadavravish@velora.workers.dev", // Primary email - for sales & direct contact
-    emailSupport: "support@velora.workers.dev", // Support email - for help & refunds
+    email: "run4ravish@gmail.com",
+emailSupport: "run4ravish@gmail.com",
     twitter: "https://x.com/yadavravish", // Your X/Twitter profile - for social proof
     whatsapp: "+918299746179", // Your WhatsApp number - MUST include country code (+91)
     whatsappLink: "https://wa.me/918299746179?text=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Pro", // Pre-filled WhatsApp message - user clicks and message is ready
