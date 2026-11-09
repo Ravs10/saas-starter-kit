@@ -2,6 +2,7 @@
 /node_modules
 /.pnp
 .pnp.js
+.pnp.*
 
 # testing
 /coverage
@@ -11,14 +12,21 @@
 /out/
 /build
 
-# env files - IMPORTANT
+# env files - IMPORTANT - NEVER upload these to GitHub
+# .env.local contains your real secrets - D1 ID, JWT, Resend Key
+# If this file goes to GitHub, anyone can steal your database
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+.dev.vars
+.dev.vars.*
+.wrangler
 
 # misc
 .DS_Store
 *.pem
 .vercel
+*.tsbuildinfo
+next-env.d.ts
