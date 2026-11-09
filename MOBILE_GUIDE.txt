@@ -1,17 +1,137 @@
-VELORA - HOW TO USE ON MOBILE
+# VELORA - HOW TO USE ON MOBILE (No Laptop Needed)
 
-1. Extract the zip using ZArchiver app
-2. Go to GitHub App > Create New Repository > Upload all files
-3. Open Cloudflare.com in Chrome (Turn ON Desktop Mode)
-4. Go to Workers & Pages > Create Application > Connect to Git
-5. Select your GitHub repository
-6. Go to Settings > Variables and Secrets and add:
-   - D1_DATABASE_ID
-   - JWT_SECRET
-   - RESEND_API_KEY
-7. Click Deploy -> Your SaaS will be Live!
+You can buy, setup and deploy Velora fully from your Mobile Phone.
+Laptop is recommended for easy setup, but Mobile also works with this method.
 
-NOTE: Laptop is recommended, but you can deploy from mobile using this method.
+Founder: Yadav Ravish
+Support: run4ravish@gmail.com | WhatsApp +91 8299746179
+Website: https://saas-starter-kit.run4ravish.workers.dev
 
-Support: yadavravish@velora.workers.dev
-Founder: Yadav Ravish @ VELORA
+---
+
+## PART 1 - BUY VELORA
+
+### Option A - Direct From Velora (India - Recommended)
+1. Open WhatsApp
+2. Send message to +91 8299746179: "BUY VELORA - SaaS Starter Kit"
+3. Founder will send UPI Payment Link - Rs 3999
+4. After payment, you will get on WhatsApp / Email:
+   - ZIP File
+   - Your License Key (Example: VELORA-XXXX-XXXX)
+5. Download ZIP File on your phone
+
+### Option B - Gumroad (Global)
+1. Open Gumroad Product Page in Chrome
+2. Buy Velora Pro - $45 Lifetime
+3. After payment, Gumroad will give you:
+   - ZIP File Download Link
+   - Your License Key
+4. Download ZIP File on your phone
+
+---
+
+## PART 2 - EXTRACT ZIP ON MOBILE
+
+1. Install ZArchiver App from Play Store (Free)
+2. Open ZArchiver
+3. Go to Download Folder
+4. Find velora.zip file
+5. Tap on it > Extract > Extract Here
+6. Now you will see a folder named velora with all files inside
+
+---
+
+## PART 3 - UPLOAD TO GITHUB (From Mobile)
+
+1. Install GitHub App from Play Store OR Open github.com in Chrome
+2. Login to your GitHub account
+3. Tap + > New Repository
+4. Repository Name: velora
+5. Keep it Private (Important - Do NOT make it Public)
+6. Tap Create Repository
+7. Tap Add File > Upload Files
+8. Select ALL files from velora folder extracted in Part 2
+9. Tap Commit / Upload
+
+Wait till all files are uploaded. Do NOT close app.
+
+---
+
+## PART 4 - CREATE DATABASE IN CLOUDFLARE
+
+1. Open Chrome on Mobile
+2. Turn ON Desktop Mode: Chrome Menu (3 dots) > Desktop site
+3. Go to https://dash.cloudflare.com
+4. Login to your Cloudflare account (Free)
+5. Go to Workers & Pages > D1 SQL Database
+6. Click Create Database
+7. Name: velora-db
+8. Click Create
+9. Copy the Database ID - Save it in Notes App, you will need it later
+
+---
+
+## PART 5 - CREATE EMAIL KEY (For OTP)
+
+1. Go to https://resend.com in Chrome (Desktop Mode ON)
+2. Create Free Account
+3. Go to API Keys > Create API Key
+4. Copy the Key (Starts with re_) - Save it in Notes App
+5. Without this, OTP Login will NOT work
+
+---
+
+## PART 6 - DEPLOY TO CLOUDFLARE (From Mobile)
+
+1. In Cloudflare Dashboard, Go to Workers & Pages
+2. Click Create Application > Connect to Git
+3. Select your GitHub Account
+4. Select Repository: velora
+5. Click Deploy (First time - It may fail, this is normal)
+6. After first deploy, Go to Settings > Variables and Secrets
+7. Click Add Variable and add these ONE BY ONE:
+
+   D1_DATABASE_ID = Paste Database ID from Part 4
+   JWT_SECRET = Paste any long random text (Example: Go to randomkeygen.com and copy any key)
+   RESEND_API_KEY = Paste Resend Key from Part 5
+   LICENSE_KEY = Paste License Key given by Founder / Gumroad
+   SITE_URL = Paste your Cloudflare URL (Example: https://velora.yourname.workers.dev)
+
+   NOTE: For Direct Buyer, Leave GUMROAD_PRODUCT_ID Empty. You do NOT need it.
+
+8. Click Save
+9. Go back and Click Redeploy / Retry Deployment
+10. Wait 1-2 Minutes - Your SaaS will be LIVE!
+
+---
+
+## PART 7 - TEST YOUR SITE
+
+1. Open your Live URL in Chrome
+2. Go to /signup - Create your account
+3. Go to /login - Login with same account
+4. Go to /activate-license - Enter your License Key
+5. Click Activate
+6. Now open /dashboard - Dashboard will unlock
+
+If License is wrong, Dashboard will send you back to Activate page. This is normal. Check your License Key again.
+
+---
+
+## IMPORTANT NOTES FOR MOBILE USERS
+
+- Always use Chrome in Desktop Mode for Cloudflare and GitHub
+- Do NOT share your .env values, License Key, or Database ID with anyone
+- Keep your License Key safe - One Key = One Buyer
+- If you face any error, take Screenshot and send on WhatsApp
+
+---
+
+## SUPPORT
+
+Founder: Yadav Ravish
+Location: UP, India
+WhatsApp: +91 8299746179 (9 AM - 9 PM IST) - Reply in 2 hours
+Email: run4ravish@gmail.com
+
+© 2026 Velora - Founded by Yadav Ravish
