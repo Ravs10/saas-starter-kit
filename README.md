@@ -11,10 +11,10 @@ Support: run4ravish@gmail.com | WhatsApp +91 8299746179
 
 ## What You Get
 
-Velora is not a landing page template. It's a complete SaaS foundation.
+Velora is not a landing page template. It is a complete SaaS foundation.
 
 - Secure Login / Signup / OTP Login / Change Password
-- License System with Gumroad Key
+- License System with License Key
 - Premium Black Theme
 - Pricing, Contact, Terms, Privacy, Refund Pages Ready
 - Dashboard Protected by License
@@ -37,27 +37,52 @@ Velora is not a landing page template. It's a complete SaaS foundation.
 
 1. Node.js installed on your computer
 2. A free Cloudflare account
-3. Your Gumroad License Key (You get it after buying)
+3. Your License Key (You get it after buying)
 4. Your Email for OTP
 
 You do NOT need any secret key from us. All keys you will create yourself in your own account.
 
 ---
 
+## How To Buy - 2 Ways
+
+### Way 1 - Direct From Velora (India - Recommended)
+Best for Indian Buyers - UPI / WhatsApp
+
+1. WhatsApp us: https://wa.me/918299746179
+2. Send message: "BUY VELORA - SaaS Starter Kit"
+3. Founder will send you UPI Payment Link - Rs 3999
+4. After payment, you will get on WhatsApp / Email:
+   - ZIP File OR GitHub Access
+   - Your License Key (Founder will provide it)
+5. Then start from Step 2 below
+6. For License Activation, use the Key given by Founder. Gumroad is NOT needed.
+
+For Direct Buyer, Gumroad step is skipped. License Key is given directly by Founder.
+
+### Way 2 - Gumroad (Global)
+For International Buyers - Card / PayPal
+
+1. Buy from Gumroad Product Page - $45 Lifetime
+2. After payment, Gumroad will give you:
+   - ZIP File Download Link
+   - Your License Key
+3. Then start from Step 2 below
+4. For License Activation, use the Key given by Gumroad
+
+---
+
 ## Quick Start - For Buyer
 
 ### Step 1 - Buy
-Global: Gumroad - $29 Lifetime
-India: WhatsApp https://wa.me/918299746179 - Rs 3999 Lifetime
-
-After buying, you will get:
-1. GitHub Private Repo Access OR ZIP File
-2. Your License Key
+Choose Way 1 (Direct) or Way 2 (Gumroad) from above. After buying, you will have ZIP File + License Key.
 
 ### Step 2 - Install
 git clone https://github.com/yadavravish/velora.git
 cd velora
 npm install
+
+If you got ZIP File, extract it and open that folder, then run npm install.
 
 ### Step 3 - Setup Your Own Env File
 Copy .env.example to .env.local
@@ -81,7 +106,9 @@ Open http://localhost:3000
 
 ### Step 6 - Activate Your License
 1. Go to http://localhost:3000/activate-license
-2. Enter your Gumroad License Key
+2. Enter your License Key
+   - Direct Buyer: Use the Key given by Founder on WhatsApp / Email
+   - Gumroad Buyer: Use the Key given by Gumroad
 3. Click Activate
 4. Now you can open /dashboard
 
@@ -93,15 +120,19 @@ Your site will be live on your own Cloudflare URL.
 
 ---
 
-## How License Works - For Buyer
+## How License Works - For Both Buyers
 
-1. You buy Velora -> You get a License Key
-2. You open /activate-license page
-3. You enter your Key
-4. If Key is correct, Dashboard unlocks
-5. If Key is wrong or missing, Dashboard stays locked
+Direct or Gumroad, Activation method is same:
 
-One License Key = One Buyer. Do not share your Key.
+1. Open site: http://localhost:3000/activate-license
+2. Enter your License Key
+   - Direct Buyer: Key given by Founder on WhatsApp / Email
+   - Gumroad Buyer: Key given by Gumroad
+3. Click Activate
+4. If Key is correct, Dashboard will unlock
+5. If Key is wrong or missing, Dashboard will stay locked
+
+One License Key = One Buyer. Do not share your Key with anyone.
 
 ---
 
@@ -133,9 +164,9 @@ You do NOT need to change any other file for basic setup.
 
 ## Pricing
 
-Starter - Rs 0 - 1 Project
-Pro (Most Popular) - Rs 3999 / $29 - Unlimited Projects, License System, Private GitHub
-Enterprise - Rs 9999 / $79 - Resell License + Setup Call
+Starter - Rs 0 / $0 - 1 Project
+Pro (Most Popular) - Rs 3999 / $45 - Unlimited Projects, License System, Private GitHub
+Enterprise - Rs 9999 / $109 - Resell License + Setup Call
 
 Refund: 7-Day Money Back, Email run4ravish@gmail.com
 
