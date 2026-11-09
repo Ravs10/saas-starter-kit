@@ -3,7 +3,7 @@
  * Single source of truth for the entire Velora website.
  * Change values here, they will reflect everywhere automatically.
  * 
- * Founder: Yadav Ravish | velora.workers.dev
+ * Founder: Yadav Ravish | run4ravish@gmail.com
  */
 
 export const SITE_CONFIG = {
@@ -31,7 +31,7 @@ export const SITE_CONFIG = {
     name: "Yadav Ravish", // Your full name - shown everywhere as founder
     location: "Uttar Pradesh, India", // Your city/state - for trust building
     email: "run4ravish@gmail.com",
-emailSupport: "run4ravish@gmail.com",
+    emailSupport: "run4ravish@gmail.com",
     twitter: "https://x.com/yadavravish", // Your X/Twitter profile - for social proof
     whatsapp: "+918299746179", // Your WhatsApp number - MUST include country code (+91)
     whatsappLink: "https://wa.me/918299746179?text=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Pro", // Pre-filled WhatsApp message - user clicks and message is ready
@@ -39,10 +39,16 @@ emailSupport: "run4ravish@gmail.com",
 
   // ========== PRICING CONFIG ==========
   // Change pricing here once, it updates on pricing page and hero section
+  // INR = For India Direct Buyer (UPI / WhatsApp)
+  // USD = For Global Buyer (Gumroad - Card / PayPal)
+  // 1 USD = ~94 INR (Nov 2026) - So $45 = Rs 4230, $109 = Rs 10246
   pricing: {
-    pro: 3999, // Current Pro plan price - Lifetime deal
-    proOriginal: 9999, // Original price - shown as strikethrough to show discount
-    enterprise: 9999, // Enterprise/Agency plan price
+    pro: 3999, // Pro - India Price in INR - Lifetime deal
+    proUSD: 45, // Pro - Global Price in USD - Lifetime deal
+    proOriginal: 9999, // Original price in INR - shown as strikethrough to show discount
+    proOriginalUSD: 99, // Original price in USD - shown as strikethrough
+    enterprise: 9999, // Enterprise - India Price in INR
+    enterpriseUSD: 109, // Enterprise - Global Price in USD
     currency: "₹", // Currency symbol - ₹ for India, $ for US
     refundDays: 7, // Refund policy - number of days for money back guarantee
   },
