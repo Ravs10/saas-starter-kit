@@ -7,9 +7,9 @@ export default function DemoDashboard() {
           <h1 className="text-2xl font-bold">Velora - Demo Dashboard</h1>
           <span className="bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full">DEMO MODE</span>
         </div>
-        <p className="text-zinc-400 text-sm mt-1">Bina Key ke dekh rahe ho. Real me yahan tumhara data hoga.</p>
+        <p className="text-zinc-400 text-sm mt-1">You are viewing without a key. In real version, your data will show here.</p>
 
-        {/* Top Buttons - Dashboard / Settings - LINK FIXED */}
+        {/* Top Buttons */}
         <div className="flex gap-2 mt-5">
           <a href="/demo" className="bg-white text-black px-4 py-2 rounded-lg font-bold text-sm">📊 Dashboard</a>
           <a href="/demo/settings" className="bg-zinc-800 border border-zinc-700 px-4 py-2 rounded-lg font-bold text-sm">⚙️ Settings</a>
@@ -45,7 +45,7 @@ export default function DemoDashboard() {
         </div>
 
         <div className="mt-6 text-center pb-24">
-          <a href="/pricing" className="bg-white text-black font-bold px-6 py-3 rounded-lg inline-block">Pasand Aaya? Abhi Kharido</a>
+          <a href="/pricing" className="bg-white text-black font-bold px-6 py-3 rounded-lg inline-block">Liked It? Buy Now</a>
         </div>
       </div>
     </div>
