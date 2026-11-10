@@ -6,6 +6,7 @@ export function middleware(req: any) {
   // Ye guard loop tod dega - Inko kabhi redirect mat karo
   if (
     path === '/' ||
+    path.startsWith('/demo') || // <-- YE ADD KIYA HAI - Demo bina login ke khulega
     path.startsWith('/activate-license') ||
     path.startsWith('/api/') ||
     path.startsWith('/_next/')
@@ -20,4 +21,4 @@ export function middleware(req: any) {
   return NextResponse.next()
 }
 
-export const config = { matcher: ['/dashboard/:path*', '/settings/:path*'] }
+export const config = { matcher: ['/dashboard/:path*', '/settings/:path*', '/demo/:path*'] }
