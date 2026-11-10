@@ -64,6 +64,7 @@ export const SITE_CONFIG = {
     { name: "Privacy", href: "/privacy" }, // Links to /app/privacy/page.tsx
     { name: "Terms", href: "/terms" }, // Links to /app/terms/page.tsx
     { name: "Refund", href: "/refund" }, // Links to /app/refund/page.tsx
+    { name: "Demo", href: "/demo" }, // Links to /app/demo
   ],
 
   // ========== NAVBAR CONFIG ==========
