@@ -9,7 +9,7 @@ export default function DemoSettings() {
         </div>
         <p className="text-zinc-400 text-sm mt-1">Ye Settings ka Demo hai. Real me yahan tum apni dukaan setup karoge.</p>
 
-        {/* Top Buttons - Dashboard / Settings */}
+        {/* Top Buttons - Dashboard / Settings - LINK FIXED */}
         <div className="flex gap-2 mt-5">
           <a href="/demo" className="bg-zinc-800 border border-zinc-700 px-4 py-2 rounded-lg font-bold text-sm">📊 Dashboard</a>
           <a href="/demo/settings" className="bg-white text-black px-4 py-2 rounded-lg font-bold text-sm">⚙️ Settings</a>
@@ -37,7 +37,7 @@ export default function DemoSettings() {
           </div>
         </div>
 
-        <div className="mt-6 text-center">
+        <div className="mt-6 text-center pb-24">
           <a href="/pricing" className="bg-white text-black font-bold px-6 py-3 rounded-lg inline-block">Real Settings Ke Liye Kharido</a>
         </div>
       </div>
