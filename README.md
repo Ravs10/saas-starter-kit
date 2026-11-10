@@ -3,8 +3,14 @@
 Ship Your SaaS in 47 Seconds. Not in Hours.
 Premium production-ready boilerplate for Next.js 15 + Cloudflare D1 + Secure Auth + Email + License System
 
+### Try Demo Without Key
+No need to buy to see Demo:
+- Dashboard Demo: /demo
+- Settings Demo: /demo/settings
+- Demo includes Password Change preview, but it is disabled in Demo.
+- 
 Live Demo: https://saas-starter-kit.run4ravish.workers.dev
-Founder: Yadav Ravish, Uska, Uttar Pradesh, India
+Founder: Yadav Ravish, Uttar Pradesh, India
 Support: run4ravish@gmail.com | WhatsApp +91 8299746179
 
 ---
