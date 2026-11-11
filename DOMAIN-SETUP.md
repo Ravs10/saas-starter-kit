@@ -1,33 +1,33 @@
 # Velora - Domain Setup Guide for Public Users
 
-## Problem Samjho
+## Understand the Problem
 
-Agar tumne .env.local me ye rakha hai:
+If you have this in your .env.local:
 RESEND_FROM_EMAIL=onboarding@resend.dev
 
-To OTP sirf TUMHARI apni email pe jayega.
-Kisi aur user ko OTP nahi jayega. Ye Resend ka rule hai.
+Then OTP will go ONLY to your own email.
+No other user will get OTP. This is a Resend rule, not a bug.
 
-Public site ke liye - jahan 100+ logo ko signup karna hai -
-tumko apna khud ka Domain Resend me Verify karna padega.
+For a public site - where 100+ people need to signup -
+you MUST verify your own domain in Resend.
 
-## Step 1 - Resend me Domain Add Karo
+## Step 1 - Add Domain in Resend
 
-1. https://resend.com pe login karo
-2. Left side me Domains pe click karo
-3. Add Domain pe click karo
-4. Apna domain likho - jaise: yourdomain.com
-   Note: www mat lagana, sirf yourdomain.com
-5. Add pe click karo
+1. Login to https://resend.com
+2. Click on Domains in left menu
+3. Click on Add Domain
+4. Enter your domain - Example: yourdomain.com
+   Note: Do not add www, only yourdomain.com
+5. Click Add
 
-Resend tumko 3 DNS Records dega. Unko copy karke rakho.
+Resend will give you 3 DNS Records. Keep them copied.
 
-## Step 2 - Cloudflare me DNS Records Dalo
+## Step 2 - Add DNS Records in Cloudflare
 
-1. https://dash.cloudflare.com pe jao
-2. Apna domain select karo
-3. Left me DNS > Records pe click karo
-4. Add Record pe click karo - Ye 3 records ek-ek karke dalo:
+1. Go to https://dash.cloudflare.com
+2. Select your domain
+3. Click DNS > Records in left menu
+4. Click Add Record - Add these 3 records one by one:
 
 Record 1 - SPF:
 Type: TXT
@@ -37,48 +37,41 @@ Content: v=spf1 include:_spf.resend.com ~all
 Record 2 - DKIM:
 Type: TXT
 Name: resend._domainkey
-Content: Resend me jo DKIM value dikh rahi hai, wo paste karo
+Content: Paste the DKIM value shown in Resend
 
 Record 3 - DMARC:
 Type: TXT
 Name: _dmarc
 Content: v=DMARC1; p=none;
 
-Important: Cloudflare me Proxy Status ko DNS Only (Grey Cloud) rakho, Orange mat rakho.
+Important: In Cloudflare, keep Proxy Status as DNS Only (Grey Cloud), not Orange.
 
-Save karte hi 2-5 minute wait karo.
+Wait for 2-5 minutes after saving.
 
-## Step 3 - Verify Check Karo
+## Step 3 - Check Verification
 
-Resend > Domains me wapas jao.
-Tumhare domain ke samne pehle Pending likha hoga.
-Refresh karo, jab Verified / Green Tick aa jaye, matlab ho gaya.
+Go back to Resend > Domains.
+First it will show Pending.
+Refresh, when it shows Verified / Green Tick, it is done.
 
-Agar 1 ghanta baad bhi Pending hai, to DNS me Name ya Content galat dala hai. Dobara check karo.
+## Step 4 - Change Email in .env.local
 
-## Step 4 - .env.local me Email Badlo
-
-Pehle tha:
+Before:
 RESEND_FROM_EMAIL=onboarding@resend.dev
 
-Ab kar do:
+Now change to:
 RESEND_FROM_EMAIL=noreply@yourdomain.com
 
-yourdomain.com ki jagah apna asli domain likho.
+Replace yourdomain.com with your real domain.
 
-File save karo, aur project ko dobara Deploy karo.
+Save the file and Deploy your project again.
 
-Bas! Ab OTP duniya ke kisi bhi email pe jayega - Gmail, Yahoo, Outlook sab pe.
+Done! Now OTP will go to any email - Gmail, Yahoo, Outlook, all.
 
-## Limits Yaad Rakho
+## Limits to Remember
 
 Resend Free Plan:
 - 100 Emails / Day
 - 3000 Emails / Month
 
-Starting ke liye kaafi hai. Agar roz 100 se zyada signup aane lage, to Resend ka $20 wala plan lena padega.
-
-## Agar Domain Nahi Hai To?
-
-Bina domain ke public SaaS nahi chalega.
-Cloudflare / GoDaddy se domain lo, fir upar wale steps follow karo.
+Enough for starting. If you get more than 100 signups per day, you will need Resend's $20 plan.
