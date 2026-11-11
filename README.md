@@ -1,5 +1,7 @@
 # Velora - SaaS Starter Kit
 
+> *Important:* If OTP is coming only to your own email, read `DOMAIN-SETUP.md` first. You need to verify your own domain in Resend for public users.
+
 Ship Your SaaS in 47 Seconds. Not in Hours.
 Premium production-ready boilerplate for Next.js 15 + Cloudflare D1 + Secure Auth + Email + License System
 
