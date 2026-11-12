@@ -126,6 +126,7 @@ If License is wrong, Dashboard will send you back to Activate page. This is norm
 npm run deploy
 Your site will be live on your own Cloudflare URL.
 
+Note - After deployment submit your domain (yourdomain.com) and sitemap.xml in Google search console. 
 ---
 
 ## How License Works - For Both Buyers
