@@ -42,7 +42,7 @@ export default function RefundPage() {
             <h2 className="text-lg font-bold text-black mb-2">5. Contact</h2>
             <p>For any questions about refunds:</p>
             <p className="mt-1 font-medium text-black">Founder @VELORA : Yadav Ravish</p>
-            <p className="font-medium text-black">Email: yadavravish@velora.workers.dev</p>
+            <p className="font-medium text-black">Email: run4ravish@gmail.com</p>
           </section>
 
         </div>
