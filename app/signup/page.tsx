@@ -60,6 +60,9 @@ export default function SignupPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <form onSubmit={handleSignup} className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg space-y-4">
         <h1 className="text-2xl font-bold text-center">Create Account - Velora</h1>
+        <p className="text-center text-sm text-gray-500 -mt-2">
+          Free account • No card needed • Demo dashboard included
+        </p>
         <input value={name} onChange={e => setName(e.target.value)} placeholder="Full Name (RCY)" className="w-full px-4 py-3 border rounded-xl outline-none" required />
         <div className="flex gap-2">
           <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="flex-1 px-4 py-3 border rounded-xl outline-none" required />
@@ -75,6 +78,14 @@ export default function SignupPage() {
         </div>
         {msg && <p className="text-sm text-center text-red-500 bg-red-50 p-2 rounded-lg">{msg}</p>}
         <button disabled={loading || !strength?.ok} className="w-full py-3 bg-black text-white rounded-xl font-semibold disabled:bg-gray-400">{loading ? "Please wait..." : "Create Account"}</button>
+        <p className="text-center text-sm text-gray-500">
+          Bina Sign Up ke dekhna hai?{" "}
+          <a href="/demo" className="underline font-semibold text-black">Try Live Demo →</a>
+        </p>
+        <p className="text-center text-sm text-gray-500">
+          Already have an account?{" "}
+          <a href="/login" className="underline font-semibold text-black">Login</a>
+        </p>
       </form>
     </div>
   )
