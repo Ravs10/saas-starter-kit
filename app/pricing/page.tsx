@@ -76,7 +76,7 @@ export default function PricingPage() {
 
         {/* Trust Section */}
         <div className="text-center mt-16 max-w-xl mx-auto">
-          <p className="text-zinc-500 text-sm">Questions? <a href="https://wa.me/918299746179" className="text-[#25D366] underline font-medium">WhatsApp: +91 82997 46179</a> • <a href="mailto:yadavravish@velora.workers.dev" className="text-white underline">yadavravish@velora.workers.dev</a></p>
+          <p className="text-zinc-500 text-sm">Questions? <a href="https://wa.me/918299746179" className="text-[#25D366] underline font-medium">WhatsApp: +91 82997 46179</a> • <a href="mailto:run4ravish@gmail.com" className="text-white underline">yadavravish@velora.workers.dev</a></p>
           <p className="text-zinc-600 text-xs mt-2">Secure payment via UPI • Instant access • 7-day refund • Founded by Yadav Ravish, Uska UP</p>
         </div>
 
