@@ -46,7 +46,7 @@ export default function TermsPage() {
             <h2 className="text-lg font-bold text-black mb-2">6. Contact</h2>
             <p>For any questions regarding these Terms, please contact: <br />
               <span className="font-medium text-black">Founder @VELORA : Yadav Ravish</span><br />
-              <span className="font-medium text-black">Email: yadavravish@velora.workers.dev</span><br />
+              <span className="font-medium text-black">Email: run4ravish@gmail.com</span><br />
               <span className="font-medium text-black">Location: India</span>
             </p>
           </section>
