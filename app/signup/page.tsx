@@ -25,7 +25,7 @@ export default function SignupPage() {
   const strength = getStrength(password)
 
   const sendOtp = async () => {
-    if (!email) return setMsg("Email daalo pehle")
+    if (!email) return setMsg("Please enter your email first")
     setLoading(true); setMsg("")
     try {
       const res = await fetch("/api/auth/send-otp", {
@@ -34,7 +34,7 @@ export default function SignupPage() {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
-      setOtpSent(true); setMsg("OTP bhej diya! Email check karo")
+      setOtpSent(true); setMsg("OTP sent! Please check your email")
     } catch (e: any) { setMsg(e.message) } 
     finally { setLoading(false) }
   }
@@ -50,7 +50,7 @@ export default function SignupPage() {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
-      setMsg("Account ban gaya! Login pe ja rahe ho...")
+      setMsg("Account created! Redirecting to login...")
       setTimeout(() => router.push("/login"), 1500)
     } catch (e: any) { setMsg(e.message) } 
     finally { setLoading(false) }
@@ -61,9 +61,9 @@ export default function SignupPage() {
       <form onSubmit={handleSignup} className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg space-y-4">
         <h1 className="text-2xl font-bold text-center">Create Account - Velora</h1>
         <p className="text-center text-sm text-gray-500 -mt-2">
-          Free account • No card needed • Demo dashboard included
+          Free account • No card required • Demo dashboard included
         </p>
-        <input value={name} onChange={e => setName(e.target.value)} placeholder="Full Name (RCY)" className="w-full px-4 py-3 border rounded-xl outline-none" required />
+        <input value={name} onChange={e => setName(e.target.value)} placeholder="Full Name" className="w-full px-4 py-3 border rounded-xl outline-none" required />
         <div className="flex gap-2">
           <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="flex-1 px-4 py-3 border rounded-xl outline-none" required />
           <button type="button" onClick={sendOtp} disabled={loading} className="px-4 py-2 bg-black text-white rounded-xl text-sm disabled:opacity-50">{otpSent ? "Resend" : "Send OTP"}</button>
@@ -79,7 +79,7 @@ export default function SignupPage() {
         {msg && <p className="text-sm text-center text-red-500 bg-red-50 p-2 rounded-lg">{msg}</p>}
         <button disabled={loading || !strength?.ok} className="w-full py-3 bg-black text-white rounded-xl font-semibold disabled:bg-gray-400">{loading ? "Please wait..." : "Create Account"}</button>
         <p className="text-center text-sm text-gray-500">
-          Bina Sign Up ke dekhna hai?{" "}
+          Want to explore without signing up?{" "}
           <a href="/demo" className="underline font-semibold text-black">Try Live Demo →</a>
         </p>
         <p className="text-center text-sm text-gray-500">
