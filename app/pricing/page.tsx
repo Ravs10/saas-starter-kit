@@ -1,4 +1,4 @@
-// app/pricing/page.tsx - DIRECT SELL + STRIPE - FINAL
+// app/pricing/page.tsx - DIRECT SELL + STRIPE + GUMROAD - FINAL
 'use client';
 
 import { useState } from 'react';
@@ -51,6 +51,12 @@ export default function PricingPage() {
   const proPriceId = process.env.NEXT_PUBLIC_STRIPE_PRICE_PRO || '';
   const enterprisePriceId = process.env.NEXT_PUBLIC_STRIPE_PRICE_ENTERPRISE || '';
 
+  // --- GUMROAD LINKS - Buyer apna link yaha daale ---
+  // Apna Gumroad Product Link yaha paste karo
+  // Example: https://yadavravish.gumroad.com/l/velora-pro
+  const gumroadProLink = "https://gumroad.com/l/velora-pro";
+  const gumroadEnterpriseLink = "https://gumroad.com/l/velora-enterprise";
+
   return (
     <div className="min-h-[calc(100vh-200px)] bg-black text-white">
       <div className="max-w-5xl mx-auto px-4 py-10 md:py-16">
@@ -83,7 +89,7 @@ export default function PricingPage() {
             <a href="/signup" className="block mt-8 bg-zinc-800 hover:bg-zinc-700 text-center py-3.5 rounded-full font-medium transition">Start for Free</a>
           </div>
 
-          {/* Pro - Most Popular - DIRECT SELL + STRIPE */}
+          {/* Pro - Most Popular - DIRECT SELL + STRIPE + GUMROAD */}
           <div className="bg-white text-black p-7 rounded-[24px] relative scale-[1.02] shadow-2xl">
             <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-4 py-1.5 rounded-full tracking-widest font-bold">MOST POPULAR</span>
             <h3 className="font-bold text-sm tracking-widest uppercase text-gray-500">Lifetime Pro</h3>
@@ -103,6 +109,11 @@ export default function PricingPage() {
 
               {/* STRIPE BUTTON - For Card / Global Buyers */}
               <StripeBuyButton priceId={proPriceId} label="💳 Pay by Card - $45" />
+
+              {/* GUMROAD BUTTON - For Global Buyers (Card / PayPal) */}
+              <a href={gumroadProLink} target="_blank" className="flex items-center justify-center gap-2 bg-[#FF90E8] hover:bg-[#ff7de4] text-black text-center py-3.5 rounded-full font-bold transition">
+                🛒 Buy on Gumroad - $45
+              </a>
 
               <a href="mailto:yadavravish@velora.workers.dev?subject=Buy%20Velora%20Pro%20-%20Rs%203999&body=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Pro" className="flex items-center justify-center gap-2 bg-black hover:bg-zinc-900 text-white text-center py-3.5 rounded-full font-bold transition">
                 ✉️ Email to Buy
@@ -125,6 +136,10 @@ export default function PricingPage() {
             <div className="mt-8 space-y-3">
               <a href="https://wa.me/918299746179?text=Hi%20Ravish,%20Need%20Enterprise%20Plan%20for%20Velora" target="_blank" className="block bg-zinc-800 hover:bg-zinc-700 text-center py-3.5 rounded-full font-bold text-white transition">WhatsApp for Enterprise</a>
               <StripeBuyButton priceId={enterprisePriceId} label="💳 Pay by Card - $109" />
+              {/* GUMROAD BUTTON - Enterprise */}
+              <a href={gumroadEnterpriseLink} target="_blank" className="flex items-center justify-center gap-2 bg-[#FF90E8] hover:bg-[#ff7de4] text-black text-center py-3.5 rounded-full font-bold transition">
+                🛒 Buy on Gumroad - $109
+              </a>
               <a href="/contact" className="block bg-white text-black text-center py-3.5 rounded-full font-bold">Contact Sales</a>
             </div>
           </div>
