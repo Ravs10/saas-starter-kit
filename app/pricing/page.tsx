@@ -1,5 +1,56 @@
-// app/pricing/page.tsx - DIRECT SELL - FINAL WITH WHATSAPP
+// app/pricing/page.tsx - DIRECT SELL + STRIPE - FINAL
+'use client';
+
+import { useState } from 'react';
+
+// --- STRIPE BUY BUTTON ---
+// This button uses buyer's own Stripe keys.
+// Buyer only needs to set NEXT_PUBLIC_STRIPE_PRICE_PRO in .env.local
+function StripeBuyButton({ priceId, label }: { priceId: string; label: string }) {
+  const [loading, setLoading] = useState(false);
+
+  const buy = async () => {
+    if (!priceId) {
+      alert('Stripe Price ID is not configured. Please set it in .env.local');
+      return;
+    }
+    setLoading(true);
+    const email = prompt('Enter your Email for receipt');
+    if (!email) {
+      setLoading(false);
+      return;
+    }
+    try {
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ priceId, email }),
+      });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+      else alert('Payment failed: ' + (data.error || 'Unknown error'));
+    } catch (e) {
+      alert('Payment failed. Please try again.');
+    }
+    setLoading(false);
+  };
+
+  return (
+    <button
+      onClick={buy}
+      disabled={loading}
+      className="flex items-center justify-center gap-2 bg-black hover:bg-zinc-900 text-white text-center py-3.5 rounded-full font-bold transition w-full disabled:opacity-50"
+    >
+      {loading ? 'Loading...' : label}
+    </button>
+  );
+}
+
 export default function PricingPage() {
+  // Buyer will set these in .env.local
+  const proPriceId = process.env.NEXT_PUBLIC_STRIPE_PRICE_PRO || '';
+  const enterprisePriceId = process.env.NEXT_PUBLIC_STRIPE_PRICE_ENTERPRISE || '';
+
   return (
     <div className="min-h-[calc(100vh-200px)] bg-black text-white">
       <div className="max-w-5xl mx-auto px-4 py-10 md:py-16">
@@ -32,7 +83,7 @@ export default function PricingPage() {
             <a href="/signup" className="block mt-8 bg-zinc-800 hover:bg-zinc-700 text-center py-3.5 rounded-full font-medium transition">Start for Free</a>
           </div>
 
-          {/* Pro - Most Popular - DIRECT SELL */}
+          {/* Pro - Most Popular - DIRECT SELL + STRIPE */}
           <div className="bg-white text-black p-7 rounded-[24px] relative scale-[1.02] shadow-2xl">
             <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-4 py-1.5 rounded-full tracking-widest font-bold">MOST POPULAR</span>
             <h3 className="font-bold text-sm tracking-widest uppercase text-gray-500">Lifetime Pro</h3>
@@ -49,10 +100,14 @@ export default function PricingPage() {
               <a href="https://wa.me/918299746179?text=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Saas%20Starter%20Kit-%20Rs%203999" target="_blank" className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-black text-center py-3.5 rounded-full font-bold transition">
                 <span>💬</span> Buy on WhatsApp - ₹3,999
               </a>
+
+              {/* STRIPE BUTTON - For Card / Global Buyers */}
+              <StripeBuyButton priceId={proPriceId} label="💳 Pay by Card - $45" />
+
               <a href="mailto:yadavravish@velora.workers.dev?subject=Buy%20Velora%20Pro%20-%20Rs%203999&body=Hi%20Ravish,%20I%20want%20to%20buy%20Velora%20Pro" className="flex items-center justify-center gap-2 bg-black hover:bg-zinc-900 text-white text-center py-3.5 rounded-full font-bold transition">
                 ✉️ Email to Buy
               </a>
-              <p className="text-[11px] text-center text-gray-400">Instant delivery within 2 hours • UPI / Bank Transfer<br/>+91 82997 46179</p>
+              <p className="text-[11px] text-center text-gray-400">Instant delivery within 2 hours • UPI / Card / Bank Transfer<br/>+91 82997 46179</p>
             </div>
           </div>
 
@@ -69,6 +124,7 @@ export default function PricingPage() {
             </ul>
             <div className="mt-8 space-y-3">
               <a href="https://wa.me/918299746179?text=Hi%20Ravish,%20Need%20Enterprise%20Plan%20for%20Velora" target="_blank" className="block bg-zinc-800 hover:bg-zinc-700 text-center py-3.5 rounded-full font-bold text-white transition">WhatsApp for Enterprise</a>
+              <StripeBuyButton priceId={enterprisePriceId} label="💳 Pay by Card - $109" />
               <a href="/contact" className="block bg-white text-black text-center py-3.5 rounded-full font-bold">Contact Sales</a>
             </div>
           </div>
@@ -77,7 +133,7 @@ export default function PricingPage() {
         {/* Trust Section */}
         <div className="text-center mt-16 max-w-xl mx-auto">
           <p className="text-zinc-500 text-sm">Questions? <a href="https://wa.me/918299746179" className="text-[#25D366] underline font-medium">WhatsApp: +91 82997 46179</a> • <a href="mailto:run4ravish@gmail.com" className="text-white underline">run4ravish@gmail.com</a></p>
-          <p className="text-zinc-600 text-xs mt-2">Secure payment via UPI • Instant access • 7-day refund • Founded by Yadav Ravish, India</p>
+          <p className="text-zinc-600 text-xs mt-2">Secure payment via UPI / Card • Instant access • 7-day refund • Founded by Yadav Ravish, India</p>
         </div>
 
       </div>
