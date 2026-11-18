@@ -1,12 +1,15 @@
 import Stripe from 'stripe';
 import { NextResponse } from 'next/server';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-02-24' as any,
-});
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: '2025-02-24' as any,
+  });
+}
 
 export async function POST(req: Request) {
   try {
+    const stripe = getStripe();
     const { priceId, email } = await req.json();
 
     if (!priceId || !email) {
